@@ -35,6 +35,38 @@
 </head>
 
 <body>
+<?php
+            $username=$_SESSION['id'];
+            if($_SESSION['user']=="Admin"){
+                $sql = "SELECT * FROM Admin WHERE AdminID = '$username'";
+                $result = $db->query($sql);
+                $row = mysqli_fetch_array($result,MYSQLI_BOTH);
+                    
+                    $givenname= $row['AdminFirstName'];
+                    $familyname=$row['AdminLastName'];
+                    $user="Admin";
+                    $contact=$row['AdminContactNo'];
+                    $identification= $username;
+                    $company=$row['AdminOffice'];
+                    $email = $row['AdminEmail'];
+                    $address = $row['AdminAddress'];
+            }
+            elseif($_SESSION['user']=="Staff"){
+                $sql = "SELECT * FROM Staff WHERE StaffID = '$username'";
+                $result = $db->query($sql);
+                $row = mysqli_fetch_array($result,MYSQLI_BOTH);
+                    
+                    $givenname= $row['StaffFirstName'];
+                    $familyname=$row['StaffLastName'];
+                    $user = "Staff";
+                    $contact=$row['StaffContactNo'];
+                    $identification= $username;
+                    $company=$row['StaffOffice'];
+                    $email = $row['StaffEmail']; 
+                    $address = $row['StaffAddress'];
+            }
+
+            ?>
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -266,51 +298,7 @@
                   </a>
                 </div>
                 <!-- View all -->
-                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-ungroup"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
-                <div class="row shortcuts px-4">
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                      <i class="ni ni-calendar-grid-58"></i>
-                    </span>
-                    <small>Calendar</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                      <i class="ni ni-email-83"></i>
-                    </span>
-                    <small>Email</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
-                      <i class="ni ni-credit-card"></i>
-                    </span>
-                    <small>Payments</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                      <i class="ni ni-books"></i>
-                    </span>
-                    <small>Reports</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
-                      <i class="ni ni-pin-3"></i>
-                    </span>
-                    <small>Maps</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                      <i class="ni ni-basket"></i>
-                    </span>
-                    <small>Shop</small>
-                  </a>
+                
                 </div>
               </div>
             </li>
@@ -323,7 +311,7 @@
                     <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $username;?></span>
                   </div>
                 </div>
               </a>
