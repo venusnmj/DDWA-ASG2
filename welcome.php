@@ -90,7 +90,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="carpark.php">
                 <i class="fas fa-parking text-orange"></i>
                 <span class="nav-link-text">Carparks</span>
               </a>
@@ -134,9 +134,9 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="carpark.php">
                 <i class="fas fa-parking text-orange"></i>
-                <span class="nav-link-text">Carparks</span>
+                <span class="nav-link-text">Carpark</span>
               </a>
             </li>
             
@@ -381,7 +381,7 @@
                   <span>Support</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
+                <a href="index.php" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
