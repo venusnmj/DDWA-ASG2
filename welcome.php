@@ -32,40 +32,44 @@
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">
+  <link rel="stylesheet" href="stylesheet.css" type="text/css">
 </head>
 
 <body>
 <?php
             $username=$_SESSION['id'];
             if($_SESSION['user']=="Admin"){
-                $sql = "SELECT * FROM Admin WHERE AdminID = '$username'";
+                $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
                     
-                    $givenname= $row['AdminFirstName'];
-                    $familyname=$row['AdminLastName'];
+                    $givenname= $row['adminfirstname'];
+                    $familyname=$row['adminlastname'];
                     $user="Admin";
-                    $contact=$row['AdminContactNo'];
+                    $contact=$row['admincontactno'];
                     $identification= $username;
-                    $company=$row['AdminOffice'];
-                    $email = $row['AdminEmail'];
-                    $address = $row['AdminAddress'];
+                    $company=$row['adminoffice'];
+                    $email = $row['adminemail'];
+                    $address = $row['adminaddress'];
+                    $postal = $row['adminpostalcode'];
+                    $pic = $row['adminpic'];
+                    //echo var_dump($row);
             }
             elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM Staff WHERE StaffID = '$username'";
+                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
                     
-                    $givenname= $row['StaffFirstName'];
-                    $familyname=$row['StaffLastName'];
+                    $givenname= $row['stafffirstname'];
+                    $familyname=$row['stafflastname'];
                     $user = "Staff";
-                    $contact=$row['StaffContactNo'];
+                    $contact=$row['staffcontactno'];
                     $identification= $username;
-                    $company=$row['StaffOffice'];
-                    $email = $row['StaffEmail']; 
-                    $address = $row['StaffAddress'];
+                    $company=$row['staffoffice'];
+                    $email = $row['staffemail']; 
+                    $address = $row['staffaddress'];
+                    $postal = $row['staffpostalcode'];
             }
-
             ?>
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
@@ -353,7 +357,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="DisplayFolder/<?php echo $pic;?>">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold"><?php echo $username;?></span>
@@ -400,12 +404,26 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello <?php echo $givenname; ?></h1>
+            <h1 class="display-2 text-white">Hello <?php echo $givenname; //echo var_dump($_GET); echo $_GET['editedUsername'];?></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
           </div>
         </div>
       </div>
     </div>
+    <!--profilepic upload-->
+
+    <form action="upload.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="circleUpload">
+    <div class="alignpop">
+      <div class="headerpop">
+    <h4>Select image to upload:</h4> <button type="button" class="btncancel" onclick="closeFormCircle()"><i class="fas fa-window-close text-red"></i></button>
+          </div>
+  <br>
+  <input type="file" name="fileToUpload" id="fileToUpload" class="fileupload">
+  <br>
+  <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
+          </div>
+          
+</form>
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
@@ -415,9 +433,12 @@
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
-                  <a href="#">
-                    <img src="argon-dashboard-master/assets/img/theme/team-4.jpg" class="rounded-circle">
-                  </a>
+                  <!--<a href="#">-->
+                  <button class="open-button" onclick="openFormCircle()">
+                    <img src="DisplayFolder/<?php echo $pic;?>" class="rounded-circle">
+                    <i class="fas fa-user-edit editpic text-primary"></i>
+                  </button>
+                  <!--</a>-->
                 </div>
               </div>
             </div>
@@ -459,6 +480,7 @@
           </div>
         </div>
         <div class="col-xl-8 order-xl-1">
+          <form action="" method="post">
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
@@ -466,39 +488,154 @@
                   <h3 class="mb-0">Edit profile </h3>
                 </div>
                 <div class="col-4 text-right">
-                <button type="button" class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-success editedbtn" id="editSubmit" disabled>Save</button>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <!--<form>-->
+              <?php 
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                          $newusername = mysqli_real_escape_string($db,$_POST['eusername']);
+                          $newemail = mysqli_real_escape_string($db,$_POST['eemail']); 
+                          $newfirst = mysqli_real_escape_string($db,$_POST['efirst']); 
+                          $newlast = mysqli_real_escape_string($db,$_POST['elast']); 
+                          $newaddress = mysqli_real_escape_string($db,$_POST['eaddress']); 
+                          $newpostal = mysqli_real_escape_string($db,$_POST['epostal']); 
+                          $newcontact = mysqli_real_escape_string($db,$_POST['econtact']); 
+                          $error =false;
+
+                          if($newemail==""){
+                            echo "<p class='text-red'>Email is required</p>";
+                            $error =true;
+                             
+                          }
+                          elseif(!filter_var($newemail, FILTER_VALIDATE_EMAIL)){
+                            echo "<p class='text-red'>Email is invalid</p>";
+                            $error =true;
+                             
+                          }
+                          elseif($newfirst==""){
+                            echo "<p class='text-red'>First name is required</p>";
+                            $error =true;
+                             
+                          }
+                            elseif($newlast==""){
+                              echo "<p class='text-red'>Last name is required</p>";
+                              $error =true;
+                               
+                            }
+                              elseif($newaddress==""){
+                                echo "<p class='text-red'>Address is required</p>";
+                                $error =true;
+                                 
+                              }
+                                elseif($newpostal==""){
+                                  echo "<p class='text-red'>Postal code is required</p>";
+                                  $error =true;
+                                   
+                                }
+                                elseif(preg_match("/^[0-9]{6}$/",$newpostal)==0){
+                                  echo "<p class='text-red'>Postal code must have 6 digits</p>";
+                                  $error =true;
+                                   
+                                }
+                                elseif($newcontact==""){
+                                  echo "<p class='text-red'>Contact number is required</p>";
+                                  $error =true;
+                                   
+                                }
+                                elseif(preg_match("/^[0-9]{8}$/",$newcontact)==0){
+                                  echo "<p class='text-red'>Postal code must have 8 digits</p>";
+                                  $error =true;
+                                   
+                                }
+                                  elseif($newusername==""){
+                                    echo"<p class='text-red'>Username is required</p>";
+                                    $error=true;
+                                     
+                                  }
+                                  elseif(preg_match("/^[A-Za-z0-9'.,-]+(?:[ _-][A-Za-z0-9]+)*$/",$newusername)==0){
+                                    echo "<p class='text-red'>Username cannot have spaces</p>";
+                                    $error=true;
+                                     
+                                  }
+                                  else{
+                                    $error=false;
+                                  }
+
+                          if ($error==false){
+                            if($user="Admin"){
+                            $sql = "UPDATE Admin SET adminemail='$newemail',adminfirstname='$newfirst',adminlastname='$newlast',
+                             adminaddress='$newaddress',adminpostalcode='$newpostal',admincontactno='$newcontact',adminid='$newusername'
+                              WHERE adminid='$username'";
+                                      if (mysqli_query($db, $sql)) {
+                                        $username=$newusername;
+                                        ?><script language="JavaScript">
+                                        document.location='welcome.php';
+                                        </script><?php
+                                        echo "<p class='text-success'>Updated</p>";
+                          }
+                          else{
+                            echo "Error updating record: " . mysqli_error($db);
+                          }
+                        }
+                        }
+                          /*
+                          if($newemail==$email){
+                            echo "unchanged";
+                          }
+                          elseif(!filter_var($newemail, FILTER_VALIDATE_EMAIL)){
+                            echo "email is invalid";
+                          }
+                          else{
+                            echo "changed";
+                            if($user=="Admin"){
+                              $sqlemail = "UPDATE Admin SET adminemail='$newemail' WHERE adminid='$username'";
+                              if (mysqli_query($db, $sqlemail)) {
+                                //echo "Record updated successfully";
+                                ?>
+            <script language="JavaScript">
+            document.location='welcome.php';
+        </script>
+        <?php
+                              }
+                              else {
+                                echo "Error updating record: " . mysqli_error($db);
+                              }
+                            }
+                          }*/
+                        }
+                        
+                        ?>
+                        
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
-                      <div class="form-group">
+                      <div class="form-group editUsername">
                         <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="<?php echo $username;?>">
+                        <input type="text" id="input-username" class="form-control editable" placeholder="Username" name="eusername" value="<?php echo $username;?>">
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <div class="form-group">
+                      <div class="form-group editEmail">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="<?php echo $email;?>">
+                        <input type="email" id="input-email" class="form-control editable" placeholder="Email" name="eemail" value="<?php echo $email;?>">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
-                      <div class="form-group">
+                      <div class="form-group editFirst">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="<?php echo $givenname;?>">
+                        <input type="text" id="input-first-name" class="form-control editable" placeholder="First name" name="efirst" value="<?php echo $givenname;?>">
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <div class="form-group">
+                      <div class="form-group editLast">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value="<?php echo $familyname;?>">
+                        <input type="text" id="input-last-name" class="form-control editable" placeholder="Last name" name="elast" value="<?php echo $familyname;?>">
                       </div>
                     </div>
                   </div>
@@ -509,25 +646,34 @@
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="form-group">
+                      <div class="form-group editAddress">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control" placeholder="Home Address" value="<?php echo $address;?>" type="text">
+                        <input type="text" id="input-address" class="form-control editable" placeholder="Home Address" name="eaddress" value="<?php echo $address;?>">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-4">
-                      <div class="form-group">
+                      <div class="form-group editPostal">
                         <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code">
+                        <input type="text" id="input-postal-code" class="form-control editable" placeholder="Postal code" name="epostal" value="<?php echo $postal;?>">
                       </div>
-                      <br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group editContact">
+                        <label class="form-control-label" for="input-country">Contact No.</label>
+                        <input type="text" id="input-contact" class="form-control editable" placeholder="Contact No" name="econtact" value="<?php echo $contact;?>">
+                      </div>
                     </div>
                   </div>
                 </div>
-              </form>
+              <!--</form>-->
             </div>
           </div>
+          </form>
+          
         </div>
       </div>
       <!-- Footer -->
@@ -559,6 +705,7 @@
     </div>
   </div>
   <!-- Argon Scripts -->
+  
   <!-- Core -->
   <script src="argon-dashboard-master/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="argon-dashboard-master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -567,6 +714,60 @@
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
+
+  <script src="script.js"></script>
+  <script>
+    
+  $(document).ready(function(){
+    $(".editable").on('input',function(){
+      $(".editedbtn").prop("disabled", false);
+    });
+/*
+    $("#editSubmit").click(function(e){
+      e.preventDefault();
+      var name=$("#input-username").val();
+      var email=$("#input-email").val();
+      var firstName=$("#input-first-name").val();
+      var lastName=$("#input-last-name").val();
+      var address=$("#input-address").val();
+      var postal=$("#input-postal-code").val();
+      var contact=$("#input-contact").val();
+      console.log(name);
+      $.ajax({
+            type: "POST",
+            url: "validate.php",
+            data: { 
+              editedUsername: name, 
+              editedEmail:email, 
+              editedFirst:firstName, 
+              editedLast: lastName,
+              editedAddress: address,
+              editedPostal: postal,
+              editedContact: contact },
+            success: function(data){
+                if(data.code=="200"){
+                  alert("Success");
+                }
+                else{
+                  alert("Not Sucess"+data.errUsername+data.errEmail);
+
+                  if(data.errUsername!="" || data.errUsername!=undefined){
+                    console.log("invalid username"+data.errUsername);
+                    $("#input-username").after(data.errUsername);
+                  }
+                  else{
+                    if(data.errEmail!="" || data.errUsername!=undefined){
+                      console.log("invalid email");
+                      $("#input-email").after(data.errEmail);
+                    }
+                  }
+                }
+            }
+          });
+    });
+    */
+  })
+</script>
 </body>
 
 </html>

@@ -1,0 +1,95 @@
+.card-profile-image
+{
+    position: relative;
+}
+
+.card-profile-image .editpic{
+    position: absolute;
+    left: 50%;
+    max-width: 140px;
+    /*transition: all .15s ease;*/
+    transform: translate(-50%, -50%) scale(1);
+    font-size: 50px;
+    opacity: 0;
+    pointer-events: none
+}
+
+.card-profile-image img:hover + .editpic{
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 1;
+}
+
+.card-profile-image img
+{
+    position: absolute;
+    left: 50%;
+
+    max-width: 140px;
+
+    /*transition: all .15s ease; */
+    transform: translate(-50%, -50%) scale(1);
+
+    border: 3px solid #fff;
+    border-radius: .375rem;
+
+    opacity: 1;
+}
+.card-profile-image img:hover
+{
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 0.7;
+}
+
+.uploadpropic{
+    background-color: #f1f1f1;
+    display: none;
+  position: fixed;
+  bottom: 50%;
+  left:50%;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  transform: translate(-50%, -50%);
+  padding: 12px;
+}
+
+.alignpop{
+    display: flex;
+    flex-direction: column;
+}
+.headerpop{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.btncancel{
+    background: none;
+	color: inherit;
+	border: none;
+    padding: 0;
+    margin: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    text-align: right;
+    align-self: end;
+    justify-self: end;
+}
+.open-button{
+    background: none;
+	color: inherit;
+	border: none;
+    padding: 0;
+    margin: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: none;
+}
+
+.bg-login-image{
+    background: url("https://images.unsplash.com/photo-1506521781263-d8422e82f27a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+    background-position: center;
+    background-size: cover;
+}
+
+

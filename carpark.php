@@ -38,32 +38,32 @@
 <?php
             $username=$_SESSION['id'];
             if($_SESSION['user']=="Admin"){
-                $sql = "SELECT * FROM Admin WHERE AdminID = '$username'";
+                $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
                     
-                    $givenname= $row['AdminFirstName'];
-                    $familyname=$row['AdminLastName'];
+                    $givenname= $row['adminfirstname'];
+                    $familyname=$row['adminlastname'];
                     $user="Admin";
-                    $contact=$row['AdminContactNo'];
+                    $contact=$row['admincontactno'];
                     $identification= $username;
-                    $company=$row['AdminOffice'];
-                    $email = $row['AdminEmail'];
-                    $address = $row['AdminAddress'];
+                    $company=$row['adminoffice'];
+                    $email = $row['adminemail'];
+                    $address = $row['adminaddress'];
             }
             elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM Staff WHERE StaffID = '$username'";
+                $sql = "SELECT * FROM Staff WHERE staffid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
                     
-                    $givenname= $row['StaffFirstName'];
-                    $familyname=$row['StaffLastName'];
+                    $givenname= $row['stafffirstname'];
+                    $familyname=$row['stafflastname'];
                     $user = "Staff";
-                    $contact=$row['StaffContactNo'];
+                    $contact=$row['staffcontactno'];
                     $identification= $username;
-                    $company=$row['StaffOffice'];
-                    $email = $row['StaffEmail']; 
-                    $address = $row['StaffAddress'];
+                    $company=$row['staffoffice'];
+                    $email = $row['staffemail']; 
+                    $address = $row['staffaddress'];
             }
 
             ?>

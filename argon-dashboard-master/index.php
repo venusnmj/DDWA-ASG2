@@ -20,7 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="stylesheet.css" rel="stylesheet">
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -135,7 +135,7 @@
         if ($count==1) {
             ?>
             <h6 class="validAlert">
-            <?php //echo "succeed"; ?>
+            <?php echo "succeed"; ?>
         </h6>
             <?php
             $_SESSION['user'] = "Admin";
