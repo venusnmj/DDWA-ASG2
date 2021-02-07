@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Admin Dashboard - For Park-a-lot app</title>
+  <title>Profile</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -32,7 +32,6 @@
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <!--<link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">-->
-  <link href="stylesheet.css" rel="stylesheet">
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
   <link href="stylesheet.css" rel="stylesheet">
 </head>
@@ -103,28 +102,28 @@
             <li class="nav-item">
               <a class="nav-link" href="carpark.php">
                 <i class="fas fa-parking text-orange"></i>
-                <span class="nav-link-text">Carparks</span>
+                <span class="nav-link-text">Carpark</span>
               </a>
             </li>
             
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fas fa-car text-primary"></i>
-                <span class="nav-link-text">Cars</span>
+                <span class="nav-link-text">Car</span>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fas fa-id-card-alt text-default"></i>
-                <span class="nav-link-text">Partners</span>
+                <span class="nav-link-text">Partner</span>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fas fa-users text-info"></i>
-                <span class="nav-link-text">Users</span>
+                <span class="nav-link-text">User</span>
               </a>
             </li>
 
@@ -154,7 +153,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fas fa-car text-primary"></i>
-                <span class="nav-link-text">Cars</span>
+                <span class="nav-link-text">Car</span>
               </a>
             </li>
 
@@ -177,6 +176,7 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
+          <!--
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
             <div class="form-group mb-0">
               <div class="input-group input-group-alternative input-group-merge">
@@ -190,6 +190,7 @@
               <span aria-hidden="true">×</span>
             </button>
           </form>
+          -->
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -620,7 +621,7 @@
                                   }
 
                           if ($error==false){
-                            if($user="Admin"){
+                            if($user=="Admin"){
                             $sql = "UPDATE Admin SET adminemail='$newemail',adminfirstname='$newfirst',adminlastname='$newlast',
                              adminaddress='$newaddress',adminpostalcode='$newpostal',admincontactno='$newcontact',adminid='$newusername'
                               WHERE adminid='$username'";
@@ -640,6 +641,7 @@
                                         $postal = $newpostal;
                                         $pic = $pic;
                                         $bannerpic = $bannerpic;
+                                        $_SESSION['id']=$username;
                 
                                         header("Location: welcome.php");
                                         echo "<p class='text-success'>Updated. The changes might take awhile to update on your screen.</p>";
@@ -648,7 +650,7 @@
                             echo "Error updating record: " . mysqli_error($db);
                           }
                         }
-                        elseif($user="Staff"){
+                        elseif($user=="Staff"){
                           $sql = "UPDATE Staff SET staffemail='$newemail',stafffirstname='$newfirst',stafflastname='$newlast',
                              staffaddress='$newaddress',staffpostalcode='$newpostal',staffcontactno='$newcontact',staffid='$newusername'
                               WHERE staffid='$username'";
@@ -668,6 +670,7 @@
                                         $postal = $newpostal;
                                         $pic = $pic;
                                         $bannerpic = $bannerpic;
+                                        $_SESSION['id']=$username;
                 
                                         header("Location: welcome.php");
                                         echo "<p class='text-success'>Updated. The changes might take awhile to update on your screen.</p>";

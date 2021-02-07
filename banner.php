@@ -83,6 +83,13 @@ if ($uploadOk == 0) {
           header('Location: welcome.php');
         } 
     }
+    elseif($user=="Staff"){
+      $sqlpic = "UPDATE Staff SET staffbanner='$file' WHERE staffid='$username'";
+        if (mysqli_query($db, $sqlpic)) {
+          //echo "Record updated successfully";
+          header('Location: welcome.php');
+        } 
+    }
 }
 else {
     echo "Sorry, there was an error uploading your file.";

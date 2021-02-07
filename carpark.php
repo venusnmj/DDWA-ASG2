@@ -22,16 +22,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <title>Carpark</title>
   <!-- Favicon -->
-  <link rel="icon" href="argon-dashboard-master/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">
+  <link href="stylesheet.css" rel="stylesheet">
+  <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
+  <link href="stylesheet.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,39 +43,25 @@
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    
-                    $givenname= $row['adminfirstname'];
-                    $familyname=$row['adminlastname'];
                     $user="Admin";
-                    $contact=$row['admincontactno'];
-                    $identification= $username;
-                    $company=$row['adminoffice'];
-                    $email = $row['adminemail'];
-                    $address = $row['adminaddress'];
+                    $pic = $row['adminpic'];
             }
             elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM Staff WHERE staffid = '$username'";
+                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    
-                    $givenname= $row['stafffirstname'];
-                    $familyname=$row['stafflastname'];
                     $user = "Staff";
-                    $contact=$row['staffcontactno'];
-                    $identification= $username;
-                    $company=$row['staffoffice'];
-                    $email = $row['staffemail']; 
-                    $address = $row['staffaddress'];
+                    $pic = $row['staffpic'];
             }
-
             ?>
+            
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="argon-dashboard-master/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+          <img src="argon-dashboard-master/assets/img/brand/park-a-lot-brand.png" class="navbar-brand-img" alt="...">
         </a>
       </div>
       <div class="navbar-inner">
@@ -84,37 +72,37 @@
           <?php if ($_SESSION['user']=="Admin"){?>
           
           <li class="nav-item">
-            <a class="nav-link active" href="welcome.php">
+            <a class="nav-link" href="welcome.php">
               <i class="ni ni-single-02 text-yellow"></i>
               <span class="nav-link-text">Profile</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="carpark.php">
+            <a class="nav-link active" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
-              <span class="nav-link-text">Carparks</span>
+              <span class="nav-link-text">Carpark</span>
             </a>
           </li>
           
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-car text-primary"></i>
-              <span class="nav-link-text">Cars</span>
+              <span class="nav-link-text">Car</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-id-card-alt text-default"></i>
-              <span class="nav-link-text">Partners</span>
+              <span class="nav-link-text">Partner</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-users text-info"></i>
-              <span class="nav-link-text">Users</span>
+              <span class="nav-link-text">User</span>
             </a>
           </li>
 
@@ -128,14 +116,14 @@
         <?php }
         elseif($_SESSION['user']=="Staff"){?>
           <li class="nav-item">
-            <a class="nav-link active" href="welcome.php">
+            <a class="nav-link" href="welcome.php">
               <i class="ni ni-single-02 text-yellow"></i>
               <span class="nav-link-text">Profile</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="carpark.php">
+            <a class="nav-link active" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
             </a>
@@ -147,6 +135,13 @@
               <span class="nav-link-text">Cars</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="far fa-life-ring text-default"></i>
+              <span class="nav-link-text">Assist</span>
+            </a>
+          </li>
         <?php } ?>
           </ul>
         </div>
@@ -156,10 +151,11 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
+          <!--
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
             <div class="form-group mb-0">
               <div class="input-group input-group-alternative input-group-merge">
@@ -173,6 +169,7 @@
               <span aria-hidden="true">×</span>
             </button>
           </form>
+        -->
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -210,7 +207,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm"><?php echo $username; ?></h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>2 hrs ago</small>
@@ -229,7 +226,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm"><?php echo $username;?></h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>3 hrs ago</small>
@@ -248,7 +245,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm"><?php echo $username;?></h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>5 hrs ago</small>
@@ -267,7 +264,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm"><?php echo $username;?></h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>2 hrs ago</small>
@@ -286,7 +283,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm"><?php echo $username;?></h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>3 hrs ago</small>
@@ -299,7 +296,7 @@
                 </div>
                 <!-- View all -->
                 
-                </div>
+                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
               </div>
             </li>
           </ul>
@@ -308,10 +305,10 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="DisplayFolder/<?php echo $pic;?>">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $username;?></span>
+                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $username; ?></span>
                   </div>
                 </div>
               </a>
@@ -347,24 +344,22 @@
       </div>
     </nav>
     <!-- Header -->
-    <!-- Header -->
-    <div class="header bg-primary pb-6">
+    <div class="header bg-default pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+              <h6 class="h2 text-white d-inline-block mb-0">Carpark</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                  <!--
+                    <li class="breadcrumb-item"><a href="#">Carpark</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Tables</li>
+                -->
+                <li class="breadcrumb-item active" aria-current="page">Carpark</li>
                 </ol>
               </nav>
-            </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
             </div>
           </div>
         </div>
@@ -372,329 +367,78 @@
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-      <div class="row">
-        <div class="col">
+      <div class="row justify-content-center">
+        <div class=" col ">
           <div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0">
-              <h3 class="mb-0">Light table</h3>
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Carpark</h3>
             </div>
-            <!-- Light table -->
-            <div class="table-responsive">
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col" class="sort" data-sort="name">Project</th>
-                    <th scope="col" class="sort" data-sort="budget">Budget</th>
-                    <th scope="col" class="sort" data-sort="status">Status</th>
-                    <th scope="col">Users</th>
-                    <th scope="col" class="sort" data-sort="completion">Completion</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody class="list">
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/bootstrap.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Argon Design System</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="budget">
-                      $2500 USD
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>
-                        <span class="status">pending</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <span class="completion mr-2">60%</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/angular.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Angular Now UI Kit PRO</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="budget">
-                      $1800 USD
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-success"></i>
-                        <span class="status">completed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <span class="completion mr-2">100%</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/sketch.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Black Dashboard</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="budget">
-                      $3150 USD
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-danger"></i>
-                        <span class="status">delayed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <span class="completion mr-2">72%</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/react.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">React Material Dashboard</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="budget">
-                      $4400 USD
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-info"></i>
-                        <span class="status">on schedule</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <span class="completion mr-2">90%</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/vue.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">Vue Paper UI Kit PRO</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td class="budget">
-                      $2200 USD
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-success"></i>
-                        <span class="status">completed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="argon-dashboard-master/assets/img/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <span class="completion mr-2">100%</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <div class="card-body">
+
+    <div class="container">
+    <div class="row">
+      <?php
+      if($user=="Admin"){
+        $sqlcp = "SELECT * FROM Carpark ORDER BY carparkid";
+        $resultcp = $db->query($sqlcp);
+        if($resultcp->num_rows>0){
+          while($rowcp = mysqli_fetch_assoc($resultcp)) { 
+            echo '
+            <form action="" method="post">
+            <div class="col-4">
+            <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
+          <div class="card-body">
+            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
+            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
+            <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
           </div>
-        </div>
-      </div>
+                </div>
+              </div>
+              </form>';
+        }
+      }
+    }
       
+      ?>
+<!--
+<div class="col-4">
+            <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
+          <div class="card-body">
+            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
+            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
+            <a href="#" class="btn btn-primary">Car lots</a>
+          </div>
+                </div>
+              </div>-->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+        </div>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $cpChoosen = $_POST['submittedCarpark'];
+  $_SESSION['carpark']=$cpChoosen;
+  echo $_SESSION['carpark'];
+  echo '<script language="JavaScript">
+  document.location="carlots.php";
+</script>';
+  
+}
+?>
+            
+
+
+
+
+
+
+
+
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -732,6 +476,10 @@
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
+
+
+
+  <script src="script.js"></script>
 </body>
 
 </html>

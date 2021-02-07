@@ -2,7 +2,8 @@
 include('session.php');
 $username=$_SESSION['id'];
 $user=$_SESSION['user'];
-$target_dir = "DisplayFolder/";
+$carpark=$_SESSION['carpark'];
+$target_dir = "CarparksPic/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -12,27 +13,12 @@ if(isset($_POST["submit"])) {
   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
     list($w, $h) = getimagesize($_FILES["fileToUpload"]["tmp_name"]); // get image resolution
-    if ($w < $h){ // if width is less than height, crop height using imagecrop function
-        $image = imagecrop($image, array(
-            "x" => 0,
-            "y" => ($w - $h) / 2,
-            "width" => $w,
-            "height" => $w
-        ));
-    } else if ($h < $w){ // vice versa
-        $image = imagecrop($image, array(
-            "x" => ($w - $h) / 2,
-            "y" => 0,
-            "width" => $h,
-            "height" => $h
-        ));
-    }
     
     echo "File is an image - " . $check["mime"] . ".";
     $uploadOk = 1;
   } else {
     echo '<script language="javascript"> alert("File is not an image.");
-    location.href="welcome.php";
+    location.href="carlots.php";
     </script>';
     $uploadOk = 0;
   }
@@ -41,7 +27,7 @@ if(isset($_POST["submit"])) {
 // Check if file already exists
 if (file_exists($target_file)) {
     echo '<script language="javascript"> alert("File already exists");
-    location.href="welcome.php";
+    location.href="carlots.php";
     </script>';
   $uploadOk = 0;
 }
@@ -49,7 +35,7 @@ if (file_exists($target_file)) {
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo '<script language="javascript"> alert("Sorry, your file is too large.");
-    location.href="welcome.php";
+    location.href="carlots.php";
     </script>';
   $uploadOk = 0;
 }
@@ -58,7 +44,7 @@ if ($_FILES["fileToUpload"]["size"] > 5000000) {
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
     echo '<script language="javascript"> alert("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-    location.href="welcome.php";
+    location.href="carlots.php";
     </script>';
   $uploadOk = 0;
 }
@@ -66,7 +52,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo '<script language="javascript"> alert("Sorry, your file was not uploaded.");
-    location.href="welcome.php";
+    location.href="carlots.php";
     </script>';
 // if everything is ok, try to upload file
 } else {
@@ -74,20 +60,13 @@ if ($uploadOk == 0) {
     echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
     $file = htmlspecialchars(basename($_FILES["fileToUpload"]["name"]));
     
-    if($user=="Admin"){
-        $sqlemail = "UPDATE Admin SET adminpic='$file' WHERE adminid='$username'";
-        if (mysqli_query($db, $sqlemail)) {
+    
+        $sqlcppic = "UPDATE Carpark SET carparkpic='$file' WHERE carparkname='$carpark'";
+        if (mysqli_query($db, $sqlcppic)) {
           //echo "Record updated successfully";
-          header('Location: welcome.php');
+          header('Location: carlots.php');
         } 
-    }
-    elseif($user=="Staff"){
-      $sqlpic = "UPDATE Staff SET staffpic='$file' WHERE staffid='$username'";
-        if (mysqli_query($db, $sqlpic)) {
-          //echo "Record updated successfully";
-          header('Location: welcome.php');
-        } 
-    }
+    
 }
 else {
     echo "Sorry, there was an error uploading your file.";

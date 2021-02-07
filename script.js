@@ -13,3 +13,11 @@ function openFormCircle() {
   function closeFormBanner() {
     document.getElementById("bannerUpload").style.display = "none";
   }
+
+  function openFormCarpark(){
+    document.getElementById("cpUpload").style.display = "block";
+  }
+
+  function closeFormCarpark(){
+    document.getElementById("cpUpload").style.display = "none";
+  }
