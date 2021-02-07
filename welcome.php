@@ -74,6 +74,8 @@
                     $address = $row['staffaddress'];
                     $postal = $row['staffpostalcode'];
                     $password = $row['staffpassword'];
+                    $pic = $row['staffpic'];
+                    $bannerpic=$row['staffbanner'];
             }
             ?>
   <!-- Sidenav -->
@@ -153,6 +155,13 @@
               <a class="nav-link" href="#">
                 <i class="fas fa-car text-primary"></i>
                 <span class="nav-link-text">Cars</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="far fa-life-ring text-default"></i>
+                <span class="nav-link-text">Assist</span>
               </a>
             </li>
           <?php } ?>
@@ -570,7 +579,7 @@
                                    
                                 }
                                 elseif(preg_match("/^[0-9]{8}$/",$newcontact)==0){
-                                  echo "<p class='text-red'>Postal code must have 8 digits</p>";
+                                  echo "<p class='text-red'>Phone numbers must have 8 digits</p>";
                                   $error =true;
                                    
                                 }
@@ -630,6 +639,35 @@
                                         $address = $newaddress;
                                         $postal = $newpostal;
                                         $pic = $pic;
+                                        $bannerpic = $bannerpic;
+                
+                                        header("Location: welcome.php");
+                                        echo "<p class='text-success'>Updated. The changes might take awhile to update on your screen.</p>";
+                          }
+                          else{
+                            echo "Error updating record: " . mysqli_error($db);
+                          }
+                        }
+                        elseif($user="Staff"){
+                          $sql = "UPDATE Staff SET staffemail='$newemail',stafffirstname='$newfirst',stafflastname='$newlast',
+                             staffaddress='$newaddress',staffpostalcode='$newpostal',staffcontactno='$newcontact',staffid='$newusername'
+                              WHERE staffid='$username'";
+                                      if (mysqli_query($db, $sql)) {
+                                        if($changepwd==true){
+                                          $sqlpwd="UPDATE Staff SET staffpassword='$rtpwd' WHERE staffid='$username'";
+                                          if(mysqli_query($db, $sqlpwd)){
+                                            echo "<p class='text-success'>Password changed</p>";
+                                          }
+                                        }
+                                        $username=$newusername;
+                                        $givenname=$newfirst;
+                                        $familyname=$newlast;
+                                        $contact=$newcontact;
+                                        $email = $newemail;
+                                        $address = $newaddress;
+                                        $postal = $newpostal;
+                                        $pic = $pic;
+                                        $bannerpic = $bannerpic;
                 
                                         header("Location: welcome.php");
                                         echo "<p class='text-success'>Updated. The changes might take awhile to update on your screen.</p>";
