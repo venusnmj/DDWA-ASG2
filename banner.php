@@ -2,7 +2,7 @@
 include('session.php');
 $username=$_SESSION['id'];
 $user=$_SESSION['user'];
-$target_dir = "DisplayFolder/";
+$target_dir = "BannerImg/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -12,6 +12,8 @@ if(isset($_POST["submit"])) {
   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
     list($w, $h) = getimagesize($_FILES["fileToUpload"]["tmp_name"]); // get image resolution
+
+    /*
     if ($w < $h){ // if width is less than height, crop height using imagecrop function
         $image = imagecrop($image, array(
             "x" => 0,
@@ -26,7 +28,7 @@ if(isset($_POST["submit"])) {
             "width" => $h,
             "height" => $h
         ));
-    }
+    }*/
     
     echo "File is an image - " . $check["mime"] . ".";
     $uploadOk = 1;
@@ -47,7 +49,7 @@ if (file_exists($target_file)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo '<script language="javascript"> alert("Sorry, your file is too large.");
     location.href="welcome.php";
     </script>';

@@ -52,6 +52,7 @@
   padding: 12px;
 }
 
+
 .alignpop{
     display: flex;
     flex-direction: column;
@@ -93,35 +94,26 @@
 }
 
 .validAlert{
-    color: red;
-}
-
-.navbar-brand {
-    font-size: 1.25rem;
-    line-height: inherit;
-    display: inline-block;
-    margin-right: 1rem;
-    padding:0rem;
-    white-space: nowrap;
-}
-
-.sidenav{
-    padding: 0rem ;
+    margin: 3rem;
 }
 
 .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img
 {
-    padding:0rem;
-    max-width: 100%;
-    max-height: 4rem;
+    max-height: 3rem;
 }
 
-.editbanner{
+.card-banner .editbanner{
     position: absolute;
-    left: 50%;
-    max-width: 140px;
-    /*transition: all .15s ease;*/
-    transform: translate(-50%, -50%) scale(1);
-    font-size: 50px;
+    right:0%;
+    /*max-width: 200px;*/
+    transform: scale(1);
+    padding-top: 1rem;
+    padding-right:1rem;
+    font-size: 2rem;
     opacity: 0;
+}
+
+.card-banner:hover .editbanner{
+    transform: scale(1.03);
+    opacity: 1;
 }

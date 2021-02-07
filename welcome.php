@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--
 =========================================================
 * Argon Dashboard - v1.2.0
@@ -13,7 +14,6 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<!DOCTYPE html>
 <?php include('session.php');?>
 <html>
 
@@ -31,7 +31,9 @@
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">
+  <!--<link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">-->
+  <link href="stylesheet.css" rel="stylesheet">
+  <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
   <link href="stylesheet.css" rel="stylesheet">
 </head>
 
@@ -53,6 +55,8 @@
                     $address = $row['adminaddress'];
                     $postal = $row['adminpostalcode'];
                     $pic = $row['adminpic'];
+                    $password = $row['adminpassword'];
+                    $bannerpic=$row['adminbanner'];
                     //echo var_dump($row);
             }
             elseif($_SESSION['user']=="Staff"){
@@ -69,6 +73,7 @@
                     $email = $row['staffemail']; 
                     $address = $row['staffaddress'];
                     $postal = $row['staffpostalcode'];
+                    $password = $row['staffpassword'];
             }
             ?>
   <!-- Sidenav -->
@@ -410,27 +415,41 @@
         </div>
       </div>
     </div>
-    <!--profilepic upload-->
 
+    <!--profilepic upload-->
     <form action="upload.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="circleUpload">
     <div class="alignpop">
       <div class="headerpop">
     <h4>Select image to upload:</h4> <button type="button" class="btncancel" onclick="closeFormCircle()"><i class="fas fa-window-close text-red"></i></button>
           </div>
   <br>
-  <input type="file" name="fileToUpload" id="fileToUpload" class="fileupload">
+  <input type="file" name="fileToUpload" id="propicToUpload" class="fileupload">
   <br>
   <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
           </div>
-          
-</form>
+        </form>
+<!--profile banner upload-->
+<form action="banner.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="bannerUpload">
+    <div class="alignpop">
+      <div class="headerpop">
+    <h4>Select image to upload:</h4> <button type="button" class="btncancel" onclick="closeFormBanner()"><i class="fas fa-window-close text-red"></i></button>
+          </div>
+  <br>
+  <input type="file" name="fileToUpload" id="bannerToUpload" class="fileupload">
+  <br>
+  <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
+          </div>
+        </form>
+
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-xl-4 order-xl-2">
           <div class="card card-profile">
-            <img src="argon-dashboard-master/assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
-            <i class="fas fa-user-edit text-primary editbanner"></i>
+          <button class="open-button card-banner" onclick="openFormBanner()">
+            <img src="BannerImg/<?php echo $bannerpic;?>" alt="Image placeholder" class="card-img-top">
+            <i class="far fa-edit text-primary editbanner"></i>
+          </button>
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
@@ -504,7 +523,11 @@
                           $newaddress = mysqli_real_escape_string($db,$_POST['eaddress']); 
                           $newpostal = mysqli_real_escape_string($db,$_POST['epostal']); 
                           $newcontact = mysqli_real_escape_string($db,$_POST['econtact']); 
+                          $checkpwd = mysqli_real_escape_string($db,$_POST['eoldpwd']); 
+                          $newpwd = mysqli_real_escape_string($db,$_POST['enewpwd']);
+                          $rtpwd = mysqli_real_escape_string($db,$_POST['eretypepwd']);  
                           $error =false;
+                          $changepwd = false;
 
                           if($newemail==""){
                             echo "<p class='text-red'>Email is required</p>";
@@ -559,7 +582,29 @@
                                   elseif(preg_match("/^[A-Za-z0-9'.,-]+(?:[ _-][A-Za-z0-9]+)*$/",$newusername)==0){
                                     echo "<p class='text-red'>Username cannot have spaces</p>";
                                     $error=true;
-                                     
+                                  }
+                                  elseif($checkpwd!=$password && $checkpwd != ""){
+                                    echo "<p class='text-red'>Current password is entered wrong</p>";
+                                    $error=true;
+                                    $changepwd = false;
+                                  }
+                                  elseif($newpwd != $rtpwd && $newpwd){
+                                    echo "<p class='text-red'>Re-type password and new password does not match</p>";
+                                    $error=true;
+                                    $changepwd = false;
+                                  }
+                                  elseif($checkpwd!="" && $newpwd=="" || $checkpwd!="" && $rtpwd==""){
+                                    echo "<p class='text-red'>There's no new password to be changed</p>";
+                                    $error=true;
+                                    $changepwd = false;
+                                  }
+                                  elseif($newpwd!="" && $rtpwd==""){
+                                    echo "<p class='text-red'>Password was not retyped</p>";
+                                    $error=true;
+                                    $changepwd = false;
+                                  }
+                                  elseif($checkpwd!="" && $newpwd!="" && $rtpwd!=""){
+                                    $changepwd = true;
                                   }
                                   else{
                                     $error=false;
@@ -571,9 +616,22 @@
                              adminaddress='$newaddress',adminpostalcode='$newpostal',admincontactno='$newcontact',adminid='$newusername'
                               WHERE adminid='$username'";
                                       if (mysqli_query($db, $sql)) {
+                                        if($changepwd==true){
+                                          $sqlpwd="UPDATE Admin SET adminpassword='$rtpwd' WHERE adminid='$username'";
+                                          if(mysqli_query($db, $sqlpwd)){
+                                            echo "<p class='text-success'>Password changed</p>";
+                                          }
+                                        }
                                         $username=$newusername;
+                                        $givenname=$newfirst;
+                                        $familyname=$newlast;
+                                        $contact=$newcontact;
+                                        $email = $newemail;
+                                        $address = $newaddress;
+                                        $postal = $newpostal;
+                                        $pic = $pic;
+                
                                         header("Location: welcome.php");
-                                        header("Refresh:0");
                                         echo "<p class='text-success'>Updated. The changes might take awhile to update on your screen.</p>";
                           }
                           else{
@@ -640,6 +698,36 @@
                     </div>
                   </div>
                 </div>
+                <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Change password</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group editAddress">
+                        <label class="form-control-label" for="input-address">Current password</label>
+                        <input type="password" id="input-old-password" class="form-control editable" placeholder="Password" name="eoldpwd" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group editPostal">
+                        <label class="form-control-label" for="input-country">New password</label>
+                        <input type="password" id="input-new-password" class="form-control editable" placeholder="New password" name="enewpwd" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group editContact">
+                        <label class="form-control-label" for="input-country">Re-type password</label>
+                        <input type="password" id="input-retype-password" class="form-control editable" placeholder="Re-type" name="eretypepwd" value="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <hr class="my-4" />
                 <!-- Address -->
                 <h6 class="heading-small text-muted mb-4">Contact information</h6>
@@ -716,6 +804,7 @@
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
 
   <script src="script.js"></script>
+
   <script>
     
   $(document).ready(function(){
