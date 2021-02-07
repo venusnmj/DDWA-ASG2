@@ -430,6 +430,7 @@
         <div class="col-xl-4 order-xl-2">
           <div class="card card-profile">
             <img src="argon-dashboard-master/assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+            <i class="fas fa-user-edit text-primary editbanner"></i>
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
@@ -571,10 +572,9 @@
                               WHERE adminid='$username'";
                                       if (mysqli_query($db, $sql)) {
                                         $username=$newusername;
-                                        ?><script language="JavaScript">
-                                        document.location='welcome.php';
-                                        </script><?php
-                                        echo "<p class='text-success'>Updated</p>";
+                                        header("Location: welcome.php");
+                                        header("Refresh:0");
+                                        echo "<p class='text-success'>Updated. The changes might take awhile to update on your screen.</p>";
                           }
                           else{
                             echo "Error updating record: " . mysqli_error($db);

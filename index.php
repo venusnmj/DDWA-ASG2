@@ -168,7 +168,7 @@
             }
             else{
                 ?>
-                <h6 class="validAlert">
+                <h6 class="validAlert text-danger">
                 <?php
                echo "invalid ID or password";
                ?>
