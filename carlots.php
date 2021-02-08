@@ -111,7 +111,7 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="car.php">
               <i class="fas fa-car text-primary"></i>
               <span class="nav-link-text">Car</span>
             </a>
@@ -151,13 +151,6 @@
             <a class="nav-link active" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-car text-primary"></i>
-              <span class="nav-link-text">Cars</span>
             </a>
           </li>
 
@@ -343,7 +336,7 @@
                   <span>Support</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
+                <a href="index.php" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
@@ -619,8 +612,17 @@
         <div class="col">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
+                <div class="row">
+                <div class="col-lg-6">
               <h3 class="text-white mb-0">Staff</h3>
+                                        </div>
+                                        <div class="col-lg-6 text-right">
+                <a class="btn btn-success editedbtn" id="editSubmit" href="addstaff.php">Add</a>
+                                        </div>
+                                        </div>
+            
             </div>
+
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">
                 <thead class="thead-dark">
@@ -670,8 +672,8 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                 <form action="" method="post">
-                                <button class="dropdown-item" href="#">Edit</button>
-                                <button class="dropdown-item" href="#">Delete</button>
+                                <button type="submit" class="dropdown-item" href="#" value="'.$row['staffid'].'" name="eEdit">Edit</button>
+                                <button type="submit" class="dropdown-item" href="#" value="'.$row['staffid'].'" name="eDelete">Delete</button>
                               </form>
                                 </div>
                               </div>
@@ -1011,6 +1013,29 @@
                     </td>
                   </tr>
                                         -->
+
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if(isset($_POST['eEdit']) || isset($_POST['eDelete'])){
+                            $eStaff=mysqli_real_escape_string($db,$_POST['eEdit']);
+                            $_SESSION['editingStaff']=$_POST['eEdit'];
+                        if(isset($_POST['eDelete'])){
+                            $eStaff=mysqli_real_escape_string($db,$_POST['eDelete']);
+                            $sqldelete="DELETE FROM Staff WHERE staffid='$eStaff'";
+                            if ($db->query($sqldelete) === TRUE) {
+                                echo "<div class='col-12'><p class='text-success'> Deleted successfully. Might take awhile to be updated.</p></div>";
+                                header("Location: carlots.php");
+                              } 
+                              else {
+                                echo "Error deleting record: " . $conn->error;
+                              }
+                        }
+                        elseif(isset($_POST['eEdit'])){
+                            echo '<script language="javascript"> location.href="editstaff.php"; </script>';
+                        }
+                    }
+                }
+                ?>
                 </tbody>
               </table>
             </div>

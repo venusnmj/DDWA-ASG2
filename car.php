@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Carpark</title>
+  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -33,26 +33,43 @@
   <!-- Argon CSS -->
   <link href="stylesheet.css" rel="stylesheet">
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
+
+
+    <!-- Custom styles for this template -->
+    <!--<link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this page -->
+    <link href="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+
+
+
+
+
   <link href="stylesheet.css" rel="stylesheet">
+
+
 </head>
 
 <body>
 <?php
-            $username=$_SESSION['id'];
+$username=$_SESSION['id'];
+            /*$carpark=$_SESSION['carpark'];
+            $sqlcp = "SELECT * FROM Carpark WHERE carparkname='$carpark'";
+            $cpdata = $db->query($sqlcp);
+            $cprow = mysqli_fetch_array($cpdata,MYSQLI_BOTH);
+            $cppic = $cprow['carparkpic'];
+            $cpaddress = $cprow['carparkaddress'];
+            $cpcontact = $cprow['carparkcontact'];
+            $cpid=$cprow['carparkid'];*/
+            
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    $user="Admin";
-                    $pic = $row['adminpic'];
-            }
-            elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
-                $result = $db->query($sql);
-                $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    $user = "Staff";
-                    $pic = $row['staffpic'];
-                    $staffcp = $row['carparkid'];
+                $user="Admin";
+                $pic = $row['adminpic'];
             }
             ?>
             
@@ -80,14 +97,14 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="carpark.php">
+            <a class="nav-link" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
             </a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="car.php">
+            <a class="nav-link active" href="car.php">
               <i class="fas fa-car text-primary"></i>
               <span class="nav-link-text">Car</span>
             </a>
@@ -114,56 +131,20 @@
             </a>
           </li>
         
-        <?php }
-        elseif($_SESSION['user']=="Staff"){?>
-          <li class="nav-item">
-            <a class="nav-link" href="welcome.php">
-              <i class="ni ni-single-02 text-yellow"></i>
-              <span class="nav-link-text">Profile</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link active" href="carpark.php">
-              <i class="fas fa-parking text-orange"></i>
-              <span class="nav-link-text">Carpark</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="far fa-life-ring text-default"></i>
-              <span class="nav-link-text">Assist</span>
-            </a>
-          </li>
-        <?php } ?>
+        <?php }?>
+        
           </ul>
         </div>
       </div>
     </div>
   </nav>
+
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Search form -->
-          <!--
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-              <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-              </div>
-            </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </form>
-        -->
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -343,7 +324,7 @@
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Carpark</h6>
+              <h6 class="h2 text-white d-inline-block mb-0">Car</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
@@ -351,7 +332,7 @@
                     <li class="breadcrumb-item"><a href="#">Carpark</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Tables</li>
                 -->
-                <li class="breadcrumb-item active" aria-current="page">Carpark</li>
+                <li class="breadcrumb-item active" aria-current="page">Car</li>
                 </ol>
               </nav>
             </div>
@@ -359,101 +340,112 @@
         </div>
       </div>
     </div>
-    <!-- Page content -->
+    <!--below header bg image-->
     <div class="container-fluid mt--6">
-      <div class="row justify-content-center">
-        <div class=" col ">
-          <div class="card">
-            <div class="card-header bg-transparent">
-              <h3 class="mb-0">Carpark</h3>
-            </div>
-            <div class="card-body">
+    <!-- Page content -->
+      <!--startbootstrap's table-->
+      <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h2 class="m-0 font-weight-bold text-primary">Cars</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Vehicle No.</th>
+                                            <th>Brand</th>
+                                            <th>Model</th>
+                                            <th>Driver's name</th>
+                                            <th>Driver's username</th>
+                                            <th>Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Vehicle No.</th>
+                                            <th>Brand</th>
+                                            <th>Model</th>
+                                            <th>Driver's name</th>
+                                            <th>Driver's username</th>
+                                            <th>Type</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php
+                                         $sqlcar = "SELECT * FROM Vehicle LEFT OUTER JOIN User ON Vehicle.vehicleid = User.carid";
+                                         $result = $db->query($sqlcar);
+                                         if ($result->num_rows > 0) { 
+                                             while($row = mysqli_fetch_assoc($result)) { 
+                                                 if($row['vehicletype']=="Car"){
+                                                     $typelot="<h4 class='text-primary'><i class='fas fa-car fa-lg'></i> Car</h4>";
+                                                 }
+                                                 elseif($row['vehicletype']=="Motorcycle"){
+                                                    $typelot="<h4 class='text-primary'><i class='fas fa-motorcycle fa-lg'></i> Motorcycle</h4>";
+                                                 }
+                                                 elseif($row['vehicletype']=="Bus"){
+                                                    $typelot="<h4 class='text-primary'><i class='fas fa-bus fa-lg'></i> Bus</h4>";
+                                                 }
+                                                 elseif($row['vehicletype']=="Truck"){
+                                                    $typelot="<h4 class='text-primary'><i class='fas fa-truck fa-lg'></i> Truck</h4>";
+                                                 }
+                                                 else{
+                                                     $typelot="";
+                                                 }
+/*<th scope="row">
+                              <div class="media align-items-center">
+                                <a href="#" class="avatar rounded-circle mr-3">
+                                  <img alt="Image placeholder" src="DisplayFolder/'.$row['staffpic'].'">
+                                </a>
+                                <div class="media-body">
+                                  <span class="name mb-0 text-sm">'.$row['staffid'].'</span>
+                                </div>
+                              </div>
+                            </th>*/
+                                                 echo "<tr>
+                                                 
+                                                 <td>". $row['vehicleid'] ."</td>
+                                                 <td>". $row['vehiclebrand']. "</td>
+                                                 <td>". $row['vehiclemodel']."</td>
+                                                 <td>". $row['userfirstname'] ." ".$row['userlastname'] ."</td>
+                                                 <td>". $row['userid'] ."</td>
+                                                 <td>". $typelot. "</td>
+                                               </tr>";
+                                             }
+                                         }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="container-fluid">
-    <div class="row">
-      <?php
-      if($user=="Admin"){
-        $sqlcp = "SELECT * FROM Carpark ORDER BY carparkid";
-        $resultcp = $db->query($sqlcp);
-        if($resultcp->num_rows>0){
-          while($rowcp = mysqli_fetch_assoc($resultcp)) { 
-            echo '
-            <form action="" method="post">
-            <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
-          <div class="card-body">
-            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
-            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
-            <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
           </div>
-                </div>
-              </div>
-              </form>';
-        }
-      }
-    }
-    elseif($user=="Staff"){
-      $sqlcp = "SELECT * FROM Carpark WHERE carparkid='$staffcp'";
-      $resultcp = $db->query($sqlcp);
-        if($resultcp->num_rows>0){
-          while($rowcp = mysqli_fetch_assoc($resultcp)) { 
-            echo '
-            <form action="" method="post">
-            <div class="col-4">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
-          <div class="card-body">
-            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
-            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
-            <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
-          </div>
-                </div>
-              </div>
-              </form>';
-        }
-      }
-    }
-      
-      ?>
-<!--
-<div class="col-4">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
-          <div class="card-body">
-            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
-            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
-            <a href="#" class="btn btn-primary">Car lots</a>
-          </div>
-                </div>
-              </div>-->
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
         </div>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $cpChoosen = $_POST['submittedCarpark'];
-  $_SESSION['carpark']=$cpChoosen;
-  echo $_SESSION['carpark'];
-  echo '<script language="JavaScript">
-  document.location="carlots.php";
-</script>';
-  
-}
-?>
-            
-
-
-
-
-
-
-
-
+      </div>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -491,10 +483,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
-
-
-
   <script src="script.js"></script>
+
+
+    <!-- Core plugin JavaScript-->
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    
+
+    <!-- Page level custom scripts -->
+    <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/datatables-demo.js"></script>
+
+
+  <script>
+      $(document).ready(function(){
+    $(".editable").on('input',function(){
+      $(".editedbtn").prop("disabled", false);
+    });
+})
+  </script>
+      
 </body>
 
 </html>
