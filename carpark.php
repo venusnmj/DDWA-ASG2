@@ -94,26 +94,18 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-id-card-alt text-default"></i>
-              <span class="nav-link-text">Partner</span>
-            </a>
-          </li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-users text-default"></i>
+                <span class="nav-link-text">User</span>
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-users text-info"></i>
-              <span class="nav-link-text">User</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="ni ni-circle-08 text-pink"></i>
-              <span class="nav-link-text">Register</span>
-            </a>
-          </li>
-        
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="ni ni-circle-08 text-info"></i>
+                <span class="nav-link-text">Register</span>
+              </a>
+            </li>
         <?php }
         elseif($_SESSION['user']=="Staff"){?>
           <li class="nav-item">

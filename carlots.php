@@ -30,9 +30,7 @@
   <!-- Icons -->
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  <!-- Argon CSS -->
-  <link href="stylesheet.css" rel="stylesheet">
-  <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
+
 
 
     <!-- Custom styles for this template -->
@@ -41,12 +39,9 @@
     <!-- Custom styles for this page -->
     <link href="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-
-
-
-
-
-
+<!-- Argon CSS -->
+    <link href="stylesheet.css" rel="stylesheet">
+  <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
   <link href="stylesheet.css" rel="stylesheet">
 
 
@@ -118,25 +113,18 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-id-card-alt text-default"></i>
-              <span class="nav-link-text">Partner</span>
-            </a>
-          </li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-users text-default"></i>
+                <span class="nav-link-text">User</span>
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-users text-info"></i>
-              <span class="nav-link-text">User</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="ni ni-circle-08 text-pink"></i>
-              <span class="nav-link-text">Register</span>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="ni ni-circle-08 text-info"></i>
+                <span class="nav-link-text">Register</span>
+              </a>
+            </li>
         
         <?php }
         elseif($_SESSION['user']=="Staff"){?>
@@ -569,12 +557,19 @@
                                                      <h4 class='text-success'><i class='fas fa-parking fa-lg'></i> Vacant</h4>";
                                                  }
 
+                                                 if(isset($row['vehicleid'])){
+                                                     $plate = "<button class='metal linear'>".$row['vehicleid']."</button>";
+                                                 }
+                                                 else{
+                                                     $plate="";
+                                                 }
+
                                                  echo "<tr>
                                                  <td>". $row['parkinglotid'] ."</td>
                                                  <td>" .$typelot."</td>
                                                  <td>". $row['lotzone']. "</td>
                                                  <td>". $row['usercontactno'] ."</td>
-                                                 <td>". $row['vehicleid'] ."</td>
+                                                 <td>". $plate ."</td>
                                                  <td>". $status ."</td>
                                                </tr>";
                                              }

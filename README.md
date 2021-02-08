@@ -12,3 +12,28 @@ http://www.rwsentosablog.com/insights-p-parking-in-the-resort/
 https://en.wikipedia.org/wiki/Marina_Bay_Sands
 https://www.capitaland.com/sg/en/lease/mall-listing/jewel-changi-airport-mall.html
 
+## Icons used
+https://icons8.com/icons/set/car-brand
+http://motorcycle-brands.com/
+https://www.izmostock.com/car-stock-photos-by-brand
+https://www.easyicon.net/language.en/iconsearch/abarth/?s=addtime_DESC
+https://iconscout.com/icons
+<a href="https://iconscout.com/icons/dacia" target="_blank">Dacia Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>
+<a href="https://iconscout.com/icons/isuzu" target="_blank">Isuzu Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+<a href="https://iconscout.com/icons/seat" target="_blank">Seat Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>
+<a href="https://iconscout.com/icons/smart" target="_blank">Smart Icon</a> on <a href="https://iconscout.com">Iconscout</a>
+<a href="https://iconscout.com/icons/ssangyong" target="_blank">Ssangyong Logo Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+<a href="https://iconscout.com/icons/abarth" target="_blank">Abarth Logo Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
+https://www.carlogos.org/
+
+#car plate generator
+https://iantan76.wordpress.com/2015/09/27/licenceplatetool/
+
+## Vehicle model and brand references
+https://www.webbikeworld.com/motorcycle-brands/all-brands/
+https://www.izmostock.com/car-stock-photos-by-brand
+https://landtransportguru.net/bus-infrastructure/bus-models/
+https://www.topspeed.com/trucks/makes/
+https://www.cars.com/
+
+

@@ -111,25 +111,18 @@ $username=$_SESSION['id'];
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-id-card-alt text-default"></i>
-              <span class="nav-link-text">Partner</span>
-            </a>
-          </li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-users text-default"></i>
+                <span class="nav-link-text">User</span>
+              </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-users text-info"></i>
-              <span class="nav-link-text">User</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="ni ni-circle-08 text-pink"></i>
-              <span class="nav-link-text">Register</span>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="ni ni-circle-08 text-info"></i>
+                <span class="nav-link-text">Register</span>
+              </a>
+            </li>
         
         <?php }?>
         
@@ -392,6 +385,10 @@ $username=$_SESSION['id'];
                                                  else{
                                                      $typelot="";
                                                  }
+
+                                                 
+
+                                        
 /*<th scope="row">
                               <div class="media align-items-center">
                                 <a href="#" class="avatar rounded-circle mr-3">
@@ -403,9 +400,17 @@ $username=$_SESSION['id'];
                               </div>
                             </th>*/
                                                  echo "<tr>
-                                                 
-                                                 <td>". $row['vehicleid'] ."</td>
-                                                 <td>". $row['vehiclebrand']. "</td>
+                                                 <td><button class='metal linear'>". $row['vehicleid'] ."</button></td>
+                                                 <th scope='row'>
+                                                     <div class='media align-items-center'>
+                                                     <a href='#' class='avatar rounded-circle avatar-sm mr-3'>
+                                  <img alt='Image placeholder' src='carbrands/". $row['vehiclebrand']. 
+                                  ".png'></a>
+                                  <div class='media-body'>
+                                    <span class='name mb-0 text-md'> ".$row['vehiclebrand']."</span>
+                                    </div>
+                                    </div>
+                        </th>
                                                  <td>". $row['vehiclemodel']."</td>
                                                  <td>". $row['userfirstname'] ." ".$row['userlastname'] ."</td>
                                                  <td>". $row['userid'] ."</td>
@@ -413,6 +418,8 @@ $username=$_SESSION['id'];
                                                </tr>";
                                              }
                                          }
+
+                                         
                                         ?>
                                     </tbody>
                                 </table>

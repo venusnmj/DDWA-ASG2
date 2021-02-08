@@ -115,21 +115,14 @@
 
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <i class="fas fa-id-card-alt text-default"></i>
-                <span class="nav-link-text">Partner</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-users text-info"></i>
+                <i class="fas fa-users text-default"></i>
                 <span class="nav-link-text">User</span>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <i class="ni ni-circle-08 text-pink"></i>
+                <i class="ni ni-circle-08 text-info"></i>
                 <span class="nav-link-text">Register</span>
               </a>
             </li>
