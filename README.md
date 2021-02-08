@@ -30,7 +30,7 @@ https://iconscout.com/icons
 <a href="https://iconscout.com/icons/abarth" target="_blank">Abarth Logo Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
 https://www.carlogos.org/
 
-#car plate generator
+## Car plate generator
 https://iantan76.wordpress.com/2015/09/27/licenceplatetool/
 
 ## Vehicle model and brand references
