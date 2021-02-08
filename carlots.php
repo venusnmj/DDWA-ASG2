@@ -505,8 +505,14 @@
       <!--startbootstrap's table-->
       <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h2 class="m-0 font-weight-bold text-primary">Carpark Lots</h2>
+                            <div class="row">
+                            <h2 class="m-0 font-weight-bold text-primary col-6">Carpark Lots</h2>
+                            <div class="text-right col-6">
+                <a href="addLots.php" class="btn btn-success editedbtn" id="addLots">Add</a>
+                </div>
+                </div>
                         </div>
+                        
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -558,7 +564,7 @@
                                                  }
 
                                                  if(isset($row['vehicleid'])){
-                                                     $plate = "<button class='metal linear'>".$row['vehicleid']."</button>";
+                                                     $plate = "<form action='' method='post'><button type='submit' name='editVeh' value='".$row['vehicleid']."' class='metal linear'>".$row['vehicleid']."</button></form>";
                                                  }
                                                  else{
                                                      $plate="";
@@ -1028,6 +1034,11 @@
                         elseif(isset($_POST['eEdit'])){
                             echo '<script language="javascript"> location.href="editstaff.php"; </script>';
                         }
+                    }
+                    if(isset($_POST['editVeh'])){
+                        $_SESSION['eVehicle']=$_POST['editVeh'];
+                        echo '<script language="JavaScript">document.location="editVehicle.php";</script>';
+
                     }
                 }
                 ?>

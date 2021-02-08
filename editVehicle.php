@@ -49,44 +49,27 @@
 
 <body>
 <?php
+
             $username=$_SESSION['id'];
+            $eVeh= $_SESSION['eVehicle'];
+            //echo $eVeh;
 
-            if(isset($_SESSION['addcpname'])){
-                $cpname=$_SESSION['addcpname'];
+            if(!isset($lotid)){
+                $lotid="";
             }
-            else{
-            $cpname="";
+            if(!isset($lotzone)){
+                $lotzone="";
             }
-
-            if(isset($_SESSION['addcpcontact'])){
-                $cpcontact=$_SESSION['addcpcontact'];
+            if(!isset($lotparked)){
+                $lotparked="";
             }
-            else{
-            $cpcontact="";
-            }
-
-            if(isset($_SESSION['addcpaddress'])){
-                $cpaddress=$_SESSION['addcpaddress'];
-            }
-            else{
-            $cpaddress="";
-            }
-
-            if(isset($_SESSION['addcpid'])){
-                $cppic=$_SESSION['addcpid'];
-            }
-            else{
-                $cppic="defaultcp.jpg";
-            }
-            /*
+            
             $carpark=$_SESSION['carpark'];
             $sqlcp = "SELECT * FROM Carpark WHERE carparkname='$carpark'";
             $cpdata = $db->query($sqlcp);
             $cprow = mysqli_fetch_array($cpdata,MYSQLI_BOTH);
             $cppic = $cprow['carparkpic'];
-            $cpaddress = $cprow['carparkaddress'];
-            $cpcontact = $cprow['carparkcontact'];
-            $cpid=$cprow['carparkid'];*/
+            $cpid=$cprow['carparkid'];
             
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
@@ -394,12 +377,13 @@
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
                 
-            <h1 class="display-2 text-white">Add carpark</h1>
+            <h1 class="display-2 text-white">Add lot</h1>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
                   <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add carpark</li>
+                  <li class="breadcrumb-item"><a href="carlots.php"><?php echo $carpark;?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add lot</li>
                 </ol>
               </nav>
             </div>
@@ -414,39 +398,46 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Edit carpark </h3>
+                  <h3 class="mb-0">Add new lot </h3>
                 </div>
               </div>
             </div>
             <div class="card-body">
                                       
-                <h6 class="heading-small text-muted mb-4">Carpark information</h6>
+                <h6 class="heading-small text-muted mb-4">Parking lot information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-md-4">
                       <div class="form-group editCarparkName">
-                        <label class="form-control-label" for="input-cpname">Carpark name</label>
-                        <input type="text" id="input-cpname" class="form-control editable" placeholder="Carpark name" name="ecpname" value="<?php echo $cpname;?>">
+                        <label class="form-control-label" for="input-lotid">Parking ID</label>
+                        <input type="text" id="input-lotid" class="form-control editable" placeholder="Parking Lot ID" name="lotid" value="<?php echo $lotid;?>">
                       </div>
                     </div>
+                    <div class="col-md-2"> </div>
                     <div class="col-md-4">
                       <div class="form-group editCarparkContact">
-                        <label class="form-control-label" for="input-cpcontact">Contact info</label>
-                        <input type="text" id="input-cpcontact" class="form-control editable" placeholder="Contact information" name="ecpcontact" value="<?php echo $cpcontact;?>">
+                        <label class="form-control-label" for="input-lottype">Lot type</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="lottype">
+                            <option value="Car">Car</option>
+                            <option value="Motorcycle">Motorcycle</option>
+                            <option value="Bus">Bus</option>
+                            <option value="Truck">Truck</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-md-4">
                       <div class="form-group editCarparkAddress">
-                        <label class="form-control-label" for="input-cpaddress">Address</label>
-                        <input type="text" id="input-cpaddress" class="form-control editable" placeholder="Carpark address" name="ecpaddress" value="<?php echo $cpaddress;?>">
+                        <label class="form-control-label" for="input-lotzone">Lot zone</label>
+                        <input type="text" id="input-lotzone" class="form-control editable" placeholder="e.g. Zone A" name="lotzone" value="<?php echo $lotzone;?>">
                       </div>
                     </div>
+                    <div class="col-md-2"> </div>
                     <div class="col-md-4">
                       <div class="form-group editCarparkid">
-                        <label class="form-control-label" for="input-cpid">ID number</label>
-                        <input type="text" id="input-cpid" class="form-control editable" placeholder="Carpark ID number" name="ecpid" value="<?php echo $cpid;?>">
+                        <label class="form-control-label" for="input-lotparked">Parked vehicle plate</label>
+                        <input type="text" id="input-lotparked" class="form-control editable" placeholder="Vehicle's license plate number" name="lotparked" value="<?php echo $lotparked;?>">
                       </div>
                     </div>
                 </div>
@@ -455,39 +446,33 @@
                 <div class="col-8">
                 <?php 
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        //var_dump($_POST);
-                        if(isset($_POST['cpSavebtn'])){
-
-                            $newcpname=mysqli_real_escape_string($db,$_POST['ecpname']);
-                            $newcpcontact=mysqli_real_escape_string($db,$_POST['ecpcontact']);
-                            $newcpaddress=mysqli_real_escape_string($db,$_POST['ecpaddress']);
-                            $newcpid=mysqli_real_escape_string($db,$_POST['ecpid']);
-                            if(isset($_SESSION['ecppic'])){
-                                $newcppic=$_SESSION['ecppic'];
-                            }
-                            else{
-                                $newcppic=$cppic;
-                            }
-
+                            $addlotid=mysqli_real_escape_string($db,$_POST['lotid']);
+                            $addlottype=mysqli_real_escape_string($db,$_POST['lottype']);
+                            $addlotzone=mysqli_real_escape_string($db,$_POST['lotzone']);
+                            $addlotparked=mysqli_real_escape_string($db,$_POST['lotparked']);
                             $error=false;
 
-                            $checkcpid="SELECT carparkid FROM Carpark";
+                            $checkcpid="SELECT parkinglotid FROM ParkingLot";
                             $result = $db->query($checkcpid);
                             if($result->num_rows>0){
                                 while($rowcp = mysqli_fetch_assoc($result)) { 
-                                    if($rowcp['carparkid']==$newcpid){
+                                    if($rowcp['parkinglotid']==$addlotid){
                                         echo "<p class='text-red'>This ID number is already taken, please key in another number</p>";
                                         $error=true;
                                     }
                                 }
                             }
 
-                        if($newcpname=="" || $newcpcontact=="" || $newcpaddress=="" || $newcpid==""){
-                            echo "<p class='text-red'>You got missing field</p>";
+                        if($addlotid==""){
+                            echo "<p class='text-red'>Parking ID is required</p>";
                             $error=true;
                         }
-                        elseif(preg_match("/^[0-9]{8}$/",$newcpid)==0){
-                            echo "<p class='text-red'>ID nunber must be 8 digits</p>";
+                        elseif($addlottype==""){
+                            echo "<p class='text-red'>Lot type is required</p>";
+                            $error=true;
+                        }
+                        elseif($addlotzone==""){
+                            echo "<p class='text-red'>Lot zone is required</p>";
                             $error=true;
                         }
                         else{
@@ -495,47 +480,23 @@
                         }
 
                         if($error==false){
-                            $sqlcppic = "INSERT INTO Carpark VALUES ('$newcpid','$newcpname','$newcpaddress',null,null,'$newcpcontact','$newcppic')";
-                            if (mysqli_query($db, $sqlcppic)) {
+                            if($addlotparked==""){
+                                $sql = "INSERT INTO ParkingLot VALUES ('$addlotid','$cpid',null,'$addlottype','$addlotzone')";
+                            }
+                            else{
+                            $sql = "INSERT INTO ParkingLot VALUES ('$addlotid','$cpid','$addlotparked','$addlottype','$addlotzone')";
+                            }
+                            if (mysqli_query($db, $sql)) {
                               //echo "Record updated successfully";
-                              echo "Carpark added successfully";
+                              echo "<p class='text-success'>Parking lot added successfully</p>";
+                              $lotid=$addlotid;
+                              $lotzone=$addlotzone;
+                              $lotparked=$addlotparked;
                             } 
-                            $cpname=$newcpname;
-                            $cpcontact=$newcpcontact;
-                            $cpaddress=$newcpaddress;
-                            $cpid=$newcpid;
-                            $cppic=$newcppic;
-                            $_SESSION['addcppic']=null;
-                            $_SESSION['addcpname']=null;
-                        $_SESSION['addcpaddress']=null;
-                        $_SESSION['addcpcontact']=null;
-                        $_SESSION['addcpid']=null;
                         }
-                    }
-                    elseif(isset($_POST['submit'])){
-                        $_SESSION['addcpname']=$newcpname;
-                        $_SESSION['addcpaddress']=$newcpaddress;
-                        $_SESSION['addcpcontact']=$newcpcontact;
-                        $_SESSION['addcpid']=$newcpid;
-
-                    }
                     }
 
                 ?>
-                </div>
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Upload picture</h6>
-                <div class="pl-lg-4">
-                    <div class="row">
-                <div class="col-md-4">
-                      <div class="form-group editCarparkImage">
-                        <label class="form-control-label" for="input-cpimg">Carpark picture</label>
-                        <button type="button" onclick="openFormCarpark()" class="btn">
-                        <img src="CarparksPic/<?php echo $cppic;?>" alt="Image placeholder" class="card-img-top">
-                    </button>
-                      </div>
-                </div>
-                </div>
                 </div>
                 <div class="col-12">
                 <button type="submit" class="btn btn-success changebtn editedbtn" id="changeCppic" name="cpSavebtn" value="yes" disabled>Add</button>
