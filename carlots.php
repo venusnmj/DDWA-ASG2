@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <title>Carpark</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -416,11 +416,11 @@
                     </div>
                 </div>
                 <div class="col-4">
-                <button type="submit" class="btn btn-success editedbtn" id="editSubmit" disabled="">Save</button>
+                <button type="submit" class="btn btn-success editedbtn" id="editSubmit" value="yes" name="cpSavebtn" disabled="">Save</button>
                 </div>
                 <div class="col-8">
                 <?php 
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cpSavebtn'])) {
                         //var_dump($_POST);
                             $newcpname=mysqli_real_escape_string($db,$_POST['ecpname']);
                             $newcpcontact=mysqli_real_escape_string($db,$_POST['ecpcontact']);
@@ -428,7 +428,7 @@
                             $error=false;
 
                         if($newcpname=="" || $newcpcontact=="" || $newcpaddress==""){
-                            echo "<p class='text-red'>Email is required</p>";
+                            echo "<p class='text-red'>You got missing fields</p>";
                             $error=true;
                         }
                         else{

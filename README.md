@@ -11,6 +11,10 @@ https://www.bft-international.com/en/artikel/bft_CarDeck_Professional_TF_for_par
 http://www.rwsentosablog.com/insights-p-parking-in-the-resort/
 https://en.wikipedia.org/wiki/Marina_Bay_Sands
 https://www.capitaland.com/sg/en/lease/mall-listing/jewel-changi-airport-mall.html
+https://valuelifestylesg.wordpress.com/2014/11/09/carpark-at-great-world-city/
+https://www.mapletree.com.sg/All-Properties/MCT/Singapore/VivoCity
+https://www.np.edu.sg/Pages/contact.aspx
+
 
 ## Icons used
 https://icons8.com/icons/set/car-brand

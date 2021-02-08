@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Carpark</title>
+  <title>Add carpark</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -30,29 +30,77 @@
   <!-- Icons -->
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  <!-- Argon CSS -->
-  <link href="stylesheet.css" rel="stylesheet">
+
+
+
+    <!-- Custom styles for this template -->
+    <!--<link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this page -->
+    <link href="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Argon CSS -->
+    <link href="stylesheet.css" rel="stylesheet">
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
   <link href="stylesheet.css" rel="stylesheet">
+
+
 </head>
 
 <body>
 <?php
             $username=$_SESSION['id'];
+
+            if(isset($_SESSION['addcpname'])){
+                $cpname=$_SESSION['addcpname'];
+            }
+            else{
+            $cpname="";
+            }
+
+            if(isset($_SESSION['addcpcontact'])){
+                $cpcontact=$_SESSION['addcpcontact'];
+            }
+            else{
+            $cpcontact="";
+            }
+
+            if(isset($_SESSION['addcpaddress'])){
+                $cpaddress=$_SESSION['addcpaddress'];
+            }
+            else{
+            $cpaddress="";
+            }
+
+            if(isset($_SESSION['addcpid'])){
+                $cppic=$_SESSION['addcpid'];
+            }
+            else{
+                $cppic="defaultcp.jpg";
+            }
+            /*
+            $carpark=$_SESSION['carpark'];
+            $sqlcp = "SELECT * FROM Carpark WHERE carparkname='$carpark'";
+            $cpdata = $db->query($sqlcp);
+            $cprow = mysqli_fetch_array($cpdata,MYSQLI_BOTH);
+            $cppic = $cprow['carparkpic'];
+            $cpaddress = $cprow['carparkaddress'];
+            $cpcontact = $cprow['carparkcontact'];
+            $cpid=$cprow['carparkid'];*/
+            
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    $user="Admin";
-                    $pic = $row['adminpic'];
+                $user="Admin";
+                $pic = $row['adminpic'];
             }
             elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
+                $sql = "SELECT * FROM Staff WHERE staffid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    $user = "Staff";
-                    $pic = $row['staffpic'];
-                    $staffcp = $row['carparkid'];
+                $user = "Staff";
+                $pic = $row['staffpic'];
             }
             ?>
             
@@ -106,6 +154,7 @@
                 <span class="nav-link-text">Register</span>
               </a>
             </li>
+        
         <?php }
         elseif($_SESSION['user']=="Staff"){?>
           <li class="nav-item">
@@ -134,28 +183,13 @@
       </div>
     </div>
   </nav>
+
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Search form -->
-          <!--
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-              <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-              </div>
-            </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </form>
-        -->
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -330,20 +364,42 @@
       </div>
     </nav>
     <!-- Header -->
-    <div class="header bg-default pb-6">
+    <!--<div class="header bg-default pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Carpark</h6>
+              <h6 class="h2 text-white d-inline-block mb-0"></h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
-                  <!--
-                    <li class="breadcrumb-item"><a href="#">Carpark</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Tables</li>
-                -->
-                <li class="breadcrumb-item active" aria-current="page">Carpark</li>
+                  <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"></li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!--bg carpark-->
+    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url('CarparksPic/<?php echo $cppic;?>'); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid">
+          
+
+      <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+                
+            <h1 class="display-2 text-white">Add carpark</h1>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add carpark</li>
                 </ol>
               </nav>
             </div>
@@ -351,102 +407,162 @@
         </div>
       </div>
     </div>
-    <!-- Page content -->
+    <!--below header bg image-->
     <div class="container-fluid mt--6">
-      <div class="row justify-content-center">
-        <div class=" col ">
+          <form action="" method="post">
           <div class="card">
-            <div class="card-header bg-transparent">
-              <div class="row">
-            <div class="col-8">
-                  <h3 class="mb-0">Carpark </h3>
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Edit carpark </h3>
                 </div>
-                <?php if($user=="Admin"){?>
-                <div class="col-4 text-right">
-                <a href="addCarpark.php" class="btn btn-success editedbtn" id="addCarpark">Add</a>
-                </div>
-                <?php }?>
-        </div>
+              </div>
             </div>
             <div class="card-body">
-
-    <div class="container-fluid">
-    <div class="row">
-      <?php
-      if($user=="Admin"){
-        $sqlcp = "SELECT * FROM Carpark ORDER BY carparkid";
-        $resultcp = $db->query($sqlcp);
-        if($resultcp->num_rows>0){
-          while($rowcp = mysqli_fetch_assoc($resultcp)) { 
-            echo '
-            <form action="" method="post">
-            <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
-          <div class="card-body">
-            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
-            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
-            <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
-          </div>
+                                      
+                <h6 class="heading-small text-muted mb-4">Carpark information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group editCarparkName">
+                        <label class="form-control-label" for="input-cpname">Carpark name</label>
+                        <input type="text" id="input-cpname" class="form-control editable" placeholder="Carpark name" name="ecpname" value="<?php echo $cpname;?>">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group editCarparkContact">
+                        <label class="form-control-label" for="input-cpcontact">Contact info</label>
+                        <input type="text" id="input-cpcontact" class="form-control editable" placeholder="Contact information" name="ecpcontact" value="<?php echo $cpcontact;?>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group editCarparkAddress">
+                        <label class="form-control-label" for="input-cpaddress">Address</label>
+                        <input type="text" id="input-cpaddress" class="form-control editable" placeholder="Carpark address" name="ecpaddress" value="<?php echo $cpaddress;?>">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group editCarparkid">
+                        <label class="form-control-label" for="input-cpid">ID number</label>
+                        <input type="text" id="input-cpid" class="form-control editable" placeholder="Carpark ID number" name="ecpid" value="<?php echo $cpid;?>">
+                      </div>
+                    </div>
                 </div>
-              </div>
-              </form>';
-        }
-      }
-    }
-    elseif($user=="Staff"){
-      $sqlcp = "SELECT * FROM Carpark WHERE carparkid='$staffcp'";
-      $resultcp = $db->query($sqlcp);
-        if($resultcp->num_rows>0){
-          while($rowcp = mysqli_fetch_assoc($resultcp)) { 
-            echo '
-            <form action="" method="post">
-            <div class="col-4">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
-          <div class="card-body">
-            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
-            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
-            <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
-          </div>
-                </div>
-              </div>
-              </form>';
-        }
-      }
-    }
-      
-      ?>
-<!--
-<div class="col-4">
-            <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="CarparksPic/'.$rowcp['carparkpic'].'" alt="Card image carpark">
-          <div class="card-body">
-            <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
-            <p class="card-text">'.$rowcp['carparkaddress'].'</p>
-            <a href="#" class="btn btn-primary">Car lots</a>
-          </div>
-                </div>
-              </div>-->
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
         </div>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $cpChoosen = $_POST['submittedCarpark'];
-  $_SESSION['carpark']=$cpChoosen;
-  echo $_SESSION['carpark'];
-  echo '<script language="JavaScript">
-  document.location="carlots.php";
-</script>';
-  
-}
-?>
-            
+                
+                <div class="col-8">
+                <?php 
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        //var_dump($_POST);
+                        if(isset($_POST['cpSavebtn'])){
+
+                            $newcpname=mysqli_real_escape_string($db,$_POST['ecpname']);
+                            $newcpcontact=mysqli_real_escape_string($db,$_POST['ecpcontact']);
+                            $newcpaddress=mysqli_real_escape_string($db,$_POST['ecpaddress']);
+                            $newcpid=mysqli_real_escape_string($db,$_POST['ecpid']);
+                            if(isset($_SESSION['ecppic'])){
+                                $newcppic=$_SESSION['ecppic'];
+                            }
+                            else{
+                                $newcppic=$cppic;
+                            }
+
+                            $error=false;
+
+                            $checkcpid="SELECT carparkid FROM carpark";
+                            $result = $db->query($checkcpid);
+                            if($result->num_rows>0){
+                                while($rowcp = mysqli_fetch_assoc($result)) { 
+                                    if($rowcp['carparkid']==$newcpid){
+                                        echo "<p class='text-red'>This ID number is already taken, please key in another number</p>";
+                                        $error=true;
+                                    }
+                                }
+                            }
+
+                        if($newcpname=="" || $newcpcontact=="" || $newcpaddress=="" || $newcpid==""){
+                            echo "<p class='text-red'>You got missing field</p>";
+                            $error=true;
+                        }
+                        elseif(preg_match("/^[0-9]{8}$/",$newcpid)==0){
+                            echo "<p class='text-red'>ID nunber must be 8 digits</p>";
+                            $error=true;
+                        }
+                        else{
+                            $error=false;
+                        }
+
+                        if($error==false){
+                            $sqlcppic = "INSERT INTO Carpark VALUES ('$newcpid','$newcpname','$newcpaddress',null,null,'$newcpcontact','$newcppic')";
+                            if (mysqli_query($db, $sqlcppic)) {
+                              //echo "Record updated successfully";
+                              echo "Carpark added successfully";
+                            } 
+                            $cpname=$newcpname;
+                            $cpcontact=$newcpcontact;
+                            $cpaddress=$newcpaddress;
+                            $cpid=$newcpid;
+                            $cppic=$newcppic;
+                            $_SESSION['addcppic']=null;
+                            $_SESSION['addcpname']=null;
+                        $_SESSION['addcpaddress']=null;
+                        $_SESSION['addcpcontact']=null;
+                        $_SESSION['addcpid']=null;
+                        }
+                    }
+                    elseif(isset($_POST['submit'])){
+                        $_SESSION['addcpname']=$newcpname;
+                        $_SESSION['addcpaddress']=$newcpaddress;
+                        $_SESSION['addcpcontact']=$newcpcontact;
+                        $_SESSION['addcpid']=$newcpid;
+
+                    }
+                    }
+
+                ?>
+                </div>
+                <hr class="my-4" />
+                <h6 class="heading-small text-muted mb-4">Upload picture</h6>
+                <div class="pl-lg-4">
+                    <div class="row">
+                <div class="col-md-4">
+                      <div class="form-group editCarparkImage">
+                        <label class="form-control-label" for="input-cpimg">Carpark picture</label>
+                        <button type="button" onclick="openFormCarpark()" class="btn">
+                        <img src="CarparksPic/<?php echo $cppic;?>" alt="Image placeholder" class="card-img-top">
+                    </button>
+                      </div>
+                </div>
+                </div>
+                </div>
+                <div class="col-12">
+                <button type="submit" class="btn btn-success changebtn editedbtn" id="changeCppic" name="cpSavebtn" value="yes" disabled>Add</button>
+                </div>
+        </div>
+                
+              <!--</form>-->
+            </div>
+          </div>
+          </form>
+          
+        <!--</div>-->
+    <!--carpark pic upload-->
+    <form action="cpinsert.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="cpUpload">
+    <div class="alignpop">
+      <div class="headerpop">
+    <h4>Select image to upload:</h4> <button type="button" class="btncancel" onclick="closeFormCarpark()"><i class="fas fa-window-close text-red"></i></button>
+          </div>
+  <br>
+  <input type="file" name="fileToUpload" id="cppicToUpload" class="fileupload">
+  <br>
+  <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
+          </div>
+        </form>
+
+    <!-- Page content -->
+    
 
 
 
@@ -454,7 +570,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -492,10 +610,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
-
-
-
   <script src="script.js"></script>
+
+
+    <!-- Core plugin JavaScript-->
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    
+
+    <!-- Page level custom scripts -->
+    <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/datatables-demo.js"></script>
+
+
+  <script>
+      $(document).ready(function(){
+    $(".editable").on('input',function(){
+      $(".editedbtn").prop("disabled", false);
+    });
+})
+  </script>
+      
 </body>
 
 </html>
