@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Add staff - Park-a-lot</title>
+  <title>Carpark - Park-a-lot</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -33,64 +33,41 @@
   <!-- Argon CSS -->
   <link href="stylesheet.css" rel="stylesheet">
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
-
-
-    <!-- Custom styles for this template -->
-    <!--<link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">-->
-
-    <!-- Custom styles for this page -->
-    <link href="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-
-
-
-
-
-
   <link href="stylesheet.css" rel="stylesheet">
-
-
 </head>
 
 <body>
 <?php
-               $username=$_SESSION['id'];
-               $carpark=$_SESSION['carpark'];
-               $sqlcp = "SELECT * FROM Carpark WHERE carparkname='$carpark'";
-               $cpdata = $db->query($sqlcp);
-               $cprow = mysqli_fetch_array($cpdata,MYSQLI_BOTH);
-               $cppic = $cprow['carparkpic'];
-               $cpid=$cprow['carparkid'];
+$username=$_SESSION['id'];
+$eVeh= $_SESSION['eVehicle'];
+//echo $eVeh;
 
-               /*
-               $sqles="SELECT * FROM Staff WHERE staffid='$eStaff'";
-               $staffdata = $db->query($sqles);
-               $staffrow = mysqli_fetch_array($staffdata,MYSQLI_BOTH);
-               $staffFirst=$staffrow['stafffirstname'];
-               $staffLast=$staffrow['stafflastname'];
-               $staffEmail=$staffrow['staffemail'];
-               $staffAdd = $staffrow['staffaddress'];
-               $staffPostal = $staffrow['staffpostalcode'];
-               $staffContact = $staffrow['staffcontactno'];
-               $staffCompany=$staffrow['staffoffice'];*/
+$sql = "SELECT * FROM Vehicle LEFT OUTER JOIN ParkingLot ON ParkingLot.vehicleid = Vehicle.vehicleid WHERE Vehicle.vehicleid='$eVeh'";
+$result = $db->query($sql);
+$row = mysqli_fetch_array($result,MYSQLI_BOTH);
+$carowner= $row['userid'];
+$carbrand=$row['vehiclebrand'];
+$carmodel=$row['vehiclemodel'];
+$cartype=$row['vehicletype'];
+$carlotparked=$row['parkinglotid'];
 
-               
-               if($_SESSION['user']=="Admin"){
+            if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                $user="Admin";
-                $pic = $row['adminpic'];
-                $password=$row['adminpassword'];
+                    $user="Admin";
+                    $pic = $row['adminpic'];
             }
             elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM Staff WHERE staffid = '$username'";
+                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                $user = "Staff";
-                $pic = $row['staffpic'];
+                    $user = "Staff";
+                    $pic = $row['staffpic'];
+                    $staffcp = $row['carparkid'];
             }
             ?>
+
             
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
@@ -116,14 +93,14 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="carpark.php">
+            <a class="nav-link" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
             </a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="car.php">
+            <a class="nav-link active" href="car.php">
               <i class="fas fa-car text-primary"></i>
               <span class="nav-link-text">Car</span>
             </a>
@@ -142,7 +119,6 @@
                 <span class="nav-link-text">Register</span>
               </a>
             </li>
-        
         <?php }
         elseif($_SESSION['user']=="Staff"){?>
           <li class="nav-item">
@@ -153,7 +129,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="carpark.php">
+            <a class="nav-link" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
             </a>
@@ -171,13 +147,28 @@
       </div>
     </div>
   </nav>
-
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Search form -->
+          <!--
+          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control" placeholder="Search" type="text">
+              </div>
+            </div>
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </form>
+        -->
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -352,43 +343,21 @@
       </div>
     </nav>
     <!-- Header -->
-    <!--<div class="header bg-default pb-6">
+    <div class="header bg-default pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0"></h6>
+              <h6 class="h2 text-white d-inline-block mb-0">Edit vehicle</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
-                  <li class="breadcrumb-item active" aria-current="page"></li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
-    <!--bg carpark-->
-    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url('CarparksPic/<?php echo $cppic;?>'); background-size: cover; background-position: center top;">
-      <!-- Mask -->
-      <span class="mask bg-gradient-default opacity-8"></span>
-      <!-- Header container -->
-      <div class="container-fluid">
-          
-
-      <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-                
-            <h1 class="display-2 text-white">Add staff</h1>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
-                  <li class="breadcrumb-item"><a href="carlots.php"><?php echo $carpark; ?></a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add staff</li>
+                  <li class="breadcrumb-item"><a href="car.php">Car</a></li>
+                  <!--
+                    <li class="breadcrumb-item"><a href="#">Carpark</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Tables</li>
+                -->
+                <li class="breadcrumb-item active" aria-current="page">Edit vehicle</li>
                 </ol>
               </nav>
             </div>
@@ -396,258 +365,269 @@
         </div>
       </div>
     </div>
-    <!--below header bg image-->
+    <!-- Page content -->
     <div class="container-fluid mt--6">
-          <form action="" method="post">
+    <form action="" method="post">
+      <div class="row justify-content-center">
+        <div class=" col ">
           <div class="card">
-            <div class="card-header">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Add staff </h3>
+            <div class="card-header bg-transparent">
+              <div class="row">
+            <div class="col-8">
+                  <h3 class="mb-0">Edit Vehicle </h3>
                 </div>
-                <div class="col-4 text-right">
-                <button type="submit" class="btn btn-success editedbtn" id="editSubmit" disabled>Add</button>
-                </div>
-              </div>
+        </div>
             </div>
             <div class="card-body">
-            <?php 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                          $newusername = mysqli_real_escape_string($db,$_POST['esUsername']);
-                          $newemail = mysqli_real_escape_string($db,$_POST['esEmail']); 
-                          $newfirst = mysqli_real_escape_string($db,$_POST['esFname']); 
-                          $newlast = mysqli_real_escape_string($db,$_POST['esLname']); 
-                          $newaddress = mysqli_real_escape_string($db,$_POST['esaddress']); 
-                          $newpostal = mysqli_real_escape_string($db,$_POST['espostal']); 
-                          $newcontact = mysqli_real_escape_string($db,$_POST['escontact']); 
-                          $checkpwd = mysqli_real_escape_string($db,$_POST['apwd']); 
-                          $newpwd = mysqli_real_escape_string($db,$_POST['esnewpwd']);
-                          $rtpwd = mysqli_real_escape_string($db,$_POST['esretypepwd']);  
-                          $newoffice=mysqli_real_escape_string($db,$_POST['esCompany']);  
-                          $error =false;
-
-                          if($newemail==""){
-                            echo "<p class='text-red'>Email is required</p>";
-                            $error =true;
-                             
-                          }
-                          elseif(!filter_var($newemail, FILTER_VALIDATE_EMAIL)){
-                            echo "<p class='text-red'>Email is invalid</p>";
-                            $error =true;
-                             
-                          }
-                          elseif($newfirst==""){
-                            echo "<p class='text-red'>First name is required</p>";
-                            $error =true;
-                             
-                          }
-                            elseif($newlast==""){
-                              echo "<p class='text-red'>Last name is required</p>";
-                              $error =true;
-                               
-                            }
-                              elseif($newaddress==""){
-                                echo "<p class='text-red'>Address is required</p>";
-                                $error =true;
-                                 
+            <h6 class="heading-small text-muted mb-4">Vehicle information</h6>
+            <div class="pl-lg-4">
+                  <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group editCarparkName">
+                        <label class="form-control-label" for="input-plateno">License plate</label>
+                        <input type="text" id="input-plateno" class="form-control editable" placeholder="License plate number" name="plateno" value="<?php echo $eVeh;?>">
+                      </div>
+                    </div>
+                    <div class="col-md-3"> </div>
+                    <div class="col-md-4">
+                      <div class="form-group editCarparkContact">
+                        <label class="form-control-label" for="input-cartype">Car type</label>
+                        <select class="form-control editable" id="input-cartype" name="cartype">
+                        <?php
+                          $sql = "SELECT DISTINCT vehicletype FROM Vehicle";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) { 
+                              while($row = mysqli_fetch_assoc($result)) { 
+                                if($cartype == $row['vehicletype']){
+                                  echo '<option value="'.$row['vehicletype'].'" selected>'.$row['vehicletype'].'</option>';
+                                }
+                                else{
+                                  echo '<option value="'.$row['vehicletype'].'">'.$row['vehicletype'].'</option>';
+                                }
                               }
-                                elseif($newpostal==""){
-                                  echo "<p class='text-red'>Postal code is required</p>";
-                                  $error =true;
-                                   
-                                }
-                                elseif(preg_match("/^[0-9]{6}$/",$newpostal)==0){
-                                  echo "<p class='text-red'>Postal code must have 6 digits</p>";
-                                  $error =true;
-                                   
-                                }
-                                elseif($newcontact==""){
-                                  echo "<p class='text-red'>Contact number is required</p>";
-                                  $error =true;
-                                   
-                                }
-                                elseif(preg_match("/^[0-9]{8}$/",$newcontact)==0){
-                                  echo "<p class='text-red'>Phone numbers must have 8 digits</p>";
-                                  $error =true;
-                                   
-                                }
-                                  elseif($newusername==""){
-                                    echo"<p class='text-red'>Username is required</p>";
-                                    $error=true;
-                                     
-                                  }
-                                  elseif(preg_match("/^[A-Za-z0-9'.,-]+(?:[ _-][A-Za-z0-9]+)*$/",$newusername)==0){
-                                    echo "<p class='text-red'>Username cannot have spaces</p>";
-                                    $error=true;
-                                  }
-                                  elseif($newoffice==""){
-                                    echo"<p class='text-red'>Organisation is required</p>";
-                                    $error=true;
-                                  }
-                                  elseif($checkpwd!=$password && $checkpwd != ""){
-                                    echo "<p class='text-red'>Current password is entered wrong</p>";
-                                    $error=true;
-                                  }
-                                  elseif($newpwd != $rtpwd && $newpwd){
-                                    echo "<p class='text-red'>Re-type password and new password does not match</p>";
-                                    $error=true;
-                                  }
-                                  elseif($checkpwd!="" && $newpwd=="" || $checkpwd!="" && $rtpwd==""){
-                                    echo "<p class='text-red'>There's no new password to be changed</p>";
-                                    $error=true;
-                                  }
-                                  elseif($newpwd!="" && $rtpwd==""){
-                                    echo "<p class='text-red'>Password was not retyped</p>";
-                                    $error=true;
-                                  }
-                                  elseif($checkpwd=="" || $newpwd=="" || $rtpwd==""){
-                                    echo "<p class='text-red'>Missing password field</p>";
-                                    $error=true;
-                                  }
-                                  else{
-                                    $error=false;
-                                  }
-
-                          if ($error==false){
-                            $sql = "INSERT INTO Staff 
-                            VALUES('$newusername','$cpid','$newfirst','$newlast','$newcontact','$newaddress','$newoffice','$rtpwd','$newemail',
-                            '$newpostal','default.jpg','bannerdefault.jpg')";
-                                      if (mysqli_query($db, $sql)) {
-                                        $eStaff=$newusername;
-                                        $staffFirst=$newfirst;
-                                        $staffLast=$newlast;
-                                        $staffContact=$newcontact;
-                                        $staffEmail = $newemail;
-                                        $staffAdd = $newaddress;
-                                        $staffPostal = $newpostal;
-                                        $staffCompany = $newoffice;
-                                        header("Location: addstaff.php");
-                                        echo "<p class='text-success'>Added. The changes might take awhile to update on your screen.</p>";
-                          }
-                          else{
-                            echo "Error updating record: " . mysqli_error($db);
-                          }
-                        }
+                            }
                           
-                        }
-                        
-                        ?>
-                                      
-                <h6 class="heading-small text-muted mb-4">Personal information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group editsUsername">
-                        <label class="form-control-label" for="input-sUsername">Staff's username</label>
-                        <input type="text" id="input-sUsername" class="form-control editable" placeholder="Username" name="esUsername" value="">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group editsEmail">
-                        <label class="form-control-label" for="input-sEmail">Staff's email</label>
-                        <input type="text" id="input-sEmail" class="form-control editable" placeholder="Email" name="esEmail" value="">
+                          ?>
+                        </select>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                  <div class="col-md-3">
-                      <div class="form-group editsUsername">
-                        <label class="form-control-label" for="input-sFname">Staff's first name</label>
-                        <input type="text" id="input-sFname" class="form-control editable" placeholder="First name" name="esFname" value="">
+                  <div class="col-md-4">
+                      <div class="form-group editCarparkAddress">
+                        <label class="form-control-label" for="input-caruser">Owner's username</label>
+                        <input type="text" id="input-caruser" class="form-control editable" placeholder="Username of car owner" name="caruser" value="<?php echo $carowner;?>">
                       </div>
                     </div>
-                    <div class="col-md-3">
-                      <div class="form-group editsUsername">
-                        <label class="form-control-label" for="input-sLname">Staff's last name</label>
-                        <input type="text" id="input-sLname" class="form-control editable" placeholder="Username" name="esLname" value="">
+                  </div>
+                  <div class="row">
+                <div class="col-md-6">
+                      <div class="form-group editCarModel">
+                        <label class="form-control-label" for="input-carmodel">Vehicle model</label>
+                        <input type="text" id="input-carmodel" class="form-control editable" placeholder="Vehicle's model name" name="carmodel" value="<?php echo $carmodel;?>">
                       </div>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group editsCompany">
-                        <label class="form-control-label" for="input-sCompany">Staff's Organisation</label>
-                        <input type="text" id="input-sCompany" class="form-control editable" placeholder="Organisation name" name="esCompany" value="">
-                      </div>
-                    </div>
+                <div class="col-md-1"> </div>
+                <div class="col-md-4">
+                <div class="form-group editCarBrand">
+                        <label class="form-control-label" for="input-carbrand">Vehicle Brand</label>
+                        <select class="form-control editable" id="input-carbrand" name="carbrand">
+                          <?php
+                          $sql = "SELECT DISTINCT vehiclebrand FROM Vehicle";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) { 
+                              while($row = mysqli_fetch_assoc($result)) { 
+                                if($carbrand == $row['vehiclebrand']){
+                                  echo '<option value="'.$row['vehiclebrand'].'" selected>'.$row['vehiclebrand'].'</option>';
+                                }
+                                else{
+                                  echo '<option value="'.$row['vehiclebrand'].'">'.$row['vehiclebrand'].'</option>';
+                                }
+                              }
+                            }
+                          
+                          ?>
+                            <!--<option value="Car">Car</option>
+                            <option value="Motorcycle" selected >Motorcycle</option>
+                            <option value="Bus">Bus</option>
+                            <option value="Truck">Truck</option>-->
+                        </select>
                 </div>
-                <hr class="my-4" />
-                <!-- Password -->
-                <h6 class="heading-small text-muted mb-4">Change password</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group editAddress">
-                        <label class="form-control-label" for="input-aPass">Admin password</label>
-                        <input type="password" id="input-aPass" class="form-control editable" placeholder="Password" name="apwd" value="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group editPostal">
-                        <label class="form-control-label" for="input-newsPwd">New staff's password</label>
-                        <input type="password" id="input-newsPwd" class="form-control editable" placeholder="New password" name="esnewpwd" value="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group editContact">
-                        <label class="form-control-label" for="input-retypesPwd">Re-type staff's password</label>
-                        <input type="password" id="input-retypesPwd" class="form-control editable" placeholder="Re-type password" name="esretypepwd" value="">
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <!--contact information-->
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group editAddress">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input type="text" id="input-address" class="form-control editable" placeholder="Home Address" name="esaddress" value="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group editPostal">
-                        <label class="form-control-label" for="input-sPostal">Postal code</label>
-                        <input type="text" id="input-sPostal" class="form-control editable" placeholder="Postal code" name="espostal" value="">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group editContact">
-                        <label class="form-control-label" for="input-sContact">Contact No.</label>
-                        <input type="text" id="input-sContact" class="form-control editable" placeholder="Contact No" name="escontact" value="">
-                      </div>
-                    </div>
-                  </div>
                 </div>
-
-
-        </div>
+                </div>
                 
-              <!--</form>-->
-            </div>
-          </div>
-          </form>
-          
-        <!--</div>-->
-  
+                <hr class="my-4" />
+                <h6 class="heading-small text-muted mb-4">Lot information (if parked)</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-4">
+                    <div class="form-group editCarparkName">
+                        <label class="form-control-label" for="input-carlotid">Lot ID</label>
+                        <input type="text" id="input-carlotid" class="form-control editable" placeholder="Parking lot number" name="carlotid" value="<?php echo $carlotparked;?>">
+                      </div>
+                    </div>
+                  </div>
+                  <?php 
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            $ecarid=mysqli_real_escape_string($db,$_POST['plateno']);
+                            $ecartype=mysqli_real_escape_string($db,$_POST['cartype']);
+                            $ecarowner=mysqli_real_escape_string($db,$_POST['caruser']);
+                            $ecarmodel=mysqli_real_escape_string($db,$_POST['carmodel']);
+                            $ecarbrand=mysqli_real_escape_string($db,$_POST['carbrand']);
+                            $ecarlotparked=mysqli_real_escape_string($db,$_POST['carlotid']);
+                            $error=false;
+                            $notregisted=false;
+                            $takenuser=false;
+                            $invalidlot=false;
+                            $occupiedlot=false;
+                            $notmatchtype=false;
 
-    <!-- Page content -->
-    
 
+                            //echo $ecarlotparked!="" && $ecarlotparked!=$carlotparked;
 
-          </div>
+                            if($ecarlotparked!="" && $ecarlotparked!=$carlotparked){
+                              //echo "accessed";
+                            $checkid="SELECT * FROM ParkingLot";
+                            $result = $db->query($checkid);
+                            if($result->num_rows>0){
+                                while($rowcp = mysqli_fetch_assoc($result)) { 
+                                  if($rowcp['parkinglotid']==$ecarlotparked && $rowcp['vehicleid']!=null && $rowcp['vehicleid']!=$eVeh){
+                                    $occupiedlot=true;
+                                }
+                                    elseif($rowcp['parkinglotid']!=$ecarlotparked){
+                                        $invalidlot=true;
+                                    }
+                        
+                                }
+                            }
+                            if($occupiedlot){
+                              echo "<p class='text-red'>This lot is already occupied, please key in another lot id.</p>";
+                            }
+                            elseif($invalidlot){
+                              echo "<p class='text-red'>This lot does not exist in this carpark, please key in another lot id.</p>";
+                            }
+                            $error=true;
+                          }
+                          
+                          elseif($ecarowner!=$carowner){
+                              $checkid="SELECT * FROM User";
+                              $result = $db->query($checkid);
+                              if($result->num_rows>0){
+                                  while($rowcp = mysqli_fetch_assoc($result)) { 
+                                      if($rowcp['userid']==$ecarowner){
+                                        $notregisted=true;
+                                      }
+                                      else{
+                                        $takenuser=true;
+                                      }
+                                  }
+                              }
+                              if($notregisted==true){
+                                echo "<p class='text-red'>This username is taken, please key in another user.</p>";
+                              }
+                              elseif($takenuser==true){
+                                echo "<p class='text-red'>This username is not registed, please key in another user.</p>";
+                              }
+                              $error=true;
+                            }
+
+                            elseif($ecarlotparked!=""){
+                              $sql="SELECT * FROM ParkingLot WHERE parkinglotid='$ecarlotparked'";
+                              $result = $db->query($sql);
+                              $row = mysqli_fetch_array($result,MYSQLI_BOTH);
+                              if($row['lottype']!=$ecartype){
+                                echo "<p class='text-red'>This vehicle type cannot be parked in another type of lot</p>";
+                                $error=true;
+                              }
+                            }
+                        elseif($ecarid==""){
+                            echo "<p class='text-red'>License plate is required</p>";
+                            $error=true;
+                        }
+                        elseif($ecartype==""){
+                            echo "<p class='text-red'>Car type is required</p>";
+                            $error=true;
+                        }
+                        elseif($ecarowner==""){
+                            echo "<p class='text-red'>Owner's username is required</p>";
+                            $error=true;
+                        }
+                        elseif($ecarmodel==""){
+                          echo "<p class='text-red'>Vehicle model is required</p>";
+                          $error=true;
+                      }
+                      elseif($ecarbrand==""){
+                        echo "<p class='text-red'>Vehicle brand is required</p>";
+                        $error=true;
+                    }
+                        else{
+                            $error=false;
+                            $notregisted=false;
+                            $takenuser=false;
+                        }
+
+                        if($error==false){
+                                $sql = "UPDATE Vehicle SET vehicleid='$ecarid',userid='$ecarowner',vehiclebrand='$ecarbrand',vehiclemodel='$ecarmodel',vehicletype='$ecartype' WHERE vehicleid='$eVeh' ";
+                                if (mysqli_query($db, $sql)) {
+                                  //echo "Record updated successfully";
+                                  //echo "<p class='text-success'>Vehicle edited successfully. It might take a while to update.</p>";
+                        
+                                } 
+                                if($ecarlotparked!=""){
+                                  $sql="UPDATE ParkingLot SET vehicleid='$ecarid' WHERE parkinglotid='$ecarlotparked'";
+                                  if (mysqli_query($db, $sql)) {
+                                    $carlotparked=$ecarlotparked;
+                                    $carowner=$ecarowner;
+                                  $carbrand=$ecarbrand;
+                                  $carmodel=$ecarmodel;
+                                  $cartype=$ecartype;
+                                  $eVeh=$ecarid;
+                                    header("Location: editVehicle.php");
+                                    echo "<p class='text-success'>Vehicle edited successfully. It might take a while to update.</p>";
+                                  }
+                                }
+                                elseif($ecarlotparked=="" && $carlotparked!=$ecarlotparked){
+                                  $sql="UPDATE ParkingLot SET vehicleid=null WHERE vehicleid='$ecarid'";
+                                  if (mysqli_query($db, $sql)) {
+                                    $carlotparked=$ecarlotparked;
+                                    $carowner=$ecarowner;
+                                  $carbrand=$ecarbrand;
+                                  $carmodel=$ecarmodel;
+                                  $cartype=$ecartype;
+                                  $eVeh=$ecarid;
+                                    header("Location: editVehicle.php");
+                                    echo "<p class='text-success'>Vehicle edited successfully. It might take a while to update.</p>";
+                                  }
+                                }
+                            
+      
+                        }
+                    }
+
+                ?>
+                </div>
+                <div class="col-12">
+                <button type="submit" class="btn btn-success changebtn editedbtn" id="changeCppic" name="cpSavebtn" value="yes" disabled>Add</button>
+                </div>
+        
+                
+</div>
+</div>
+</div>
+</form>
+</div>
         </div>
-      </div>
+
+            
+
+
+
+
+
+
+
+
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -685,19 +665,15 @@
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
-  <script src="script.js"></script>
 
+  <script src="script.js"></script>
   <script>
-    
-  $(document).ready(function(){
+      $(document).ready(function(){
     $(".editable").on('input',function(){
       $(".editedbtn").prop("disabled", false);
     });
-  })
-</script>
-
-
-      
+})
+  </script>
 </body>
 
 </html>

@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <title>Car - Park-a-lot</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -111,7 +111,7 @@ $username=$_SESSION['id'];
           </li>
 
           <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="user.php">
                 <i class="fas fa-users text-default"></i>
                 <span class="nav-link-text">User</span>
               </a>
@@ -339,7 +339,11 @@ $username=$_SESSION['id'];
       <!--startbootstrap's table-->
       <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h2 class="m-0 font-weight-bold text-primary">Cars</h2>
+                        <div class="row">
+                            <h2 class="m-0 font-weight-bold text-primary col-6">Vehicles</h2>
+                            <div class="text-right col-6">
+                <a href="addVehicle.php" class="btn btn-success editedbtn" id="addLots">Add</a>
+                </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -398,9 +402,14 @@ $username=$_SESSION['id'];
                                   <span class="name mb-0 text-sm">'.$row['staffid'].'</span>
                                 </div>
                               </div>
-                            </th>*/
+                            </th>
+                            */
                                                  echo "<tr>
-                                                 <td><button class='metal linear'>". $row['vehicleid'] ."</button></td>
+                                                 <td>
+                                                 <form action='' method='post'>
+                                                 <button  type='submit' name='editCar' value='".$row['vehicleid']."' class='metal linear'>". $row['vehicleid'] ."</button>
+                                                 </form>
+                                                 </td>
                                                  <th scope='row'>
                                                      <div class='media align-items-center'>
                                                      <a href='#' class='avatar rounded-circle avatar-sm mr-3'>
@@ -427,6 +436,14 @@ $username=$_SESSION['id'];
                         </div>
                     </div>
 
+                    <?php
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                      if(isset($_POST['editCar'])){
+                        $_SESSION['eVehicle']=$_POST['editCar'];
+                        echo '<script language="JavaScript">document.location="editCar.php";</script>';
+                      }
+                    }
+                    ?>
                 
 
 

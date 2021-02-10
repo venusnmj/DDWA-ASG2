@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Add carpark</title>
+  <title>Add carpark - Park-a-lot</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -124,7 +124,7 @@
           </li>
 
           <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="user.php">
                 <i class="fas fa-users text-default"></i>
                 <span class="nav-link-text">User</span>
               </a>
