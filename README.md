@@ -16,6 +16,12 @@ https://www.mapletree.com.sg/All-Properties/MCT/Singapore/VivoCity
 https://www.np.edu.sg/Pages/contact.aspx
 https://www.kkh.com.sg/patient-care/visitor-info/parking-information-kk-womens-and-childrens-hospital
 https://foursquare.com/v/kkh-carpark/4cdd36105aeda1cd6d04c711
+https://thestarvista.sg/plan-your-visit.html#parking
+https://www.facebook.com/TheStarVista/about/
+https://www.sgh.com.sg/about-us
+https://www.sp.edu.sg/sp/about-sp
+https://mothership.sg/2019/07/poly-students-new-scheme-graduate-uni-early/
+https://www.nypi.edu.sg/en.html
 
 
 
