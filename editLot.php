@@ -387,10 +387,13 @@
           <form action="" method="post">
           <div class="card">
             <div class="card-header">
-              <div class="row align-items-center">
-                <div class="col-8">
+            <div class="row">
+                <div class="col-lg-6">
                   <h3 class="mb-0">Edit lot </h3>
                 </div>
+                <div class="col-lg-6 text-right">
+                <button type="submit" class="btn btn-warning editedbtn" id="deleteCP" name="deleteLot" value="<?php echo $lotparked;?>">Delete</button>
+                 </div>
               </div>
             </div>
             <div class="card-body">
@@ -448,6 +451,7 @@
                 <div class="col-8">
                 <?php 
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        if(isset($_POST['cpSavebtn'])){
                         var_dump($_POST);
                             $addlotid=mysqli_real_escape_string($db,$_POST['lotid']);
                             $addlottype=mysqli_real_escape_string($db,$_POST['lottype']);
@@ -524,6 +528,14 @@
                               $lottype=$addlottype;
                               header("Location: editLot.php");
                             } 
+                        }
+                    }
+                        if(isset($_POST['deleteLot'])){
+                            var_dump($_POST);
+                            $delLot=mysqli_real_escape_string($db,$_POST['deleteLot']);
+                            //$sqldl="DELETE ParkingLot WHERE parkinglotid='$delLot'";
+                            echo $delLot.$lotparked;
+                            //$db->query($sqldl);
                         }
                     }
 
