@@ -114,7 +114,7 @@ $carlotparked=$row['parkinglotid'];
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="addAdmin.php">
                 <i class="ni ni-circle-08 text-info"></i>
                 <span class="nav-link-text">Register</span>
               </a>
@@ -315,21 +315,13 @@ $carlotparked=$row['parkinglotid'];
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="welcome.php" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
+                <a href="messages.php" class="dropdown-item">
+                <i class="fas fa-comments"></i>
+                  <span>Messages</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php" class="dropdown-item">
@@ -495,19 +487,16 @@ $carlotparked=$row['parkinglotid'];
                                   if($rowcp['parkinglotid']==$ecarlotparked && $rowcp['vehicleid']!=null && $rowcp['vehicleid']!=$eVeh){
                                     $occupiedlot=true;
                                 }
-                                    elseif($rowcp['parkinglotid']!=$ecarlotparked){
-                                        $invalidlot=true;
-                                    }
+                                   
                         
                                 }
                             }
                             if($occupiedlot){
                               echo "<p class='text-red'>This lot is already occupied, please key in another lot id.</p>";
+                              $error=true;
                             }
-                            elseif($invalidlot){
-                              echo "<p class='text-red'>This lot does not exist in this carpark, please key in another lot id.</p>";
-                            }
-                            $error=true;
+                            
+                            
                           }
                           
                           elseif($ecarowner!=$carowner){

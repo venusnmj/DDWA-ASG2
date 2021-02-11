@@ -58,6 +58,7 @@
             $cpaddress = $cprow['carparkaddress'];
             $cpcontact = $cprow['carparkcontact'];
             $cpid=$cprow['carparkid'];
+            echo $cpcontact;
             
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
@@ -120,7 +121,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="addAdmin.php">
                 <i class="ni ni-circle-08 text-info"></i>
                 <span class="nav-link-text">Register</span>
               </a>
@@ -307,21 +308,13 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="welcome.php" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
+                <a href="messages.php" class="dropdown-item">
+                <i class="fas fa-comments"></i>
+                  <span>Messages</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php" class="dropdown-item">
@@ -383,10 +376,13 @@
           <form action="" method="post">
           <div class="card">
             <div class="card-header">
-              <div class="row align-items-center">
-                <div class="col-8">
+              <div class="row">
+                <div class="col-lg-6">
                   <h3 class="mb-0">Edit carpark </h3>
                 </div>
+                <div class="col-lg-6 text-right">
+                <button type="submit" class="btn btn-warning editedbtn" id="deleteCP" name="deleteCarpark" value="<?php echo $cpid;?>">Delete</button>
+                 </div>
               </div>
             </div>
             <div class="card-body">
@@ -452,6 +448,22 @@
                                 echo "Error updating record: " . mysqli_error($db);
                             }
                         }
+                    }
+                    elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deleteCarpark'])) {
+                      $cpdelete= $_POST['deleteCarpark'];
+                      $sql="DELETE FROM Carpark WHERE carparkid='$cpdelete'";
+                      if ($db->query($sql) === TRUE) {
+                        $deletestaff="DELETE FROM Staff WHERE carparkid=$cpdelete";
+                        $db->query($deletestaff);
+                        
+                        $deletelots="DELETE FROM ParkingLot WHERE carparkid='$cpdelete'";
+                        $db->query($deletelots);
+                        
+                        header("Location: carpark.php");
+                      } 
+                      else {
+                        echo "Error deleting record: " . $conn->error;
+                      }
                     }
                 ?>
                 </div>
@@ -524,6 +536,7 @@
                                             <th>Driver's contact</th>
                                             <th>Vehicle No.</th>
                                             <th>Status</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -534,6 +547,7 @@
                                             <th>Driver's contact</th>
                                             <th>Vehicle No.</th>
                                             <th>Status</th>
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -577,6 +591,11 @@
                                                  <td>". $row['usercontactno'] ."</td>
                                                  <td>". $plate ."</td>
                                                  <td>". $status ."</td>
+                                                 <td><form action='' method='post'>
+                                                 <button type='submit' class='btn' name='editLot' value='".$row['parkinglotid']."'>
+                                                 <i class='far fa-edit'></i>
+                                                 </button>
+                                                 </form></td>
                                                </tr>";
                                              }
                                          }
@@ -1039,6 +1058,10 @@
                         $_SESSION['eVehicle']=$_POST['editVeh'];
                         echo '<script language="JavaScript">document.location="editVehicle.php";</script>';
 
+                    }
+                    if(isset($_POST['editLot'])){
+                      $_SESSION['eLot']=$_POST['editLot'];
+                      echo '<script language="JavaScript">document.location="editLot.php";</script>';
                     }
                 }
                 ?>

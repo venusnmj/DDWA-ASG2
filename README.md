@@ -14,6 +14,9 @@ https://www.capitaland.com/sg/en/lease/mall-listing/jewel-changi-airport-mall.ht
 https://valuelifestylesg.wordpress.com/2014/11/09/carpark-at-great-world-city/
 https://www.mapletree.com.sg/All-Properties/MCT/Singapore/VivoCity
 https://www.np.edu.sg/Pages/contact.aspx
+https://www.kkh.com.sg/patient-care/visitor-info/parking-information-kk-womens-and-childrens-hospital
+https://foursquare.com/v/kkh-carpark/4cdd36105aeda1cd6d04c711
+
 
 
 ## Icons used

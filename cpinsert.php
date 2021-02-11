@@ -1,9 +1,6 @@
 <?php
 include('session.php');
-$newcpname=$_SESSION['addcpname'];
-$newcpcontact=$_SESSION['addcpcontact'];
-$newcpaddress=$_SESSION['addcpaddress'];
-$newcpid=$_SESSION['addcpid'];
+
 $target_dir = "CarparksPic/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -11,6 +8,11 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
+  $_SESSION['addcpname']=$_POST["CPname"];
+    $_SESSION['addcpaddress']=$_POST["CPaddress"];
+    $_SESSION['addcpcontact']=$_POST["CPcontact"];
+    $_SESSION['addcpid']=$_POST["CPid"];
+
   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
     list($w, $h) = getimagesize($_FILES["fileToUpload"]["tmp_name"]); // get image resolution
@@ -19,7 +21,7 @@ if(isset($_POST["submit"])) {
     $uploadOk = 1;
   } else {
     echo '<script language="javascript"> alert("File is not an image.");
-    location.href="carlots.php";
+    location.href="addCarpark.php";
     </script>';
     $uploadOk = 0;
   }
@@ -28,7 +30,7 @@ if(isset($_POST["submit"])) {
 // Check if file already exists
 if (file_exists($target_file)) {
     echo '<script language="javascript"> alert("File already exists");
-    location.href="carlots.php";
+    location.href="addCarpark.php";
     </script>';
   $uploadOk = 0;
 }
@@ -36,7 +38,7 @@ if (file_exists($target_file)) {
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo '<script language="javascript"> alert("Sorry, your file is too large.");
-    location.href="carlots.php";
+    location.href="addCarpark.php";
     </script>';
   $uploadOk = 0;
 }
@@ -45,7 +47,7 @@ if ($_FILES["fileToUpload"]["size"] > 5000000) {
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
     echo '<script language="javascript"> alert("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-    location.href="carlots.php";
+    location.href="addCarpark.php";
     </script>';
   $uploadOk = 0;
 }
@@ -53,7 +55,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo '<script language="javascript"> alert("Sorry, your file was not uploaded.");
-    location.href="carlots.php";
+    location.href="addCarpark.php";
     </script>';
 // if everything is ok, try to upload file
 } else {
@@ -63,6 +65,7 @@ if ($uploadOk == 0) {
     
     //insert carpark pic
     $_SESSION['ecppic']=$file;
+    
     header('Location: addCarpark.php');
     
 }

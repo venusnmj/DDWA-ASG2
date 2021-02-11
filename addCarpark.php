@@ -50,6 +50,7 @@
 <body>
 <?php
             $username=$_SESSION['id'];
+            echo $_SESSION['addcpname'];
 
             if(isset($_SESSION['addcpname'])){
                 $cpname=$_SESSION['addcpname'];
@@ -73,11 +74,20 @@
             }
 
             if(isset($_SESSION['addcpid'])){
-                $cppic=$_SESSION['addcpid'];
+                $cpid=$_SESSION['addcpid'];
             }
             else{
-                $cppic="defaultcp.jpg";
+                $cpid="";
             }
+
+            //$_SESSION['ecppic']=null;
+            if(isset($_SESSION['ecppic'])){
+              $cppic=$_SESSION['ecppic'];
+              $_SESSION['ecppic']=null;
+          }
+          else{
+              $cppic="defaultcp.jpg";
+          }
             /*
             $carpark=$_SESSION['carpark'];
             $sqlcp = "SELECT * FROM Carpark WHERE carparkname='$carpark'";
@@ -149,7 +159,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="addAdmin.php">
                 <i class="ni ni-circle-08 text-info"></i>
                 <span class="nav-link-text">Register</span>
               </a>
@@ -336,21 +346,13 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="welcome.php" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
+                <a href="messages.php" class="dropdown-item">
+                <i class="fas fa-comments"></i>
+                  <span>Messages</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php" class="dropdown-item">
@@ -414,43 +416,12 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Edit carpark </h3>
+                  <h3 class="mb-0">Add carpark </h3>
                 </div>
               </div>
             </div>
             <div class="card-body">
-                                      
-                <h6 class="heading-small text-muted mb-4">Carpark information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group editCarparkName">
-                        <label class="form-control-label" for="input-cpname">Carpark name</label>
-                        <input type="text" id="input-cpname" class="form-control editable" placeholder="Carpark name" name="ecpname" value="<?php echo $cpname;?>">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group editCarparkContact">
-                        <label class="form-control-label" for="input-cpcontact">Contact info</label>
-                        <input type="text" id="input-cpcontact" class="form-control editable" placeholder="Contact information" name="ecpcontact" value="<?php echo $cpcontact;?>">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group editCarparkAddress">
-                        <label class="form-control-label" for="input-cpaddress">Address</label>
-                        <input type="text" id="input-cpaddress" class="form-control editable" placeholder="Carpark address" name="ecpaddress" value="<?php echo $cpaddress;?>">
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group editCarparkid">
-                        <label class="form-control-label" for="input-cpid">ID number</label>
-                        <input type="text" id="input-cpid" class="form-control editable" placeholder="Carpark ID number" name="ecpid" value="<?php echo $cpid;?>">
-                      </div>
-                    </div>
-                </div>
-        </div>
+                                    
                 
                 <div class="col-8">
                 <?php 
@@ -510,21 +481,22 @@
                         $_SESSION['addcpaddress']=null;
                         $_SESSION['addcpcontact']=null;
                         $_SESSION['addcpid']=null;
+                        $_SESSION['ecppic']=null;
                         }
                     }
+                    /*
                     elseif(isset($_POST['submit'])){
                         $_SESSION['addcpname']=$newcpname;
                         $_SESSION['addcpaddress']=$newcpaddress;
                         $_SESSION['addcpcontact']=$newcpcontact;
                         $_SESSION['addcpid']=$newcpid;
-
-                    }
+                        //echo '<script language="javascript"> location.href="cpinsert.php"; </script>';
+                    }*/
                     }
 
                 ?>
                 </div>
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Upload picture</h6>
+                <h6 class="heading-small text-muted mb-4">Upload picture first</h6>
                 <div class="pl-lg-4">
                     <div class="row">
                 <div class="col-md-4">
@@ -537,6 +509,38 @@
                 </div>
                 </div>
                 </div>
+                <hr class="my-4" />
+                <h6 class="heading-small text-muted mb-4">Carpark information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group editCarparkName">
+                        <label class="form-control-label" for="input-cpname">Carpark name</label>
+                        <input type="text" id="input-cpname" class="form-control editable" placeholder="Carpark name" name="ecpname" value="<?php echo $cpname;?>">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group editCarparkContact">
+                        <label class="form-control-label" for="input-cpcontact">Contact info</label>
+                        <input type="text" id="input-cpcontact" class="form-control editable" placeholder="Contact information" name="ecpcontact" value="<?php echo $cpcontact;?>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group editCarparkAddress">
+                        <label class="form-control-label" for="input-cpaddress">Address</label>
+                        <input type="text" id="input-cpaddress" class="form-control editable" placeholder="Carpark address" name="ecpaddress" value="<?php echo $cpaddress;?>">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group editCarparkid">
+                        <label class="form-control-label" for="input-cpid">ID number</label>
+                        <input type="text" id="input-cpid" class="form-control editable" placeholder="Carpark ID number" name="ecpid" value="<?php echo $cpid;?>">
+                      </div>
+                    </div>
+                </div>
+        </div>
                 <div class="col-12">
                 <button type="submit" class="btn btn-success changebtn editedbtn" id="changeCppic" name="cpSavebtn" value="yes" disabled>Add</button>
                 </div>
@@ -556,6 +560,10 @@
           </div>
   <br>
   <input type="file" name="fileToUpload" id="cppicToUpload" class="fileupload">
+  <input type="hidden" id="CPname" name="CPname" value="<?php echo $newcpname;?>">
+  <input type="hidden" id="CPaddress" name="CPaddress" value="<?php echo $newcpaddress;?>">
+  <input type="hidden" id="CPcontact" name="CPcontact" value="<?php echo $newcpcontact;?>">
+  <input type="hidden" id="CPid" name="CPid" value="<?php echo $newcpid;?>">
   <br>
   <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
           </div>

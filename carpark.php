@@ -39,6 +39,10 @@
 <body>
 <?php
             $username=$_SESSION['id'];
+            $empty=0;
+            $occupied=0;
+
+
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
@@ -101,7 +105,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="addAdmin.php">
                 <i class="ni ni-circle-08 text-info"></i>
                 <span class="nav-link-text">Register</span>
               </a>
@@ -302,21 +306,13 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="welcome.php" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
+                <a href="messages.php" class="dropdown-item">
+                <i class="fas fa-comments"></i>
+                  <span>Messages</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php" class="dropdown-item">
@@ -378,6 +374,19 @@
         $resultcp = $db->query($sqlcp);
         if($resultcp->num_rows>0){
           while($rowcp = mysqli_fetch_assoc($resultcp)) { 
+            $statid=$rowcp['carparkid'];
+            $sqlstats="SELECT * FROM ParkingLot WHERE carparkid='$statid'";
+      $result = $db->query($sqlstats);
+        if($result->num_rows>0){
+          while($rowstats = mysqli_fetch_assoc($result)) { 
+            if($rowstats['vehicleid']==null){
+              $empty++;
+            }
+            else{
+              $occupied++;
+            }
+          }
+        }
             echo '
             <form action="" method="post">
             <div class="col-md-4">
@@ -386,15 +395,32 @@
           <div class="card-body">
             <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
             <p class="card-text">'.$rowcp['carparkaddress'].'</p>
+            <p class="card-text text-success">Empty lots: '.$empty.'</p>
+            <p class="card-text text-danger">Occupied lots: '.$occupied.'</p>
             <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
           </div>
                 </div>
               </div>
               </form>';
+              $empty=0;
+              $occupied=0;
         }
       }
     }
     elseif($user=="Staff"){
+      $sqlstats="SELECT * FROM ParkingLot WHERE carparkid='$staffcp'";
+      $result = $db->query($sqlstats);
+        if($result->num_rows>0){
+          while($rowstats = mysqli_fetch_assoc($result)) { 
+            if($rowstats['vehicleid']==null){
+              $empty++;
+            }
+            else{
+              $occupied++;
+            }
+          }
+        }
+
       $sqlcp = "SELECT * FROM Carpark WHERE carparkid='$staffcp'";
       $resultcp = $db->query($sqlcp);
         if($resultcp->num_rows>0){
@@ -407,11 +433,15 @@
           <div class="card-body">
             <h5 class="card-title">'.$rowcp['carparkname'].'</h5>
             <p class="card-text">'.$rowcp['carparkaddress'].'</p>
+            <p class="card-text text-success">Empty lots: '.$empty.'</p>
+            <p class="card-text text-danger">Occupied lots: '.$occupied.'</p>
             <button type="submit" value="'.$rowcp['carparkname'].'" class="btn btn-primary" name="submittedCarpark">Car lots</a>
           </div>
                 </div>
               </div>
               </form>';
+              $empty=0;
+              $occupied=0;
         }
       }
     }

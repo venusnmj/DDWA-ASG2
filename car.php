@@ -284,21 +284,13 @@ $username=$_SESSION['id'];
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="welcome.php" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
+                <a href="messages.php" class="dropdown-item">
+                <i class="fas fa-comments"></i>
+                  <span>Messages</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php" class="dropdown-item">
@@ -356,6 +348,7 @@ $username=$_SESSION['id'];
                                             <th>Driver's name</th>
                                             <th>Driver's username</th>
                                             <th>Type</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -366,6 +359,7 @@ $username=$_SESSION['id'];
                                             <th>Driver's name</th>
                                             <th>Driver's username</th>
                                             <th>Type</th>
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -424,6 +418,11 @@ $username=$_SESSION['id'];
                                                  <td>". $row['userfirstname'] ." ".$row['userlastname'] ."</td>
                                                  <td>". $row['userid'] ."</td>
                                                  <td>". $typelot. "</td>
+                                                 <td><form action='' method='post'>
+                                                 <button type='submit' class='btn' name='deleteCar' value='".$row['vehicleid']."'>
+                                                 <i class='fas fa-trash-alt'></i>
+                                                 </button>
+                                                 </form></td>
                                                </tr>";
                                              }
                                          }
@@ -441,6 +440,22 @@ $username=$_SESSION['id'];
                       if(isset($_POST['editCar'])){
                         $_SESSION['eVehicle']=$_POST['editCar'];
                         echo '<script language="JavaScript">document.location="editCar.php";</script>';
+                      }
+                      if(isset($_POST['deleteCar'])){
+                        $delCar=$_POST['deleteCar'];
+                        $sql="DELETE FROM Vehicle WHERE vehicleid='$delCar'";
+                        $db->query($sql);
+
+                        $sqluser="UPDATE User SET carid=null WHERE carid='$delCar'";
+                        $db->query($sqluser);
+
+                        $sqlselect="SELECT * FROM ParkingLot WHERE vehicleid='$delCar'";
+                        $result = $db->query($sqlselect);
+                                    $count = mysqli_num_rows($result);
+                                    if($count==1){
+                                      $emptyspace="UPDATE ParkingLot SET vehicleid=null WHERE vehicleid='$delCar'";
+                                      $db->query($emptyspace);
+                                    }
                       }
                     }
                     ?>

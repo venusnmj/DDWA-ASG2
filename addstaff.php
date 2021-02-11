@@ -137,7 +137,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="addAdmin.php">
                 <i class="ni ni-circle-08 text-info"></i>
                 <span class="nav-link-text">Register</span>
               </a>
@@ -324,21 +324,13 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="welcome.php" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-calendar-grid-58"></i>
-                  <span>Activity</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-support-16"></i>
-                  <span>Support</span>
+                <a href="messages.php" class="dropdown-item">
+                <i class="fas fa-comments"></i>
+                  <span>Messages</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php" class="dropdown-item">
@@ -542,6 +534,7 @@
                         <input type="text" id="input-sUsername" class="form-control editable" placeholder="Username" name="esUsername" value="">
                       </div>
                     </div>
+                    <div class="col-md-4"></div>
                     <div class="col-md-4">
                       <div class="form-group editsEmail">
                         <label class="form-control-label" for="input-sEmail">Staff's email</label>
@@ -556,6 +549,7 @@
                         <input type="text" id="input-sFname" class="form-control editable" placeholder="First name" name="esFname" value="">
                       </div>
                     </div>
+                    <div class="col-md-4"></div>
                     <div class="col-md-3">
                       <div class="form-group editsUsername">
                         <label class="form-control-label" for="input-sLname">Staff's last name</label>
@@ -570,6 +564,7 @@
                         <input type="text" id="input-sCompany" class="form-control editable" placeholder="Organisation name" name="esCompany" value="">
                       </div>
                     </div>
+                </div>
                 </div>
                 <hr class="my-4" />
                 <!-- Password -->

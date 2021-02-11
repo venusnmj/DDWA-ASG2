@@ -22,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Carpark - Park-a-lot</title>
+  <title>Edit lot - Park-a-lot</title>
   <!-- Favicon -->
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
@@ -30,44 +30,61 @@
   <!-- Icons -->
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-  <!-- Argon CSS -->
-  <link href="stylesheet.css" rel="stylesheet">
+
+
+
+    <!-- Custom styles for this template -->
+    <!--<link href="startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this page -->
+    <link href="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Argon CSS -->
+    <link href="stylesheet.css" rel="stylesheet">
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
   <link href="stylesheet.css" rel="stylesheet">
+
+
 </head>
 
 <body>
 <?php
-$username=$_SESSION['id'];
-$eVeh= $_SESSION['eVehicle'];
-//echo $eVeh;
 
-$sql = "SELECT * FROM Vehicle LEFT OUTER JOIN ParkingLot ON ParkingLot.vehicleid = Vehicle.vehicleid WHERE Vehicle.vehicleid='$eVeh'";
-$result = $db->query($sql);
-$row = mysqli_fetch_array($result,MYSQLI_BOTH);
-$carowner= $row['userid'];
-$carbrand=$row['vehiclebrand'];
-$carmodel=$row['vehiclemodel'];
-$cartype=$row['vehicletype'];
-$carlotparked=$row['parkinglotid'];
 
+            $username=$_SESSION['id'];
+            
+            $carpark=$_SESSION['carpark'];
+            $sqlcp = "SELECT * FROM Carpark WHERE carparkname='$carpark'";
+            $cpdata = $db->query($sqlcp);
+            $cprow = mysqli_fetch_array($cpdata,MYSQLI_BOTH);
+            $cppic = $cprow['carparkpic'];
+            $cpid=$cprow['carparkid'];
+
+            $elot=$_SESSION['eLot'];
+            $lotsql="SELECT * FROM ParkingLot WHERE parkinglotid='$elot'";
+            $data = $db->query($lotsql);
+            $lotrow = mysqli_fetch_array($data,MYSQLI_BOTH);
+            $lotzone=$lotrow['lotzone'];
+            $lottype=$lotrow['lottype'];
+            $lotparked=$lotrow['vehicleid'];
+            
+
+            
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    $user="Admin";
-                    $pic = $row['adminpic'];
+                $user="Admin";
+                $pic = $row['adminpic'];
             }
             elseif($_SESSION['user']=="Staff"){
-                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
+                $sql = "SELECT * FROM Staff WHERE staffid = '$username'";
                 $result = $db->query($sql);
                 $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                    $user = "Staff";
-                    $pic = $row['staffpic'];
-                    $staffcp = $row['carparkid'];
+                $user = "Staff";
+                $pic = $row['staffpic'];
             }
             ?>
-
             
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
@@ -93,7 +110,7 @@ $carlotparked=$row['parkinglotid'];
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="carpark.php">
+            <a class="nav-link active" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
             </a>
@@ -107,7 +124,7 @@ $carlotparked=$row['parkinglotid'];
           </li>
 
           <li class="nav-item">
-              <a class="nav-link active" href="user.php">
+              <a class="nav-link" href="user.php">
                 <i class="fas fa-users text-default"></i>
                 <span class="nav-link-text">User</span>
               </a>
@@ -119,6 +136,7 @@ $carlotparked=$row['parkinglotid'];
                 <span class="nav-link-text">Register</span>
               </a>
             </li>
+        
         <?php }
         elseif($_SESSION['user']=="Staff"){?>
           <li class="nav-item">
@@ -129,7 +147,7 @@ $carlotparked=$row['parkinglotid'];
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="carpark.php">
+            <a class="nav-link active" href="carpark.php">
               <i class="fas fa-parking text-orange"></i>
               <span class="nav-link-text">Carpark</span>
             </a>
@@ -147,28 +165,13 @@ $carlotparked=$row['parkinglotid'];
       </div>
     </div>
   </nav>
+
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Search form -->
-          <!--
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-              <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-              </div>
-            </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </form>
-        -->
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -335,21 +338,43 @@ $carlotparked=$row['parkinglotid'];
       </div>
     </nav>
     <!-- Header -->
-    <div class="header bg-default pb-6">
+    <!--<div class="header bg-default pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
             <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Edit vehicle</h6>
+              <h6 class="h2 text-white d-inline-block mb-0"></h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="car.php">User</a></li>
-                  <!--
-                    <li class="breadcrumb-item"><a href="#">Carpark</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Tables</li>
-                -->
-                <li class="breadcrumb-item active" aria-current="page">Edit vehicle</li>
+                  <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"></li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!--bg carpark-->
+    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url('CarparksPic/<?php echo $cppic;?>'); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid">
+          
+
+      <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+                
+            <h1 class="display-2 text-white">Edit lot</h1>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="welcome.php"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="carpark.php">Carpark</a></li>
+                  <li class="breadcrumb-item"><a href="carlots.php"><?php echo $carpark;?></a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit lot</li>
                 </ol>
               </nav>
             </div>
@@ -357,40 +382,39 @@ $carlotparked=$row['parkinglotid'];
         </div>
       </div>
     </div>
-    <!-- Page content -->
+    <!--below header bg image-->
     <div class="container-fluid mt--6">
-    <form action="" method="post">
-      <div class="row justify-content-center">
-        <div class=" col ">
+          <form action="" method="post">
           <div class="card">
-            <div class="card-header bg-transparent">
-              <div class="row">
-            <div class="col-8">
-                  <h3 class="mb-0">Edit Vehicle </h3>
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Edit lot </h3>
                 </div>
-        </div>
+              </div>
             </div>
             <div class="card-body">
-            <h6 class="heading-small text-muted mb-4">Vehicle information</h6>
-            <div class="pl-lg-4">
+                                      
+                <h6 class="heading-small text-muted mb-4">Parking lot information</h6>
+                <div class="pl-lg-4">
                   <div class="row">
-                  <div class="col-md-4">
+                    <div class="col-md-4">
                       <div class="form-group editCarparkName">
-                        <label class="form-control-label" for="input-plateno">License plate</label>
-                        <input type="text" id="input-plateno" class="form-control editable" placeholder="License plate number" name="plateno" value="<?php echo $eVeh;?>">
+                        <label class="form-control-label" for="input-lotid">Parking ID</label>
+                        <input type="text" id="input-lotid" class="form-control editable" placeholder="Parking Lot ID" name="lotid" value="<?php echo $elot;?>">
                       </div>
                     </div>
-                    <div class="col-md-3"> </div>
+                    <div class="col-md-2"> </div>
                     <div class="col-md-4">
                       <div class="form-group editCarparkContact">
-                        <label class="form-control-label" for="input-cartype">Car type</label>
-                        <select class="form-control editable" id="input-cartype" name="cartype">
+                        <label class="form-control-label" for="input-lottype">Lot type</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="lottype">
                         <?php
                           $sql = "SELECT DISTINCT vehicletype FROM Vehicle";
                           $result = $db->query($sql);
                           if ($result->num_rows > 0) { 
                               while($row = mysqli_fetch_assoc($result)) { 
-                                if($cartype == $row['vehicletype']){
+                                if($lottype == $row['vehicletype']){
                                   echo '<option value="'.$row['vehicletype'].'" selected>'.$row['vehicletype'].'</option>';
                                 }
                                 else{
@@ -405,195 +429,101 @@ $carlotparked=$row['parkinglotid'];
                     </div>
                   </div>
                   <div class="row">
-                  <div class="col-md-4">
-                      <div class="form-group editCarparkAddress">
-                        <label class="form-control-label" for="input-caruser">Owner's username</label>
-                        <input type="text" id="input-caruser" class="form-control editable" placeholder="Username of car owner" name="caruser" value="<?php echo $carowner;?>">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                <div class="col-md-6">
-                      <div class="form-group editCarModel">
-                        <label class="form-control-label" for="input-carmodel">Vehicle model</label>
-                        <input type="text" id="input-carmodel" class="form-control editable" placeholder="Vehicle's model name" name="carmodel" value="<?php echo $carmodel;?>">
-                      </div>
-                </div>
-                <div class="col-md-1"> </div>
-                <div class="col-md-4">
-                <div class="form-group editCarBrand">
-                        <label class="form-control-label" for="input-carbrand">Vehicle Brand</label>
-                        <select class="form-control editable" id="input-carbrand" name="carbrand">
-                          <?php
-                          $sql = "SELECT DISTINCT vehiclebrand FROM Vehicle";
-                          $result = $db->query($sql);
-                          if ($result->num_rows > 0) { 
-                              while($row = mysqli_fetch_assoc($result)) { 
-                                if($carbrand == $row['vehiclebrand']){
-                                  echo '<option value="'.$row['vehiclebrand'].'" selected>'.$row['vehiclebrand'].'</option>';
-                                }
-                                else{
-                                  echo '<option value="'.$row['vehiclebrand'].'">'.$row['vehiclebrand'].'</option>';
-                                }
-                              }
-                            }
-                          
-                          ?>
-                            <!--<option value="Car">Car</option>
-                            <option value="Motorcycle" selected >Motorcycle</option>
-                            <option value="Bus">Bus</option>
-                            <option value="Truck">Truck</option>-->
-                        </select>
-                </div>
-                </div>
-                </div>
-                </div>
-                
-                <hr class="my-4" />
-                <h6 class="heading-small text-muted mb-4">Lot information (if parked)</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
                     <div class="col-md-4">
-                    <div class="form-group editCarparkName">
-                        <label class="form-control-label" for="input-carlotid">Lot ID</label>
-                        <input type="text" id="input-carlotid" class="form-control editable" placeholder="Parking lot number" name="carlotid" value="<?php echo $carlotparked;?>">
+                      <div class="form-group editCarparkAddress">
+                        <label class="form-control-label" for="input-lotzone">Lot zone</label>
+                        <input type="text" id="input-lotzone" class="form-control editable" placeholder="e.g. Zone A" name="lotzone" value="<?php echo $lotzone;?>">
                       </div>
                     </div>
-                  </div>
-                  <?php 
+                    <div class="col-md-2"> </div>
+                    <div class="col-md-4">
+                      <div class="form-group editCarparkid">
+                        <label class="form-control-label" for="input-lotparked">Parked vehicle plate</label>
+                        <input type="text" id="input-lotparked" class="form-control editable" placeholder="Vehicle's license plate number" name="lotparked" value="<?php echo $lotparked;?>">
+                      </div>
+                    </div>
+                </div>
+        </div>
+                
+                <div class="col-8">
+                <?php 
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            $ecarid=mysqli_real_escape_string($db,$_POST['plateno']);
-                            $ecartype=mysqli_real_escape_string($db,$_POST['cartype']);
-                            $ecarowner=mysqli_real_escape_string($db,$_POST['caruser']);
-                            $ecarmodel=mysqli_real_escape_string($db,$_POST['carmodel']);
-                            $ecarbrand=mysqli_real_escape_string($db,$_POST['carbrand']);
-                            $ecarlotparked=mysqli_real_escape_string($db,$_POST['carlotid']);
+                        var_dump($_POST);
+                            $addlotid=mysqli_real_escape_string($db,$_POST['lotid']);
+                            $addlottype=mysqli_real_escape_string($db,$_POST['lottype']);
+                            $addlotzone=mysqli_real_escape_string($db,$_POST['lotzone']);
+                            $addlotparked=mysqli_real_escape_string($db,$_POST['lotparked']);
                             $error=false;
-                            $notregisted=false;
-                            $takenuser=false;
-                            $invalidlot=false;
-                            $occupiedlot=false;
-                            $notmatchtype=false;
+                            $takenid=false;
+                            $alrparked=false;
+                            
 
-
-                            //echo $ecarlotparked!="" && $ecarlotparked!=$carlotparked;
-
-                            if($ecarlotparked!="" && $ecarlotparked!=$carlotparked){
-                              //echo "accessed";
-                            $checkid="SELECT * FROM ParkingLot";
-                            $result = $db->query($checkid);
+                        if($addlotid==""){
+                            echo "<p class='text-red'>Parking ID is required</p>";
+                            $error=true;
+                        }
+                        elseif($addlotid!=$elot){
+                            $checkcpid="SELECT parkinglotid FROM ParkingLot";
+                            $result = $db->query($checkcpid);
                             if($result->num_rows>0){
                                 while($rowcp = mysqli_fetch_assoc($result)) { 
-                                  if($rowcp['parkinglotid']==$ecarlotparked && $rowcp['vehicleid']!=null && $rowcp['vehicleid']!=$eVeh){
-                                    $occupiedlot=true;
-                                }
-                                    elseif($rowcp['parkinglotid']!=$ecarlotparked){
-                                        $invalidlot=true;
+                                    if($rowcp['parkinglotid']==$addlotid){
+                                        $takenid=true;
                                     }
-                        
                                 }
                             }
-                            if($occupiedlot){
-                              echo "<p class='text-red'>This lot is already occupied, please key in another lot id.</p>";
-                            }
-                            elseif($invalidlot){
-                              echo "<p class='text-red'>This lot does not exist in this carpark, please key in another lot id.</p>";
-                            }
-                            $error=true;
-                          }
-                          
-                          elseif($ecarowner!=$carowner){
-                              $checkid="SELECT * FROM User";
-                              $result = $db->query($checkid);
-                              if($result->num_rows>0){
-                                  while($rowcp = mysqli_fetch_assoc($result)) { 
-                                      if($rowcp['userid']==$ecarowner){
-                                        $notregisted=true;
-                                      }
-                                      else{
-                                        $takenuser=true;
-                                      }
-                                  }
-                              }
-                              if($notregisted==true){
-                                echo "<p class='text-red'>This username is taken, please key in another user.</p>";
-                              }
-                              elseif($takenuser==true){
-                                echo "<p class='text-red'>This username is not registed, please key in another user.</p>";
-                              }
-                              $error=true;
-                            }
-
-                            elseif($ecarlotparked!=""){
-                              $sql="SELECT * FROM ParkingLot WHERE parkinglotid='$ecarlotparked'";
-                              $result = $db->query($sql);
-                              $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-                              if($row['lottype']!=$ecartype){
-                                echo "<p class='text-red'>This vehicle type cannot be parked in another type of lot</p>";
+                            if($takenid){
+                                echo "<p class='text-red'>This lot already exist, please key in another lot id</p>";
                                 $error=true;
-                              }
                             }
-                        elseif($ecarid==""){
-                            echo "<p class='text-red'>License plate is required</p>";
+                        }
+                        elseif($addlottype==""){
+                            echo "<p class='text-red'>Lot type is required</p>";
                             $error=true;
                         }
-                        elseif($ecartype==""){
-                            echo "<p class='text-red'>Car type is required</p>";
-                            $error=true;
+                        elseif($addlotparked!=$lotparked && $addlotparked!=null){
+                            $sql ="SELECT vehicleid FROM ParkingLot";
+                            $result = $db->query($sql);
+                            if($result->num_rows>0){
+                                while($rowcp = mysqli_fetch_assoc($result)) { 
+                                    if($rowcp['vehicleid']==$addlotparked){
+                                        $alrparked=true;
+                                    }
+                                }
+                            }
+                            $sql = "SELECT * FROM Vehicle where vehicleid='$addlotparked'";
+                            $result = $db->query($sql);
+                            $row = mysqli_fetch_array($result,MYSQLI_BOTH);
+
+                            if($alrparked){
+                                echo "<p class='text-red'>This vehicle already has a parking lot</p>";
+                                $error=true;
+                            }
+                            if($row['vehicletype']!=$addlottype){
+                                echo "<p class='text-red'>This lot type must be the same type as the vehicle currently parked.</p>";
+                                $error=true;
+                            }
                         }
-                        elseif($ecarowner==""){
-                            echo "<p class='text-red'>Owner's username is required</p>";
-                            $error=true;
-                        }
-                        elseif($ecarmodel==""){
-                          echo "<p class='text-red'>Vehicle model is required</p>";
-                          $error=true;
-                      }
-                      elseif($ecarbrand==""){
-                        echo "<p class='text-red'>Vehicle brand is required</p>";
-                        $error=true;
-                    }
                         else{
                             $error=false;
-                            $notregisted=false;
-                            $takenuser=false;
                         }
 
                         if($error==false){
-                                $sql = "UPDATE Vehicle SET vehicleid='$ecarid',userid='$ecarowner',vehiclebrand='$ecarbrand',vehiclemodel='$ecarmodel',vehicletype='$ecartype' WHERE vehicleid='$eVeh' ";
-                                if (mysqli_query($db, $sql)) {
-                                  //echo "Record updated successfully";
-                                  //echo "<p class='text-success'>Vehicle edited successfully. It might take a while to update.</p>";
-                        
-                                } 
-                                if($ecarlotparked!=""){
-                                  $sql="UPDATE ParkingLot SET vehicleid='$ecarid' WHERE parkinglotid='$ecarlotparked'";
-                                  if (mysqli_query($db, $sql)) {
-                                    $carlotparked=$ecarlotparked;
-                                    $carowner=$ecarowner;
-                                  $carbrand=$ecarbrand;
-                                  $carmodel=$ecarmodel;
-                                  $cartype=$ecartype;
-                                  $eVeh=$ecarid;
-                                    header("Location: editVehicle.php");
-                                    echo "<p class='text-success'>Vehicle edited successfully. It might take a while to update.</p>";
-                                  }
-                                }
-                                elseif($ecarlotparked=="" && $carlotparked!=$ecarlotparked){
-                                  $sql="UPDATE ParkingLot SET vehicleid=null WHERE vehicleid='$ecarid'";
-                                  if (mysqli_query($db, $sql)) {
-                                    $carlotparked=$ecarlotparked;
-                                    $carowner=$ecarowner;
-                                  $carbrand=$ecarbrand;
-                                  $carmodel=$ecarmodel;
-                                  $cartype=$ecartype;
-                                  $eVeh=$ecarid;
-                                    header("Location: editVehicle.php");
-                                    echo "<p class='text-success'>Vehicle edited successfully. It might take a while to update.</p>";
-                                  }
-                                }
-                            
-      
+                            if($addlotparked==""){
+                                $sql = "UPDATE ParkingLot SET parkinglotid='$addlotid',vehicleid=null, lottype='$addlottype',lotzone='$addlotzone' WHERE parkinglotid='$elot'";
+                            }
+                            else{
+                                $sql = "UPDATE ParkingLot SET parkinglotid='$addlotid',vehicleid='$addlotparked', lottype='$addlottype',lotzone='$addlotzone' WHERE parkinglotid='$elot'";
+                            }
+                            if (mysqli_query($db, $sql)) {
+                              //echo "Record updated successfully";
+                              echo "<p class='text-success'>Updated successfully, it might take awhile to be updated.</p>";
+                              $elot=$addlotid;
+                              $lotzone=$addlotzone;
+                              $lotparked=$addlotparked;
+                              $lottype=$addlottype;
+                              header("Location: editLot.php");
+                            } 
                         }
                     }
 
@@ -602,16 +532,29 @@ $carlotparked=$row['parkinglotid'];
                 <div class="col-12">
                 <button type="submit" class="btn btn-success changebtn editedbtn" id="changeCppic" name="cpSavebtn" value="yes" disabled>Add</button>
                 </div>
-        
-                
-</div>
-</div>
-</div>
-</form>
-</div>
         </div>
+                
+              <!--</form>-->
+            </div>
+          </div>
+          </form>
+          
+        <!--</div>-->
+    <!--carpark pic upload-->
+    <form action="cpinsert.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="cpUpload">
+    <div class="alignpop">
+      <div class="headerpop">
+    <h4>Select image to upload:</h4> <button type="button" class="btncancel" onclick="closeFormCarpark()"><i class="fas fa-window-close text-red"></i></button>
+          </div>
+  <br>
+  <input type="file" name="fileToUpload" id="cppicToUpload" class="fileupload">
+  <br>
+  <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
+          </div>
+        </form>
 
-            
+    <!-- Page content -->
+    
 
 
 
@@ -619,7 +562,9 @@ $carlotparked=$row['parkinglotid'];
 
 
 
-
+          </div>
+        </div>
+      </div>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
@@ -657,8 +602,25 @@ $carlotparked=$row['parkinglotid'];
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
-
   <script src="script.js"></script>
+
+
+    <!-- Core plugin JavaScript-->
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    
+
+    <!-- Page level custom scripts -->
+    <script src="startbootstrap-sb-admin-2-gh-pages/js/demo/datatables-demo.js"></script>
+
+
   <script>
       $(document).ready(function(){
     $(".editable").on('input',function(){
@@ -666,6 +628,7 @@ $carlotparked=$row['parkinglotid'];
     });
 })
   </script>
+      
 </body>
 
 </html>
