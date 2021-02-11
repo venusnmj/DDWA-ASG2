@@ -237,9 +237,6 @@
                                     <div class="text-center">
                                         <a class="small" href="startbootstrap-sb-admin-2-gh-pages/forgot-password.html">Forgot Password?</a>
                                     </div>
-                                    <div class="text-center">
-                                        <a class="small" href="startbootstrap-sb-admin-2-gh-pages/register.html">Create an Account!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

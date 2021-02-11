@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
-include('session.php');
+include('config.php');
 
 $obj2 = json_decode($_GET["y"], false);
 $stmt2 = $db->prepare("SELECT * FROM ParkingLot LEFT OUTER JOIN Carpark ON Parkinglot.carparkid = Carpark.carparkid");
