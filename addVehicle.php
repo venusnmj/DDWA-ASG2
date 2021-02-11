@@ -39,17 +39,7 @@
 <body>
 <?php
 $username=$_SESSION['id'];
-/*$eVeh= $_SESSION['eVehicle'];
-//echo $eVeh;
 
-$sql = "SELECT * FROM Vehicle LEFT OUTER JOIN ParkingLot ON ParkingLot.vehicleid = Vehicle.vehicleid WHERE Vehicle.vehicleid='$eVeh'";
-$result = $db->query($sql);
-$row = mysqli_fetch_array($result,MYSQLI_BOTH);
-$carowner= $row['userid'];
-$carbrand=$row['vehiclebrand'];
-$carmodel=$row['vehiclemodel'];
-$cartype=$row['vehicletype'];
-$carlotparked=$row['parkinglotid'];*/
 
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
