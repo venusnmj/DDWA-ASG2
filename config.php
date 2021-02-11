@@ -1,8 +1,8 @@
 <?php
    define('DB_SERVER', 'localhost');
-   define('DB_USERNAME', 'venus');
-   define('DB_PASSWORD', 'password');
-   define('DB_DATABASE', 'SpaceSluggers_DDWA_Assg2_Database');
+   define('DB_USERNAME', 'amphibis_venus');
+   define('DB_PASSWORD', 'wy4iBowG.^t_');
+   define('DB_DATABASE', 'amphibis_venus');
    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 
    if(mysqli_connect_errno()) {
