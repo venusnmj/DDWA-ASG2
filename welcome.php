@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!--
 =========================================================
 * Argon Dashboard - v1.2.0
@@ -14,7 +14,17 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<?php include('session.php');?>
+
+<?php
+@ob_start();
+include('session.php');
+?>
+<!DOCTYPE html>
+ 
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);?>
 <html>
 
 <head>
