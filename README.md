@@ -1,34 +1,55 @@
 # Park-a-lot Admin Website
 
-An accompanying website for our app "Park-a-lot". This website is for developers of the app and also for our partners, the respective staff of each carpark. It allows the staff to edit things related to the carpark they are associated with and give developers complete control over the information that the mobile app has to access. 
-
-One or two paragraphs providing an overview of your project. Tell us about your project.
-
-Essentially, this part is your sales pitch.
+An accompanying website for our app "Park-a-lot". This website is for developers of the app and also for our partners, the respective staff of each carpark. It allows the staff to edit things related to the carpark they are associated with and give developers complete control over the information that the mobile app has to access. The developers are able to create, delete and edit various data and work upon it when our partners and users send problem requests.
  
 ## Design Process
  
-Provide us insights about your design process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
+ This website is mainly for developers to help our users and partners when they face an issue on their app or wants to make edits that the app doesn't currently have as a feature. It is also for staff to make edits to their own profile, make requests to the developers and edit, delete and add things related to the carpark they are in charge of. 
+ Our partners are referred to staff and our developers are referred to as admin.
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
+ - As a partner or developer, I want to customised my own profile and change my personal information so that I can personalised my information and pictures.
+ - As a partner or developer, I want to be able to communicate with other users and developers if they have an issue and want to reach out to me.
 
+ - As a partner, I want to see the details of my company's carpark so that I can stay updated and assist in any issues.
+ - As a partner, I want to be able to change the picture and information of my company's carpark so that the information can stay updated.
+ - As a partner, I want to be able to add and edit the lots in my company's carpark so that any users will see the updated lots to park in.
+ - As a partner, I want to be able to add staff to the carpark so that my co-worker that just joined can have access to the admin website as well.
+
+ - As a developer, I would like to delete, edit and update the carparks, vehicles and users so that I can deal with any issue from the user or staff efficiently.
+ - As a developer, I would like to be able to add another developer account so that new developers can have admin access to this admin website.
+
+ DDWA adobe XD link
+ 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. 
 These files should themselves either be included as a pdf file in the project itself (in an separate directory)
 Include the Adobe XD wireframe as a folder. You can include the XD share url. 
 
 ## Features
-
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
  
 ### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
+- Edit personal profile
+Where you can edit the your personal information, change password, contact information and images.
+- Carpark
+Where you can see how many lots are occupied and empty, the address and name of the carpark.
+- Edit carpark
+You can add or edit the carpark information and the picture for the carpark. You can delete the carpark if you want.
+- Lots
+You can edit, delete and add the carpark lots as well as edit the parked vehicle within.
+- Staff 
+You can edit, delete and add staff for developers, or add staff for partners.
+- Car
+Developers can edit, delete and add vehicles.
+- User 
+Developers can edit, delete and add users.
+- Register 
+Developers can add another admin account.
 
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
-- Another feature idea
+- Allow starting a new conversation in message
+- Dark mode
+- Personalised interface
+- Individual carpark layouts
 
 ## Technologies Used
 
