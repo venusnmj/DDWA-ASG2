@@ -134,12 +134,7 @@ $carlotparked=$row['parkinglotid'];*/
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="far fa-life-ring text-default"></i>
-              <span class="nav-link-text">Assist</span>
-            </a>
-          </li>
+           
         <?php } ?>
           </ul>
         </div>

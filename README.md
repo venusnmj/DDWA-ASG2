@@ -1,4 +1,6 @@
-# Your Project's Name
+# Park-a-lot Admin Website
+
+An accompanying website for our app "Park-a-lot". This website is for developers of the app and also for our partners, the respective staff of each carpark. It allows the staff to edit things related to the carpark they are associated with and give developers complete control over the information that the mobile app has to access. 
 
 One or two paragraphs providing an overview of your project. Tell us about your project.
 
