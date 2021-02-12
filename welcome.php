@@ -29,26 +29,31 @@ error_reporting(E_ALL);?>
 <html>
 
 <head>
+<!--
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <meta name="author" content="Creative Tim">
-  <title>Profile - Park-a-lot</title>
+  <meta name="author" content="Creative Tim">-->
+  <title>Profile - Park-a-lot</title>  
   <!-- Favicon -->
-  <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
+  <!--
+  <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">-->
   <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!--
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">-->
   <!-- Icons -->
+  <!--
   <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="argon-dashboard-master/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">-->
   <!-- Argon CSS -->
   <!--<link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">-->
+  <!--
   <link rel="stylesheet" href="argon-dashboard-master/assets/css/argon.css" type="text/css">
-  <link href="stylesheet.css" rel="stylesheet">
+  <link href="stylesheet.css" rel="stylesheet">-->
 </head>
 
 <body>
-<?php
+<?php/*
             $username=$_SESSION['id'];
             if($_SESSION['user']=="Admin"){
                 $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
@@ -86,23 +91,28 @@ error_reporting(E_ALL);?>
                     $password = $row['staffpassword'];
                     $pic = $row['staffpic'];
                     $bannerpic=$row['staffbanner'];
-            }
+            }*/
             ?>
   <!-- Sidenav -->
+
+  <!--
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-    <div class="scrollbar-inner">
+    <div class="scrollbar-inner">      -->
+
       <!-- Brand -->
-      <div class="sidenav-header  align-items-center">
+<!--      <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
           <img src="argon-dashboard-master/assets/img/brand/park-a-lot-brand.png" class="navbar-brand-img" alt="...">
         </a>
       </div>
-      <div class="navbar-inner">
+      <div class="navbar-inner">      -->
         <!-- Collapse -->
+        <!--
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-          <?php if ($_SESSION['user']=="Admin"){?>
-          
+        -->
+          <?php //if ($_SESSION['user']=="Admin"){?>
+          <!--
             <li class="nav-item">
               <a class="nav-link active" href="welcome.php">
                 <i class="ni ni-single-02 text-yellow"></i>
@@ -137,9 +147,10 @@ error_reporting(E_ALL);?>
                 <span class="nav-link-text">Register</span>
               </a>
             </li>
-          
-          <?php }
-          elseif($_SESSION['user']=="Staff"){?>
+          -->
+          <?php   /* }
+          elseif($_SESSION['user']=="Staff"){      */?>
+          <!--
             <li class="nav-item">
               <a class="nav-link active" href="welcome.php">
                 <i class="ni ni-single-02 text-yellow"></i>
@@ -159,39 +170,28 @@ error_reporting(E_ALL);?>
                 <i class="far fa-life-ring text-default"></i>
                 <span class="nav-link-text">Assist</span>
               </a>
-            </li>
-          <?php } ?>
+            </li> -->
+          <?php //} ?>
+          <!--
           </ul>
         </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
   <!-- Main content -->
-  <div class="main-content" id="panel">
+  <!--
+  <div class="main-content" id="panel">   -->
     <!-- Topnav -->
+    <!--
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
       <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Search form -->
-          <!--
-          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-            <div class="form-group mb-0">
-              <div class="input-group input-group-alternative input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                <input class="form-control" placeholder="Search" type="text">
-              </div>
-            </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </form>
-          -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">  -->
           <!-- Navbar links -->
+          <!--
           <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <li class="nav-item d-xl-none">
+            <li class="nav-item d-xl-none">    -->
               <!-- Sidenav toggler -->
+              <!--
               <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
@@ -201,62 +201,16 @@ error_reporting(E_ALL);?>
               </div>
             </li>
              
-            <!--
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-ungroup"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
-                <div class="row shortcuts px-4">
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                      <i class="ni ni-calendar-grid-58"></i>
-                    </span>
-                    <small>Calendar</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                      <i class="ni ni-email-83"></i>
-                    </span>
-                    <small>Email</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
-                      <i class="ni ni-credit-card"></i>
-                    </span>
-                    <small>Payments</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                      <i class="ni ni-books"></i>
-                    </span>
-                    <small>Reports</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
-                      <i class="ni ni-pin-3"></i>
-                    </span>
-                    <small>Maps</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                      <i class="ni ni-basket"></i>
-                    </span>
-                    <small>Shop</small>
-                  </a>
-                </div>
-              </div>
-            </li>-->
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="DisplayFolder/<?php echo $pic;?>">
+                    <img alt="Image placeholder" src="DisplayFolder/<?php //echo $pic;?>">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold"><?php echo $username;?></span>
+                    <span class="mb-0 text-sm  font-weight-bold"><?php //echo $username;?></span>
                   </div>
                 </div>
               </a>
@@ -283,23 +237,29 @@ error_reporting(E_ALL);?>
         </div>
       </div>
     </nav>
+    -->
     <!-- Header -->
     <!-- Header -->
+    <!--
     <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(argon-dashboard-master/assets/img/theme/profilecoverbg.jpg); background-size: cover; background-position: center top;">
+      -->
       <!-- Mask -->
-      <span class="mask bg-gradient-default opacity-8"></span>
+      <!--
+      <span class="mask bg-gradient-default opacity-8"></span>  -->
       <!-- Header container -->
+      <!--
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello <?php echo $givenname; //echo var_dump($_GET); echo $_GET['editedUsername'];?></h1>
+            <h1 class="display-2 text-white">Hello <?php //echo $givenname; //echo var_dump($_GET); echo $_GET['editedUsername'];?></h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
           </div>
         </div>
       </div>
     </div>
-
+-->
     <!--profilepic upload-->
+    <!--
     <form action="upload.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="circleUpload">
     <div class="alignpop">
       <div class="headerpop">
@@ -310,8 +270,9 @@ error_reporting(E_ALL);?>
   <br>
   <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
           </div>
-        </form>
+        </form>  -->
 <!--profile banner upload-->
+<!--
 <form action="banner.php" method="post" enctype="multipart/form-data" class="uploadpropic" id="bannerUpload">
     <div class="alignpop">
       <div class="headerpop">
@@ -323,25 +284,29 @@ error_reporting(E_ALL);?>
   <input type="submit" value="Upload Image" name="submit" class="uploadbtn">
           </div>
         </form>
-
+-->
     <!-- Page content -->
+    <!--
     <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-xl-4 order-xl-2">
           <div class="card card-profile">
           <button class="open-button card-banner" onclick="openFormBanner()">
-            <img src="BannerImg/<?php echo $bannerpic;?>" alt="Image placeholder" class="card-img-top">
+            <img src="BannerImg/<?php //echo $bannerpic;?>" alt="Image placeholder" class="card-img-top">
             <i class="far fa-edit text-primary editbanner"></i>
           </button>
             <div class="row justify-content-center">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
+                -->
                   <!--<a href="#">-->
+                  <!--
                   <button class="open-button" onclick="openFormCircle()">
-                    <img src="DisplayFolder/<?php echo $pic;?>" class="rounded-circle">
+                    <img src="DisplayFolder/<?php //echo $pic;?>" class="rounded-circle">
                     <i class="fas fa-user-edit editpic text-primary"></i>
-                  </button>
+                  </button>  -->
                   <!--</a>-->
+                  <!--
                 </div>
               </div>
             </div>
@@ -368,15 +333,15 @@ error_reporting(E_ALL);?>
               </div>
               <div class="text-center">
                 <h5 class="h3">
-                  <?php echo $givenname ." ". $familyname; ?>
+                  <?php //echo $givenname ." ". $familyname; ?>
                 </h5>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i><?php echo $username; ?>
+                  <i class="ni location_pin mr-2"></i><?php //echo $username; ?>
                 </div>
                 <div class="h5 mt-4">
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i><?php echo $company; ?>
+                  <i class="ni education_hat mr-2"></i><?php //echo $company; ?>
                 </div>
               </div>
             </div>
@@ -396,8 +361,9 @@ error_reporting(E_ALL);?>
               </div>
             </div>
             <div class="card-body">
+            -->
               <!--<form>-->
-              <?php 
+              <?php /*
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           $newusername = mysqli_real_escape_string($db,$_POST['eusername']);
                           $newemail = mysqli_real_escape_string($db,$_POST['eemail']); 
@@ -553,47 +519,24 @@ error_reporting(E_ALL);?>
                           }
                         }
                         }
-                          /*
-                          if($newemail==$email){
-                            echo "unchanged";
-                          }
-                          elseif(!filter_var($newemail, FILTER_VALIDATE_EMAIL)){
-                            echo "email is invalid";
-                          }
-                          else{
-                            echo "changed";
-                            if($user=="Admin"){
-                              $sqlemail = "UPDATE Admin SET adminemail='$newemail' WHERE adminid='$username'";
-                              if (mysqli_query($db, $sqlemail)) {
-                                //echo "Record updated successfully";
-                                ?>
-            <script language="JavaScript">
-            document.location='welcome.php';
-        </script>
-        <?php
-                              }
-                              else {
-                                echo "Error updating record: " . mysqli_error($db);
-                              }
-                            }
-                          }*/
+                  
                         }
                         
-                        ?>
-                        
+                        */ ?>
+                        <!--
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group editUsername">
                         <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control editable" placeholder="Username" name="eusername" value="<?php echo $username;?>">
+                        <input type="text" id="input-username" class="form-control editable" placeholder="Username" name="eusername" value="<?php //echo $username;?>">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group editEmail">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control editable" placeholder="Email" name="eemail" value="<?php echo $email;?>">
+                        <input type="email" id="input-email" class="form-control editable" placeholder="Email" name="eemail" value="<?php //echo $email;?>">
                       </div>
                     </div>
                   </div>
@@ -601,19 +544,20 @@ error_reporting(E_ALL);?>
                     <div class="col-lg-6">
                       <div class="form-group editFirst">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control editable" placeholder="First name" name="efirst" value="<?php echo $givenname;?>">
+                        <input type="text" id="input-first-name" class="form-control editable" placeholder="First name" name="efirst" value="<?php //echo $givenname;?>">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group editLast">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control editable" placeholder="Last name" name="elast" value="<?php echo $familyname;?>">
+                        <input type="text" id="input-last-name" class="form-control editable" placeholder="Last name" name="elast" value="<?php //echo $familyname;?>">
                       </div>
                     </div>
                   </div>
                 </div>
-                <hr class="my-4" />
+                <hr class="my-4" />  -->
                 <!-- Address -->
+                <!--
                 <h6 class="heading-small text-muted mb-4">Change password</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -642,15 +586,17 @@ error_reporting(E_ALL);?>
                   </div>
                 </div>
 
-                <hr class="my-4" />
+                <hr class="my-4" />  -->
                 <!-- Address -->
+
+                <!--
                 <h6 class="heading-small text-muted mb-4">Contact information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group editAddress">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input type="text" id="input-address" class="form-control editable" placeholder="Home Address" name="eaddress" value="<?php echo $address;?>">
+                        <input type="text" id="input-address" class="form-control editable" placeholder="Home Address" name="eaddress" value="<?php //echo $address;?>">
                       </div>
                     </div>
                   </div>
@@ -658,7 +604,7 @@ error_reporting(E_ALL);?>
                     <div class="col-lg-4">
                       <div class="form-group editPostal">
                         <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="text" id="input-postal-code" class="form-control editable" placeholder="Postal code" name="epostal" value="<?php echo $postal;?>">
+                        <input type="text" id="input-postal-code" class="form-control editable" placeholder="Postal code" name="epostal" value="<?php //echo $postal;?>">
                       </div>
                     </div>
                   </div>
@@ -666,19 +612,20 @@ error_reporting(E_ALL);?>
                     <div class="col-lg-4">
                       <div class="form-group editContact">
                         <label class="form-control-label" for="input-country">Contact No.</label>
-                        <input type="text" id="input-contact" class="form-control editable" placeholder="Contact No" name="econtact" value="<?php echo $contact;?>">
+                        <input type="text" id="input-contact" class="form-control editable" placeholder="Contact No" name="econtact" value="<?php //echo $contact;?>">
                       </div>
                     </div>
                   </div>
-                </div>
-              <!--</form>-->
+                </div> 
+
             </div>
           </div>
           </form>
           
         </div>
-      </div>
+      </div>  -->
       <!-- Footer -->
+      <!--
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
@@ -705,16 +652,19 @@ error_reporting(E_ALL);?>
         </div>
       </footer>
     </div>
-  </div>
+  </div>  -->
   <!-- Argon Scripts -->
   
   <!-- Core -->
+  <!--
   <script src="argon-dashboard-master/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="argon-dashboard-master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="argon-dashboard-master/assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="argon-dashboard-master/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="argon-dashboard-master/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  -->
   <!-- Argon JS -->
+  <!--
   <script src="argon-dashboard-master/assets/js/argon.js?v=1.2.0"></script>
 
   <script src="script.js"></script>
@@ -727,6 +677,7 @@ error_reporting(E_ALL);?>
     });
   })
 </script>
+-->
 </body>
 
 </html>
