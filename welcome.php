@@ -16,6 +16,7 @@
 -->
 
 <?php
+var_dump($E);
 @ob_start();
 include('session.php');
 ?>
