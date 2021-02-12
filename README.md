@@ -27,21 +27,21 @@ Include the Adobe XD wireframe as a folder. You can include the XD share url.
 ## Features
  
 ### Existing Features
-# Edit personal profile
+- Edit personal profile:
 Where you can edit the your personal information, change password, contact information and images.
-# Carpark
+- Carpark:
 Where you can see how many lots are occupied and empty, the address and name of the carpark.
-# Edit carpark
+- Edit carpark:
 You can add or edit the carpark information and the picture for the carpark. You can delete the carpark if you want.
-# Lots
+- Lots:
 You can edit, delete and add the carpark lots as well as edit the parked vehicle within.
-# Staff 
+- Staff: 
 You can edit, delete and add staff for developers, or add staff for partners.
-# Car
+- Car:
 Developers can edit, delete and add vehicles.
-# User 
+- User:
 Developers can edit, delete and add users.
-# Register 
+- Register:
 Developers can add another admin account.
 
 
