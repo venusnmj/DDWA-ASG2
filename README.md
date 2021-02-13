@@ -18,24 +18,19 @@ An accompanying website for our app "Park-a-lot". This website is for developers
  - As a developer, I would like to delete, edit and update the carparks, vehicles and users so that I can deal with any issue from the user or staff efficiently.
  - As a developer, I would like to be able to add another developer account so that new developers can have admin access to this admin website.
 
- #### DDWA adobe XD link: https://xd.adobe.com/view/598f99ba-b67a-4ed9-8cd8-7d3a80caa590-0cdc/
- #### Login page
+ [DDWA adobe XD link](https://xd.adobe.com/view/598f99ba-b67a-4ed9-8cd8-7d3a80caa590-0cdc/)
+ ### Login page
  ![login wireframe](Wireframes/login_wireframe.png)
- #### Profile/Home page
+ ### Profile/Home page
  ![profile wireframe](Wireframes/profile_wireframe.png)
- #### Carpark page
+ ### Carpark page
  ![carpark wireframe](Wireframes/Carpark_wireframe.png)
-#### Car page
+### Car page
 ![car wireframe](Wireframes/car_wireframe.png)
-#### User page
+### User page
 ![user wireframe](Wireframes/user_wireframe.png)
-#### Register page
+### Register page
 ![register wireframe](Wireframes/register_wireframe.png)
-
-
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. 
-These files should themselves either be included as a pdf file in the project itself (in an separate directory)
-Include the Adobe XD wireframe as a folder. You can include the XD share url. 
 
 ## Features
  
