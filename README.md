@@ -22,15 +22,15 @@ An accompanying website for our app "Park-a-lot". This website is for developers
  #### Login page
  ![login wireframe](Wireframes/login_wireframe.png)
  #### Profile/Home page
- ![login wireframe](Wireframes/profile_wireframe.png)
+ ![profile wireframe](Wireframes/profile_wireframe.png)
  #### Carpark page
-  ![login wireframe](Wireframes/carpark_wireframe.png)
+![carpark wireframe](Wireframes/carpark_wireframe.png)
 #### Car page
-![login wireframe](Wireframes/car_wireframe.png)
+![car wireframe](Wireframes/car_wireframe.png)
 #### User page
-![login wireframe](Wireframes/user_wireframe.png)
+![user wireframe](Wireframes/user_wireframe.png)
 #### Register page
-![login wireframe](Wireframes/register_wireframe.png)
+![register wireframe](Wireframes/register_wireframe.png)
 
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. 
