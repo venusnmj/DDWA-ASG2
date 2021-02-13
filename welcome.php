@@ -20,7 +20,7 @@
  
 <?php
 include('session.php');
-@ob_start();
+//@ob_start();
 /*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -56,14 +56,7 @@ error_reporting(E_ALL);*/
 /*
 var_dump($E);
 @ob_start();*/
-$_SESSION['dino']="trex";
-echo $_SESSION['dino'];
-  
-echo $_SESSION['id'].$_SESSION['user'];
-print_r($_SESSION);
 
-
-$username=$_SESSION['id'];
 if($_SESSION['user']=="Admin"){
     $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
     $result = $db->query($sql);
