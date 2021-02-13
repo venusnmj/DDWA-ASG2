@@ -195,34 +195,6 @@ Adding vehicle will cause the added vehicle to have no owner
 
 ## Credits
 
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
-
-### Media
-- The photos used in this site were obtained from ...
-
-### Acknowledgements
-
-- I received inspiration for this project from X
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Bootstrap templates used
 - https://www.creative-tim.com/product/argon-dashboard?partner=114912#
 - https://startbootstrap.com/theme/sb-admin-2
@@ -280,4 +252,6 @@ Adding vehicle will cause the added vehicle to have no owner
 - https://www.topspeed.com/trucks/makes/
 - https://www.cars.com/
 
+### Acknowledgements
+- I received inspiration for this project from Jewel's Parking Kiosk
 
