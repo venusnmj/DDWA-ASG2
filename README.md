@@ -24,7 +24,7 @@ An accompanying website for our app "Park-a-lot". This website is for developers
  #### Profile/Home page
  ![profile wireframe](Wireframes/profile_wireframe.png)
  #### Carpark page
-![carpark wireframe](Wireframes/carpark_wireframe.png)
+ ![carpark wireframe](Wireframes/carpark_wireframe.png)
 #### Car page
 ![car wireframe](Wireframes/car_wireframe.png)
 #### User page
