@@ -139,8 +139,10 @@
             <?php //echo "succeed"; ?>
         </h6>
             <?php
+            echo $myusername;
             $_SESSION['user'] = "Admin";
             $_SESSION['id'] = $myusername;
+            echo $_SESSION['id'].$_SESSION['user'];
             ?>
             <script language="JavaScript">
             document.location='welcome.php';

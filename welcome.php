@@ -462,21 +462,21 @@ elseif($_SESSION['user']=="Staff"){
                                   }
 
                           if ($error==false){
-                            /* THIS NEEDS EDITING
-                            $allsender="SELECT * FROM Message WHERE receiver='$username' AND OR sender='$username'";
+                            
+                            $allsender="SELECT * FROM Message WHERE receiver='$username' OR sender='$username'";
                             $result = $db->query($allsender);
                             if ($result->num_rows > 0) { 
                               while($row = mysqli_fetch_assoc($result)) { 
                                 if($row['sender']==$username){
-                                  $updatesender="UPDATE Message SET sender='$newusername'";
+                                  $updatesender="UPDATE Message SET sender='$newusername' WHERE sender='$username'";
                                   $done = $db->query($updatesender);
                                 }
-                                elseif($row['receiver'==$username]){
-                                  $updatereceiver="UPDATE Message SET receiver='$newusername'";
+                                elseif($row['receiver']==$username){
+                                  $updatereceiver="UPDATE Message SET receiver='$newusername' WHERE receiver='$username'";
                                   $donere = $db->query($updatereceiver);
                                 }
                               }
-                            }*/
+                            }
 
 
                             if($user=="Admin"){

@@ -342,6 +342,7 @@ $carlotparked=$row['parkinglotid'];*/
                   </div>
                   <?php 
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                      //var_dump($_POST);
                             $eadminusername=mysqli_real_escape_string($db,$_POST['eUsername']);
                             $eadminemail=mysqli_real_escape_string($db,$_POST['eUseremail']);
                             $eadminfirst=mysqli_real_escape_string($db,$_POST['eUserfirst']);
@@ -362,8 +363,8 @@ $carlotparked=$row['parkinglotid'];*/
                             
 
                             //validation
-                            if($eadminusername!=$eCarUser){
-                                $sql="SELECT admind FROM Admin";
+                            
+                                $sql="SELECT adminid FROM Admin";
                                 $result = $db->query($sql);
                                 if ($result->num_rows > 0) { 
                                     while($row = mysqli_fetch_assoc($result)) { 
@@ -372,12 +373,15 @@ $carlotparked=$row['parkinglotid'];*/
                                         }
                                     }
                                 }
+                                else{
+                                  echo "query not working";
+                                }
                                 if($unExist==true){
                                     echo "<p class='text-red'>This username already exist, please key in another username.</p>";
                                     $error=true;
                                 }
 
-                            }
+                            
                             elseif($eadminusername==""){
                                 echo "<p class='text-red'>Admin's username cannot be empty</p>";
                                 $error=true;
@@ -430,7 +434,7 @@ $carlotparked=$row['parkinglotid'];*/
                                 echo "<p class='text-red'>Password was not retyped</p>";
                                 $error=true;
                               }
-                              elseif($checkpwd=="" && $eadminnewpwd=="" && $eadminnewrt==""){
+                              elseif($checkpwd=="" || $eadminnewpwd=="" || $eadminnewrt==""){
                                 echo "<p class='text-red'>Password is required</p>";
                                 $error=true;
                               }
@@ -440,6 +444,7 @@ $carlotparked=$row['parkinglotid'];*/
 
                             //passed validation
                         if($error==false){
+                          /*
                             $sql="INSERT INTO Admin 
                             VALUES('$eadminusername','$eadminfirst','$eadminlast','$eadminnewrt','$eadmincontact','$eadminaddress','Ngee Ann Poly','$eadminemail','default.jpg','$eadminpostal','bannerdefault.jpg')";
                             if (mysqli_query($db, $sql)) {
@@ -453,7 +458,7 @@ $carlotparked=$row['parkinglotid'];*/
                                             $usercontact=$eadmincontact;
                                             echo "<p class='text-success'>Admin added. The changes might take awhile to update on your screen.</p>";
                                 
-                              } 
+                              } */
                             //echo "false";
                             //code for updating the database
                         }

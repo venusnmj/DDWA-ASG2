@@ -121,7 +121,7 @@ Developers can add another admin account.
     9. Try to submit the form with all password input valid and verify that a success message appears
     10. Try to submit the form with all inputs valid and verify that a success message appears
 
-## Developers
+### Developers
 5. Edit Staff:
     1. From the selected carpark page, click on the more icon and click "Edit"
     2. Try to submit the form with invalid Admin password and verify that a relevant error message appears
@@ -149,15 +149,49 @@ Developers can add another admin account.
     12. From the "Car" page, click on the delete icon and refresh to see the selected car be deleted from the vehicles table
 
 7. User form:
-1.
+    1. Go to the "User" page
+    2. From the "User" page, click on the "Add" button and arrive at "Add user" page
+    3. Try to submit the form without all the values in the input and verify that an error message about the required fields appears
+    4. Try to submit the form with an invalid email address and verify that a relevant error message appears
+    5. Try to submit the form with a contact number that does not consist of exactly 8 digits and verify that a relevant error message appears
+    6. Try to submit the form with invalid Admin password and verify that a relevant error message appears
+    7. Try to submit the form without matching the password and the re-type password and verify that a relevant error message appears
+    8. Try to submit the form with missing password field  and verify that a relevant error message appears
+    9. Try to submit the form with all password input valid and verify that a success message appears
+    10. Try to submit the form with all inputs valid and verify that a success message appears
+    11. From the "User" page, click on the edit icon and arrive at "Edit user" page
+    12. Try to submit the form without all the values in the input and verify that an error message about the required fields appears
+    13. Try to submit the form with an invalid email address and verify that a relevant error message appears
+    14. Try to submit the form with a contact number that does not consist of exactly 8 digits and verify that a relevant error message appears
+    15. Try to submit the form with invalid Admin password and verify that a relevant error message appears
+    16. Try to submit the form without matching the password and the re-type password and verify that a relevant error message appears
+    17. Try to submit the form with missing password field and verify that a relevant error message appears
+    18. Try to submit the form with an already used username and verify that a relevant error message appears
+    19. Try to submit the form with an already used license plate number and verify that a relevant error message appears
+    20. Try to submit the form with all password input valid and verify that a success message appears
+    21. On the "Edit user" page, pressed the "Delete" button and vertify that the selected user has been removed from the Users table
+
+8. Register form:
+    1. Go to the "Register" page
+    2. Try to submit the form without all the values in the input and verify that an error message about the required fields appears
+    3. Try to submit the form with an already used admin username and verify that a relevant error message appears
+    4. Try to submit the form with an invalid email address and verify that a relevant error message appears
+    5. Try to submit the form with a contact number that does not consist of exactly 8 digits and verify that a relevant error message appears
+    6. Try to submit the form with invalid Admin password and verify that a relevant error message appears
+    7. Try to submit the form without matching the password and the re-type password and verify that a relevant error message appears
+    8. Try to submit the form with missing password field and verify that a relevant error message appears
+    9. Try to submit the form with a postal code that does not consist of exactly 6 digits and verify that a relevant error message appears
+    10. Try to submit the form with all form input valid and verify that a success message appears
+
+9. Message:
+    1. Go the "Message" page that pops up when you click on your username
+    2. Click on a conversation and verify that the chat messages appear
+    3. Type in a message in the text message input and send
+    4. Click on the same conversation again
 
 
-
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+### Problem
+Adding vehicle will cause the added vehicle to have no owner
 
 ## Credits
 
@@ -189,54 +223,61 @@ If this section grows too long, you may want to split it off into a separate fil
 
 
 
-## Bootstrap templates used
-https://www.creative-tim.com/product/argon-dashboard?partner=114912#
-https://startbootstrap.com/theme/sb-admin-2
+### Bootstrap templates used
+- https://www.creative-tim.com/product/argon-dashboard?partner=114912#
+- https://startbootstrap.com/theme/sb-admin-2
 
-## Images used
-<span>Photo by <a href="https://unsplash.com/@john_matychuk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">John Matychuk</a> on <a href="https://unsplash.com/s/photos/parking?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
-<span>Photo by <a href="https://unsplash.com/@arteum?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Arteum.ro</a> on <a href="https://unsplash.com/s/photos/car-park?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
-https://unsplash.com/photos/UfMb0M2RWjo
-https://www.bft-international.com/en/artikel/bft_CarDeck_Professional_TF_for_parking_structures_subjected_to_high_loading_1617781.html
-http://www.rwsentosablog.com/insights-p-parking-in-the-resort/
-https://en.wikipedia.org/wiki/Marina_Bay_Sands
-https://www.capitaland.com/sg/en/lease/mall-listing/jewel-changi-airport-mall.html
-https://valuelifestylesg.wordpress.com/2014/11/09/carpark-at-great-world-city/
-https://www.mapletree.com.sg/All-Properties/MCT/Singapore/VivoCity
-https://www.np.edu.sg/Pages/contact.aspx
-https://www.kkh.com.sg/patient-care/visitor-info/parking-information-kk-womens-and-childrens-hospital
-https://foursquare.com/v/kkh-carpark/4cdd36105aeda1cd6d04c711
-https://thestarvista.sg/plan-your-visit.html#parking
-https://www.facebook.com/TheStarVista/about/
-https://www.sgh.com.sg/about-us
-https://www.sp.edu.sg/sp/about-sp
-https://mothership.sg/2019/07/poly-students-new-scheme-graduate-uni-early/
-https://www.nypi.edu.sg/en.html
+### Images used
+- https://unsplash.com/@john_matychuk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText 
+    - Photo by John Matychuk on Unsplash
+- https://unsplash.com/@arteum?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText
+    - Photot by Arteum.ro on Unsplash
+- https://unsplash.com/photos/UfMb0M2RWjo
+- https://www.bft-international.com/en/artikel/bft_CarDeck_Professional_TF_for_parking_structures_subjected_to_high_loading_1617781.html
+- http://www.rwsentosablog.com/insights-p-parking-in-the-resort/
+- https://en.wikipedia.org/wiki/Marina_Bay_Sands
+- https://www.capitaland.com/sg/en/lease/mall-listing/jewel-changi-airport-mall.html
+- https://valuelifestylesg.wordpress.com/2014/11/09/carpark-at-great-world-city/
+- https://www.mapletree.com.sg/All-Properties/MCT/Singapore/VivoCity
+- https://www.np.edu.sg/Pages/contact.aspx
+- https://www.kkh.com.sg/patient-care/visitor-info/parking-information-kk-womens-and-childrens-hospital
+- https://foursquare.com/v/kkh-carpark/4cdd36105aeda1cd6d04c711
+- https://thestarvista.sg/plan-your-visit.html#parking
+- https://www.facebook.com/TheStarVista/about/
+- https://www.sgh.com.sg/about-us
+- https://www.sp.edu.sg/sp/about-sp
+- https://mothership.sg/2019/07/poly-students-new-scheme-graduate-uni-early/
+- https://www.nypi.edu.sg/en.html
 
 
-
-## Icons used
-https://icons8.com/icons/set/car-brand
-http://motorcycle-brands.com/
-https://www.izmostock.com/car-stock-photos-by-brand
-https://www.easyicon.net/language.en/iconsearch/abarth/?s=addtime_DESC
-https://iconscout.com/icons
-<a href="https://iconscout.com/icons/dacia" target="_blank">Dacia Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>
-<a href="https://iconscout.com/icons/isuzu" target="_blank">Isuzu Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
-<a href="https://iconscout.com/icons/seat" target="_blank">Seat Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>
-<a href="https://iconscout.com/icons/smart" target="_blank">Smart Icon</a> on <a href="https://iconscout.com">Iconscout</a>
-<a href="https://iconscout.com/icons/ssangyong" target="_blank">Ssangyong Logo Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
-<a href="https://iconscout.com/icons/abarth" target="_blank">Abarth Logo Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia">Icon Mafia</a> on <a href="https://iconscout.com">Iconscout</a>
-https://www.carlogos.org/
+### Icons used
+- https://icons8.com/icons/set/car-brand
+- http://motorcycle-brands.com/
+- https://www.izmostock.com/car-stock-photos-by-brand
+- https://www.easyicon.net/language.en/iconsearch/abarth/?s=addtime_DESC
+- https://iconscout.com/icons
+- https://iconscout.com/icons/dacia
+    - Dacia Icon by Icon Mafia
+- https://iconscout.com/icons/isuzu
+    - Isuzu Icon by Icon Mafia on Iconscout
+- https://iconscout.com/icons/seat
+    - Seat Icon by Icon Mafia
+- https://iconscout.com/icons/smart
+    - Smart Icon on Iconscout
+- https://iconscout.com/icons/ssangyong
+    - Ssangyong Logo Icon by Icon Mafia on Iconscout
+- https://iconscout.com/icons/abarth
+    - Abarth Logo Icon by Icon Mafia on Iconscout
+- https://www.carlogos.org/
 
 ## Car plate generator
-https://iantan76.wordpress.com/2015/09/27/licenceplatetool/
+- https://iantan76.wordpress.com/2015/09/27/licenceplatetool/
 
 ## Vehicle model and brand references
-https://www.webbikeworld.com/motorcycle-brands/all-brands/
-https://www.izmostock.com/car-stock-photos-by-brand
-https://landtransportguru.net/bus-infrastructure/bus-models/
-https://www.topspeed.com/trucks/makes/
-https://www.cars.com/
+- https://www.webbikeworld.com/motorcycle-brands/all-brands/
+- https://www.izmostock.com/car-stock-photos-by-brand
+- https://landtransportguru.net/bus-infrastructure/bus-models/
+- https://www.topspeed.com/trucks/makes/
+- https://www.cars.com/
 
 
