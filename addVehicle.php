@@ -331,7 +331,7 @@ $username=$_SESSION['id'];
                   </div>
                   <?php 
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        echo var_dump($_POST);
+                        //echo var_dump($_POST);
                             $ecarid=mysqli_real_escape_string($db,$_POST['plateno']);
                             $ecartype=mysqli_real_escape_string($db,$_POST['cartype']);
                             $ecarowner=mysqli_real_escape_string($db,$_POST['caruser']);

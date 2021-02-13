@@ -53,21 +53,105 @@ Developers can add another admin account.
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
-
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
+- [JavaScript](https://www.javascript.com/)
+    - The project uses **Javascript** for implementation of opening and closing form as well as JQuery
+- [HTML](https://html.com/)
+    - The project uses **HTML** to create website structure
+- [Bootstrap](https://getbootstrap.com/)
+    - The project uses **Bootstrap** and **CSS** to make the website visually appealing
+- [Argon Dashboard](https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html)
+    - The project uses **Argon Admin Dashboard** for website pages structure and design
+- [Start Bootstrap Dashboard](https://startbootstrap.com/theme/sb-admin-2)
+    - The project uses **Start Bootstrap Dashboard** for login and register pages struture and design
+- [PHP](https://www.php.net/)
+    - The project uses **PHP** to execute form actions and display from database
+- [phpMyAdmin](https://www.phpmyadmin.net/)
+    - The project uses **phpMyAdmin** as a database for the website
 
 
 ## Testing
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
+### Partner and Developer
+1. Profile form:
+    1. Login and you will arrive at the profile page
+    2. Try to submit remove all the values or just one value from the form and verify that an error message about the required fields appears
     3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
+    4. Try to submit the form with a postal code that does not consist of exactly 6 digits and verify that a relevant error message appears
+    5. Try to submit the form with a contact number that does not consist of exactly 8 digits and verify that a relevant error message appears
+    6. Try to upload an identical file of profile image or banner image and verify that a relevant error message appears
+    7. Try to upload a file with invalid file format and verify that a relevant error message appears
+    8. Try to upload without any file and verify that a relevant error message appears
+    9. Try to submit the form's values with all inputs valid and verify that a success message appears
+    10. Try to upload a valid profile or banner image and verify that the image is changed successfully
+
+2. Carpark form:
+    1. Go to the "Carpark" page
+    2. Try to click the button "Car lots" of a carpark and verify that the details of the form matches that of the carpark you clicked
+    3. Try to submit the form without all the values in the input and verify that an error message about the required fields appears
+    4. Try to submit the form's values with all inputs valid and verify that a success message appears
+    5. Try to upload an identical file of profile image or banner image and verify that a relevant error message appears
+    6. Try to upload a file with invalid file format and verify that a relevant error message appears
+    7. Try to upload without any file and verify that a relevant error message appears
+    8. Try to upload a carpark image and verify that the image is changed successfully on the carpark page
+
+3. Carpark Lots form:
+    1. Scroll down from the "Carpark" page to see "Carpark Lots" table
+    2. Click on the "Add" button and arrive at "Add lot" page
+    3. Try to submit a Parking ID that already exist and verify that a relevant error message appears
+    4. Try to submit the form without filling in the required field and verify that an error message about the required fields
+    5. Try to key in an existing vehicle plate that has a different type of vehicle as the lot you are adding/editing and verify that a relevant error message appears
+    6. Try to submit the form's values with all inputs valid and verify that a success message appears
+    7. From "Carpark" page, click on the edit button in the same line as the lot
+    8. Try to submit the form without filling in any field and verify that an error message about the required fields
+    9. Try to submit a Parking ID that already exist and verify that a relevant error message appears
+    10. Try to submit the form's values with all inputs valid and verify that a success message appears
+    11. Click on "Delete" button and go back to the selected carpark page and verify that the delete4d lot is no longer in the table
+
+4. Add Staff:
+    1. From "Carpark" page, click on the add button in the same line as the lot
+    2. Try to submit the form without all the values in the input and verify that an error message about the required fields appears
+    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
+    4. Try to submit the form with a postal code that does not consist of exactly 6 digits and verify that a relevant error message appears
+    5. Try to submit the form with a contact number that does not consist of exactly 8 digits and verify that a relevant error message appears
+    6. Try to submit the form with invalid Admin password and verify that a relevant error message appears
+    7. Try to submit the form without matching the password and the re-type password and verify that a relevant error message appears
+    8. Try to submit the form with missing password field  and verify that a relevant error message appears
+    9. Try to submit the form with all password input valid and verify that a success message appears
+    10. Try to submit the form with all inputs valid and verify that a success message appears
+
+## Developers
+5. Edit Staff:
+    1. From the selected carpark page, click on the more icon and click "Edit"
+    2. Try to submit the form with invalid Admin password and verify that a relevant error message appears
+    3. Try to submit the form without matching the password and the re-type password and verify that a relevant error message appears
+    4. Try to submit the form with one or two missing password field and verify that a relevant error message appears
+    5. Try to submit the form with all password input valid and verify that a success message appears
+    6. Try to submit the form with an invalid email address and verify that a relevant error message appears
+    7. Try to submit the form with a postal code that does not consist of exactly 6 digits and verify that a relevant error message appears
+    8. Try to submit the form with a contact number that does not consist of exactly 8 digits and verify that a relevant error message appears
+    9. Try to submit the form with all inputs valid and verify that a success message appears
+    10. From the selected carpark page, click on the more icon, click "Delete" and verify that a success message appears
+
+6. Car form:
+    1. Go to the "Car" page
+    2. From the "Car" page, click on the "Add" button and arrive at "Add vehicle" page
+    3. Try to submit the form without all the values in the input and verify that an error message about the required fields appears
+    4. Try to submit the form with a lot that already has a vehicle parked and verify that a relevant error message appears
+    5. Try to submit the form with a lot for another vehicle type and verify that a relevant error message appears
+    6. Try to submit the form with all inputs valid and verify that a success message appears
+    7. From the "Car" page, click on the car plate number and arrive at "Edit vehicle" page
+    8. Try to submit the form without the values in the input and verify that an error message about the required fields appears
+    9. Try to submit the form with a lot that already has a vehicle parked and verify that a relevant error message appears
+    10. Try to submit the form with a lot for another vehicle type and verify that a relevant error message appears
+    11. Try to submit the form with all inputs valid and verify that a success message appears
+    12. From the "Car" page, click on the delete icon and refresh to see the selected car be deleted from the vehicles table
+
+7. User form:
+1.
+
+
 
 In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
 
@@ -105,8 +189,6 @@ If this section grows too long, you may want to split it off into a separate fil
 
 
 
-
-# DDWA-ASG2
 ## Bootstrap templates used
 https://www.creative-tim.com/product/argon-dashboard?partner=114912#
 https://startbootstrap.com/theme/sb-admin-2

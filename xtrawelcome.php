@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <!--
 =========================================================
 * Argon Dashboard - v1.2.0
@@ -16,16 +14,17 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 
-
+<?php
+var_dump($E);
+@ob_start();
+include('session.php');
+?>
+<!DOCTYPE html>
  
 <?php
-include('session.php');
-@ob_start();
-/*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
-?>
+error_reporting(E_ALL);?>
 <html>
 
 <head>
@@ -39,6 +38,7 @@ error_reporting(E_ALL);*/
   
   <link rel="icon" href="argon-dashboard-master/assets/img/brand/park-a-lot-logo.png" type="image/png">
   <!-- Fonts -->
+  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
   
@@ -53,57 +53,49 @@ error_reporting(E_ALL);*/
 
 <body>
 <?php
-/*
-var_dump($E);
-@ob_start();*/
-$_SESSION['dino']="trex";
-echo $_SESSION['dino'];
+            $username=$_SESSION['id'];
+            if($_SESSION['user']=="Admin"){
+                $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
+                $result = $db->query($sql);
+                $row = mysqli_fetch_array($result,MYSQLI_BOTH);
+                    
+                    $givenname= $row['adminfirstname'];
+                    $familyname=$row['adminlastname'];
+                    $user="Admin";
+                    $contact=$row['admincontactno'];
+                    $identification= $username;
+                    $company=$row['adminoffice'];
+                    $email = $row['adminemail'];
+                    $address = $row['adminaddress'];
+                    $postal = $row['adminpostalcode'];
+                    $pic = $row['adminpic'];
+                    $password = $row['adminpassword'];
+                    $bannerpic=$row['adminbanner'];
+                    //echo var_dump($row);
+            }
+            elseif($_SESSION['user']=="Staff"){
+                $sql = "SELECT * FROM staff WHERE staffid = '$username'";
+                $result = $db->query($sql);
+                $row = mysqli_fetch_array($result,MYSQLI_BOTH);
+                    
+                    $givenname= $row['stafffirstname'];
+                    $familyname=$row['stafflastname'];
+                    $user = "Staff";
+                    $contact=$row['staffcontactno'];
+                    $identification= $username;
+                    $company=$row['staffoffice'];
+                    $email = $row['staffemail']; 
+                    $address = $row['staffaddress'];
+                    $postal = $row['staffpostalcode'];
+                    $password = $row['staffpassword'];
+                    $pic = $row['staffpic'];
+                    $bannerpic=$row['staffbanner'];
+            }
+            ?>
+  <!-- Sidenav -->
+
   
-echo $_SESSION['id'].$_SESSION['user'];
-print_r($_SESSION);
-
-
-$username=$_SESSION['id'];
-if($_SESSION['user']=="Admin"){
-    $sql = "SELECT * FROM Admin WHERE adminid = '$username'";
-    $result = $db->query($sql);
-    $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-        
-        $givenname= $row['adminfirstname'];
-        $familyname=$row['adminlastname'];
-        $user="Admin";
-        $contact=$row['admincontactno'];
-        $identification= $username;
-        $company=$row['adminoffice'];
-        $email = $row['adminemail'];
-        $address = $row['adminaddress'];
-        $postal = $row['adminpostalcode'];
-        $pic = $row['adminpic'];
-        $password = $row['adminpassword'];
-        $bannerpic=$row['adminbanner'];
-        //echo var_dump($row);
-}
-elseif($_SESSION['user']=="Staff"){
-    $sql = "SELECT * FROM staff WHERE staffid = '$username'";
-    $result = $db->query($sql);
-    $row = mysqli_fetch_array($result,MYSQLI_BOTH);
-        
-        $givenname= $row['stafffirstname'];
-        $familyname=$row['stafflastname'];
-        $user = "Staff";
-        $contact=$row['staffcontactno'];
-        $identification= $username;
-        $company=$row['staffoffice'];
-        $email = $row['staffemail']; 
-        $address = $row['staffaddress'];
-        $postal = $row['staffpostalcode'];
-        $password = $row['staffpassword'];
-        $pic = $row['staffpic'];
-        $bannerpic=$row['staffbanner'];
-}
-?>
-
-<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">     
 
       <!-- Brand -->
@@ -462,23 +454,6 @@ elseif($_SESSION['user']=="Staff"){
                                   }
 
                           if ($error==false){
-                            /* THIS NEEDS EDITING
-                            $allsender="SELECT * FROM Message WHERE receiver='$username' AND OR sender='$username'";
-                            $result = $db->query($allsender);
-                            if ($result->num_rows > 0) { 
-                              while($row = mysqli_fetch_assoc($result)) { 
-                                if($row['sender']==$username){
-                                  $updatesender="UPDATE Message SET sender='$newusername'";
-                                  $done = $db->query($updatesender);
-                                }
-                                elseif($row['receiver'==$username]){
-                                  $updatereceiver="UPDATE Message SET receiver='$newusername'";
-                                  $donere = $db->query($updatereceiver);
-                                }
-                              }
-                            }*/
-
-
                             if($user=="Admin"){
                             $sql = "UPDATE Admin SET adminemail='$newemail',adminfirstname='$newfirst',adminlastname='$newlast',
                              adminaddress='$newaddress',adminpostalcode='$newpostal',admincontactno='$newcontact',adminid='$newusername'
@@ -490,7 +465,6 @@ elseif($_SESSION['user']=="Staff"){
                                             echo "<p class='text-success'>Password changed</p>";
                                           }
                                         }
-                                        
                                         $username=$newusername;
                                         $givenname=$newfirst;
                                         $familyname=$newlast;
@@ -520,7 +494,6 @@ elseif($_SESSION['user']=="Staff"){
                                             echo "<p class='text-success'>Password changed</p>";
                                           }
                                         }
-
                                         $username=$newusername;
                                         $givenname=$newfirst;
                                         $familyname=$newlast;
@@ -698,6 +671,7 @@ elseif($_SESSION['user']=="Staff"){
     });
   })
 </script>
+
 </body>
 
 </html>

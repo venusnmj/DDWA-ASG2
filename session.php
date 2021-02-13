@@ -10,8 +10,9 @@
    
    //$login_session = $row['studentid'];
    
+   /*
    if(!isset($_SESSION['id'])){
       header("location:index.php");
       die();
-   }
+   }*/
 ?>
