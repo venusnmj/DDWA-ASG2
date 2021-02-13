@@ -19,7 +19,7 @@ An accompanying website for our app "Park-a-lot". This website is for developers
  - As a developer, I would like to be able to add another developer account so that new developers can have admin access to this admin website.
 
  DDWA adobe XD link
- ![login wireframe2](https://github.com/venusnmj/DDWA_ASG2/blob/main/Wireframes/login_wireframe.png)
+ #### Login page
  ![login wireframe](Wireframes/login_wireframe.png)
 
 
