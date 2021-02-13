@@ -73,6 +73,18 @@ Developers can add another admin account.
 
 ## Testing
 
+### Admin login
+- Username:
+    - admin01
+- Password:
+    - 0101
+
+### Staff login
+- Username:
+    - paulineNP
+- Password:
+    - 0000
+
 ### Partner and Developer
 1. Profile form:
     1. Login and you will arrive at the profile page
