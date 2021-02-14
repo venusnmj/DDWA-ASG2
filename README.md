@@ -89,9 +89,9 @@ Developers can add another admin account.
 
 ### Staff login
 - Username:
-    - paulineNP
+    - cherdonovan
 - Password:
-    - 0000
+    - javascript
 
 ### Partner and Developer
 1. Profile form:
