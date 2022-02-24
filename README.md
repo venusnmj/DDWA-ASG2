@@ -82,6 +82,7 @@ Developers can add another admin account.
 ## Testing
 
 ### Admin login
+https://student.amphibistudio.sg/10196284K/eduSpace
 - Username:
     - admin01
 - Password:
@@ -274,4 +275,5 @@ Adding vehicle will cause the added vehicle to have no owner
 
 ### Acknowledgements
 - I received inspiration for this project from Jewel's Parking Kiosk
+- https://docs.google.com/presentation/d/1SCQOECQWaApEbb8kItBvy5mjXlaFbqhrJHIshjTRRGM/edit?usp=sharing
 
